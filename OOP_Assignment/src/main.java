@@ -6,6 +6,7 @@ public class main {
 		System.out.println("yoyyo does this work??");
 		System.out.println("fesgjigsfuah");
 		System.out.println("Ong mali ohm ohm ong mali mali ohm");
+		System.out.println("test test");
 	}
 
 }
