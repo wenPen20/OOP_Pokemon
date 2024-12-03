@@ -1,0 +1,1 @@
+username="Bob", ownedDisks=["01-025", "05-012"], tokens=10

@@ -1,0 +1,4 @@
+name="Poke Ball", catchRate=0.3
+name="Great Ball", catchRate=0.5
+name="Ultra Ball", catchRate=0.7
+name="Master Ball", catchRate=0.9
