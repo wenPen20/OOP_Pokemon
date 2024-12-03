@@ -1,3 +1,4 @@
+import java.util.*;
 
 public class main {
 
@@ -8,6 +9,7 @@ public class main {
 		System.out.println("Ong mali ohm ohm ong mali mali ohm");
 		System.out.println("test test");
 		System.out.println('a');
+		
 	}
 
 }
