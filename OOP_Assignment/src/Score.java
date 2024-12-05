@@ -2,7 +2,7 @@
 public class Score {
 	private String name;
 	private int score;
-	
+
 	public Score(String name, int score) {
 		this.name = name;
 		this.score = score;
@@ -22,5 +22,11 @@ public class Score {
 
 	public void setScore(int score) {
 		this.score = score;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Score [name=%s, score=%s]", name, score);
+	}
+
 }

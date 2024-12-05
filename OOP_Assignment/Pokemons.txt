@@ -1,23 +1,23 @@
-collectionNumber=01-025, grade=1, name=Dunsparce, pokeEne=1280, type=Normal, moveName=Headbutt, hp=82, attack=38, defense=38, speed=26
-collectionNumber=03-031, grade=2, name=Munchlax, pokeEne=1560, type=Normal, moveName=Body Slam, hp=128, attack=59, defense=30, speed=8
-collectionNumber=02-027, grade=3, name=Kangaskhan, pokeEne=2160, type=Normal, moveName=Cut, hp=124, attack=75, defense=64, speed=71
-collectionNumber=03-033, grade=4, name=Snorlax, pokeEne=2740, type=Normal, moveName=Giga Impact, hp=194, attack=101, defense=62, speed=30
-collectionNumber=04-037NM, grade=5, name=Silvally, pokeEne=3440, type=Normal, moveName=Multi-Attack, hp=163, attack=105, defense=105, speed=105
+collectionNumber=01-025, grade=★, name=Dunsparce, pokeEne=1280, type=Normal, moveName=Headbutt, hp=82, attack=38, defense=38, speed=26
+collectionNumber=03-031, grade=★★, name=Munchlax, pokeEne=1560, type=Normal, moveName=Body Slam, hp=128, attack=59, defense=30, speed=8
+collectionNumber=02-027, grade=★★★, name=Kangaskhan, pokeEne=2160, type=Normal, moveName=Cut, hp=124, attack=75, defense=64, speed=71
+collectionNumber=03-033, grade=★★★★, name=Snorlax, pokeEne=2740, type=Normal, moveName=Giga Impact, hp=194, attack=101, defense=62, speed=30
+collectionNumber=04-037NM, grade=★★★★★, name=Silvally, pokeEne=3440, type=Normal, moveName=Multi-Attack, hp=163, attack=105, defense=105, speed=105
 
-collectionNumber=01-017, grade=1, name=Fennekin, pokeEne=1000, type=Fire, moveName=Ember, hp=53, attack=34, defense=24, speed=33
-collectionNumber=01-006, grade=2, name=Charmeleon, pokeEne=1520, type=Fire, moveName=Fire Fang, hp=74, attack=43, defense=39, speed=53
-collectionNumber=05-012, grade=3, name=Flareon, pokeEne=2460, type=Fire, moveName=Flamethrower, hp=102, attack=81, defense=53, speed=57
-collectionNumber=UL5-027, grade=4, name=Magmortar, pokeEne=3460, type=Fire, moveName=Flamethrower, hp=150, attack=146, defense=79, speed=97
-collectionNumber=D1-068, grade=5, name=Entei, pokeEne=3500, type=Fire, moveName=Fire Blast, hp=184, attack=100, defense=95, speed=111
+collectionNumber=01-017, grade=★, name=Fennekin, pokeEne=1000, type=Fire, moveName=Ember, hp=53, attack=34, defense=24, speed=33
+collectionNumber=01-006, grade=★★, name=Charmeleon, pokeEne=1520, type=Fire, moveName=Fire Fang, hp=74, attack=43, defense=39, speed=53
+collectionNumber=05-012, grade=★★★, name=Flareon, pokeEne=2460, type=Fire, moveName=Flamethrower, hp=102, attack=81, defense=53, speed=57
+collectionNumber=UL5-027, grade=★★★★, name=Magmortar, pokeEne=3460, type=Fire, moveName=Flamethrower, hp=150, attack=146, defense=79, speed=97
+collectionNumber=D1-068, grade=★★★★★, name=Entei, pokeEne=3500, type=Fire, moveName=Fire Blast, hp=184, attack=100, defense=95, speed=111
 
-collectionNumber=01-009, grade=1, name=Squirtle, pokeEne=1040, type=Water, moveName=Water Gun, hp=55, attack=29, defense=36, speed=25
-collectionNumber=01-010, grade=2, name=Wartortle, pokeEne=1520, type=Water, moveName=Water Pulse, hp=75, attack=44, defense=53, speed=39
-collectionNumber=01-011, grade=3, name=Blastoise, pokeEne=2240, type=Water, moveName=Aqua Tail, hp=102, attack=64, defense=77, speed=61
-collectionNumber=D1-069, grade=4, name=Suicune, pokeEne=3120, type=Water, moveName=Bubble Beam, hp=151, attack=89, defense=113, speed=84
-collectionNumber=D2-067, grade=5, name=Kyogre, pokeEne=4120, type=Water, moveName=Hydro Pump, hp=175, attack=170, defense=104, speed=104
+collectionNumber=01-009, grade=★, name=Squirtle, pokeEne=1040, type=Water, moveName=Water Gun, hp=55, attack=29, defense=36, speed=25
+collectionNumber=01-010, grade=★★, name=Wartortle, pokeEne=1520, type=Water, moveName=Water Pulse, hp=75, attack=44, defense=53, speed=39
+collectionNumber=01-011, grade=★★★, name=Blastoise, pokeEne=2240, type=Water, moveName=Aqua Tail, hp=102, attack=64, defense=77, speed=61
+collectionNumber=D1-069, grade=★★★★, name=Suicune, pokeEne=3120, type=Water, moveName=Bubble Beam, hp=151, attack=89, defense=113, speed=84
+collectionNumber=D2-067, grade=★★★★★, name=Kyogre, pokeEne=4120, type=Water, moveName=Hydro Pump, hp=175, attack=170, defense=104, speed=104
 
-collectionNumber=01-013, grade=1, name=Chespin, pokeEne=1020, type=Grass, moveName=Vine Whip, hp=60, attack=34, defense=36, speed=23
-collectionNumber=01-014, grade=2, name=Quilladin, pokeEne=1520, type=Grass, moveName=Needle Arm, hp=76, attack=51, defense=62, speed=39
-collectionNumber=04-003, grade=3, name=Lurantis, pokeEne=2220, type=Grass, moveName=Solar Blade, hp=103, attack=86, defense=75, speed=40
-collectionNumber=D3-004, grade=4, name=Serperior, pokeEne=2980, type=Grass, moveName=Leaf Storm, hp=132, attack=78, defense=98, speed=115
-collectionNumber=UL4-062, grade=5, name=Arceus, pokeEne=4860, type=Grass, moveName=Judgement, hp=217, attack=151, defense=151, speed=151
+collectionNumber=01-013, grade=★, name=Chespin, pokeEne=1020, type=Grass, moveName=Vine Whip, hp=60, attack=34, defense=36, speed=23
+collectionNumber=01-014, grade=★★, name=Quilladin, pokeEne=1520, type=Grass, moveName=Needle Arm, hp=76, attack=51, defense=62, speed=39
+collectionNumber=04-003, grade=★★★, name=Lurantis, pokeEne=2220, type=Grass, moveName=Solar Blade, hp=103, attack=86, defense=75, speed=40
+collectionNumber=D3-004, grade=★★★★, name=Serperior, pokeEne=2980, type=Grass, moveName=Leaf Storm, hp=132, attack=78, defense=98, speed=115
+collectionNumber=UL4-062, grade=★★★★★, name=Arceus, pokeEne=4860, type=Grass, moveName=Judgement, hp=217, attack=151, defense=151, speed=151

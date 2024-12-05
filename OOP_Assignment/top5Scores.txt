@@ -1,5 +1,5 @@
-username=abc score=1000
-username=12aewr3 score=900
-username=aswerd score=700
-username=78wer9 score=500
-username=adsdfgs score=100
+username=abc, score=10000
+username=12aewr3, score=9000
+username=aswerd, score=7000
+username=78wer9, score=5000
+username=adsdfgs, score=1000

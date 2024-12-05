@@ -1,22 +1,24 @@
 
 public class Pokemon {
-	private String collectionNumber, name, type, moveName;
-	private int grade, pokeEne, hp, attack, defense, speed;
+	private String collectionNumber, grade, name, type, moveName;
+	private int pokeEne, hp, attack, defense, speed;
+	private double probability;
 	
 	public Pokemon() {
 		this.collectionNumber = "10-001";
 		this.name = "New Pokemon";
 		this.type = "Normal";
 		this.moveName = "Basic Attack";
-		this.grade = 1;
+		this.grade = "★";
 		this.pokeEne = 1000;
 		this.hp = 25;
 		this.attack = 25;
 		this.defense = 25;
 		this.speed = 25;
+		this.probability = 0.0;
 	}
 	
-	public Pokemon(String collectionNumber, String name, String type, String moveName, int grade, int pokeEne, int hp,
+	public Pokemon(String collectionNumber, String name, String type, String moveName, String grade, int pokeEne, int hp,
 			int attack, int defense, int speed) {
 		this.collectionNumber = collectionNumber;
 		this.name = name;
@@ -28,6 +30,7 @@ public class Pokemon {
 		this.attack = attack;
 		this.defense = defense;
 		this.speed = speed;
+		this.probability = 0.0;
 	}
 
 	public String getCollectionNumber() {
@@ -62,11 +65,11 @@ public class Pokemon {
 		this.moveName = moveName;
 	}
 
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 
@@ -109,12 +112,20 @@ public class Pokemon {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
+	
+	public double getProbability() {
+        return probability;
+    }
+
+    public void setProbability(double probability) {
+        this.probability = probability;
+    }
 
 	@Override
 	public String toString() {
 		return String.format(
-				"Pokemon [collectionNumber=%s, name=%s, type=%s, moveName=%s, grade=%s, pokeEne=%s, hp=%s, attack=%s, defense=%s, speed=%s]",
-				collectionNumber, name, type, moveName, grade, pokeEne, hp, attack, defense, speed);
+				"Pokemon [collectionNumber=%s, name=%s, type=%s, moveName=%s, grade=%s, pokeEne=%s, hp=%s, attack=%s, defense=%s, speed=%s, probability=%f]",
+				collectionNumber, name, type, moveName, grade, pokeEne, hp, attack, defense, speed, probability);
 	}
 	
 	public void useMove(Pokemon target) {
