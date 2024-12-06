@@ -29,16 +29,16 @@ public class Database {
 					String username = extractData(parts, 0);
 
 					// Extract ownedDisks
-					String disksString = extractData(parts, 1);
-					disksString = disksString.replaceAll("\\[|\\]", ""); // Remove square brackets
-					String[] disksArray = disksString.split(",\\s*"); // Split by commas
-					ArrayList<String> ownedDisks = new ArrayList<>(Arrays.asList(disksArray));
+					String PokemonsString = extractData(parts, 1);
+					PokemonsString = PokemonsString.replaceAll("\\[|\\]", ""); // Remove square brackets
+					String[] PokemonsArray = PokemonsString.split(",\\s*"); // Split by commas
+					ArrayList<String> ownedPokemons = new ArrayList<>(Arrays.asList(PokemonsArray));
 
 					// Extract tokens
 					int tokens = Integer.parseInt(extractData(parts, 2));
 
 					// Create Player object and add it to the list
-					Player player = new Player(username, ownedDisks, tokens);
+					Player player = new Player(username, ownedPokemons, tokens);
 					players.add(player);
 				}
 			}

@@ -1,2 +1,3 @@
-username=Bob, ownedDisks=[01-025, 05-012], tokens=10
-username=joe, ownedDisks=[03-033, 04-003, UL4-062], tokens=0
+username=bob, ownedPokemons=[Dunsparce, Flareon], tokens=10
+username=joe, ownedPokemons=[Chespin, Magmortar, Kyogre], tokens=0
+username=bob, ownedPokemons=[], tokens=1

@@ -2,20 +2,20 @@ import java.util.ArrayList;
 
 public class Player {
 	private String username;
-	private ArrayList<String> ownedDisks;
+	private ArrayList<String> ownedPokemons;
 	private int tokens;
 	
 	// creating new player
 	public Player(String username) {
 		this.username = username;
-		this.ownedDisks = new ArrayList<String>();
+		this.ownedPokemons = new ArrayList<String>();
 		this.tokens = 0;
 	}
 
 	// retrieve player
 	public Player(String username, ArrayList<String> ownedDisks, int tokens) {
 		this.username = username;
-		this.ownedDisks = ownedDisks;
+		this.ownedPokemons = ownedDisks;
 		this.tokens = tokens;
 	}
 
@@ -29,11 +29,11 @@ public class Player {
 	}
 
 	public ArrayList<String> getOwnedDisks() {
-		return ownedDisks;
+		return ownedPokemons;
 	}
 
 	public void setOwnedDisks(ArrayList<String> ownedDisks) {
-		this.ownedDisks = ownedDisks;
+		this.ownedPokemons = ownedDisks;
 	}
 
 	public int getTokens() {
@@ -46,7 +46,9 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return String.format("Player [username=%s, ownedDisks=%s, tokens=%s]", username, ownedDisks, tokens);
+		return String.format("Username: %s \n"
+				+ "Owned Disks: %s \n"
+				+ "Tokens: %s \n", username, ownedPokemons, tokens);
 	}
 	
 	// other methods
@@ -55,7 +57,7 @@ public class Player {
 	}
 	
 	public void saveDisk(String pokemon) {
-		this.ownedDisks.add(pokemon);
+		this.ownedPokemons.add(pokemon);
 	}
 	
 }
