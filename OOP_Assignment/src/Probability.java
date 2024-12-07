@@ -6,14 +6,18 @@ import java.util.*;
 public class Probability {
 	
 	private int stage;
-
+	
 	public void setStage() {
-		Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose a stage:\n[1] Fire, [2] Water, [3] Grass");
-        int input = scanner.nextInt();
-		this.stage = input;
+		try {
+			Scanner scanner = new Scanner(System.in);
+	        System.out.println("Choose a stage:\n[1] Fire, [2] Water, [3] Grass");
+	        int input = scanner.nextInt();
+			this.stage = input;
+		} catch (InputMismatchException e) {
+			System.out.println("Incorrect input, please try again.");
+		}
 	}
-
+	
 	public Probability() {
         
     }

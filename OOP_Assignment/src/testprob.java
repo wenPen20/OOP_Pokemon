@@ -18,7 +18,7 @@ public class testprob {
     }
 
     private void adjustProbabilities(String targetType, double increaseAmount) {
-        String fileName = "C:\\Users\\seand\\OneDrive\\Desktop\\Programming\\code2024\\AssignmentTestV2\\src\\Pokemons.txt";
+        String fileName = "Pokemons.txt";
 
         try {
             // Read all lines from the file
