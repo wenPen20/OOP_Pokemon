@@ -1,17 +1,16 @@
-import java.util.Scanner;
 
 public class test {
     public static void main(String[] args) {
     	
-    	Scanner scanner = new Scanner(System.in);
-    	String input = "";
+    	StageSelector stage = new StageSelector();
+    	stage.roar();
+    	
+//    	Probability test = new Probability();
+//    	test.getRandomPokemon();
+    	
+    	Battle test1 = new Battle();
+    	test1.battleStart();
 
-    	Probability stage = new Probability();
-
-    	stage.setStage();
-    	stage.Stage();
-    	stage.Stage();
-    	stage.Stage();
     	}
     	
     }
