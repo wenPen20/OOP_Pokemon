@@ -4,5 +4,4 @@ public class main {
 		Game g = new Game();
 		g.start();
 	}
-
 }

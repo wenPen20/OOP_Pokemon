@@ -16,7 +16,6 @@ public class TestClass {
 
 		ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
 		// If current stage is "Fire", add probability to the object
-		db.assignProbabilities(loadedPokemons, "Fire");
 		
 		System.out.println("=========================");
 		System.out.println("Pokemon Database");
@@ -36,7 +35,7 @@ public class TestClass {
 		}
 		
 		
-		ArrayList<Score> loadedScores = db.loadScores("top5Scores.txt");
+		ArrayList<Score> loadedScores = db.loadTopScores("top5Scores.txt");
 		System.out.println("=========================");
 		System.out.println("Score Database");
 		System.out.println("=========================");

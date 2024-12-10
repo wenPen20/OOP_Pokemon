@@ -106,7 +106,7 @@ public class Database {
 		return pokeballs;
 	}
 
-	public ArrayList<Score> loadScores(String filePath) {
+	public ArrayList<Score> loadTopScores(String filePath) {
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			String line;
 
@@ -129,25 +129,8 @@ public class Database {
 		}
 		return topScores;
 	}
-
-	public void assignProbabilities(List<Pokemon> pokemons, String currentStageType) {
-		double boostedProbability = 0.50; // 50% for boosted type
-		double baseProbability = 0.50; // Remaining 50% for other types
-		int boostedCount = 5; // 5 Pokémon per type
-		int totalPokemon = pokemons.size();
-		int nonBoostedCount = totalPokemon - boostedCount;
-
-		double boostedChance = boostedProbability / boostedCount;
-		double nonBoostedChance = baseProbability / nonBoostedCount;
-
-		for (Pokemon p : pokemons) {
-			if (p.getType().equalsIgnoreCase(currentStageType)) {
-				p.setProbability(boostedChance);
-			} else {
-				p.setProbability(nonBoostedChance);
-			}
-		}
-	}
+	
+	
 
 	// helper function to extract data
 	public String extractData(String[] parts, int index) {
