@@ -6,13 +6,11 @@ public class PokemonResult {
     private String name;
     private String type;
 
-    // Constructor for Pokémon, grade, name, and type
     public PokemonResult(HashMap<String, String> pokemon, String grade) {
         this.pokemon = pokemon;
         this.grade = grade;
     }
 
-    // Constructor for name, type, and grade
     public PokemonResult(String name, String type, String grade) {
         this.name = name;
         this.type = type;
