@@ -14,5 +14,14 @@ public class Ascii {
         System.out.println("|  __/ (_) |   <  __/ | | | | | (_) | | | | | |_| | (_| |_____| (_) | |  __/");
         System.out.println("|_|   \\___/|_|\\_\\___|_| |_| |_|\\___/|_| |_|  \\____|\\__,_|      \\___/|_|\\___|");
 	}
-
+	
+	public static void GameStartMessage() {
+		
+	}
+	
+	public static void GameOverMessage() {
+		
+	}
+	
+	
 }

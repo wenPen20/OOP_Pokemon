@@ -6,7 +6,7 @@ public class Game {
 	ArrayList<Player> loadedPlayers = db.loadPlayers("Players.txt");
 	ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
 	ArrayList<Pokeball> loadedPokeballs = db.loadPokeballs("Pokeballs.txt");
-	ArrayList<Score> loadedScores = db.loadScores("top5Scores.txt");
+	ArrayList<Score> loadedScores = db.loadTopScores("top5Scores.txt");
 
 	public void start() {
 		Scanner input = new Scanner(System.in);
@@ -30,7 +30,6 @@ public class Game {
 			System.out.printf("Username: %s \n", username);
 			System.out.println("Owned Disks: []");
 			System.out.println("Tokens: 0");
-
 		}
 		
 		
