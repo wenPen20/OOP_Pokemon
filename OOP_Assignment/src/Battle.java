@@ -11,7 +11,7 @@ public class Battle extends Probability{
         String nameRental1 = roaredPokemon.getRoaredPokemon();
         
         // Get a random pokemon
-        String rental2 = getRandomPokemon();
+        String rental2 = selectRandomPokemon();
         
         // Gets the name, type and grade of the pokemons
         int colonIndex = rental2.indexOf(":");
@@ -26,8 +26,7 @@ public class Battle extends Probability{
         System.out.println("Your Rental Pokemons:");
         System.out.println(nameRental1 + ": " + roaredPokemon.getRoaredPokemonType() + ", Grade:" + roaredPokemon.getRoaredPokemonGrade()); 
         
-        noDuplicate(nameRental1,nameRental2);
-        
+        noDuplicate(nameRental1,nameRental2); 
         System.out.println(nameRental2 + ": " + typeRental2 + ", Grade:" + gradeRental2);
     }
     
@@ -35,11 +34,10 @@ public class Battle extends Probability{
         String enemy1 = "", enemy2 = "";
         
         // Get two random pokemon for the enemy.
-        enemy1 = getRandomPokemon();
-        enemy2 = getRandomPokemon();
+        enemy1 = selectRandomPokemon();
+        enemy2 = selectRandomPokemon();
         
         noDuplicate(enemy1,enemy2);
-        
         System.out.println(enemy1 + "\n" + enemy2);
     }
     

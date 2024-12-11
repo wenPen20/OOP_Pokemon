@@ -69,10 +69,11 @@ public class Probability {
 
     // This method selects a random pokemon from the available options returned by readRandomPokemon.
     // It returns a random pokemon choice as a dictionary.
-    public HashMap<String, String> selectRandomPokemon() {
+    public String selectRandomPokemon() {
         PokemonResult result = readRandomPokemon();
         HashMap<String, String> pokemons = result.getPokemon();
         HashMap<String, String> choice [] = new HashMap[4];
+        String pokemonName = "", pokemonType = "";
         
         int i = 0;
         // Stores up to 4 random pokemon choices
@@ -82,41 +83,25 @@ public class Probability {
             choice[i] = temp;
             i++;
         }
-        
         grade = result.getGrade();
         
         // Randomly select one of the chices of pokemon from the list
         Random rand = new Random();
         int randomNumber = rand.nextInt(4);
-        return choice[randomNumber];
-    }
-
-    // This method retrieves a random pokemon from the list and returns it in a PokemonResult object containing name, type, and grade.
-    public PokemonResult pokemonName() {
-        HashMap<String, String> pokemon = selectRandomPokemon();
-        String pokemonName = "", pokemonType = "";
-        PokemonResult result = readRandomPokemon();
+        HashMap<String, String> randompokemon = choice[randomNumber];
         
-        // Extract the name and type from the selected pokemon
-        for (Map.Entry<String, String> entry : pokemon.entrySet()) {
+        for (Map.Entry<String, String> entry : randompokemon.entrySet()) {
             pokemonName = entry.getKey();
             pokemonType = entry.getValue();
         }
-        
-        return new PokemonResult(pokemonName, pokemonType, grade);
-    }
-
-    // This method returns a string of a random pokemon's name, type, and grade.
-    public String getRandomPokemon() {
-        PokemonResult nameType = pokemonName();
-        return nameType.getName() + ": " + nameType.getType() + ", Grade: " + nameType.getGrade();
+        return pokemonName + ": " + pokemonType + ", Grade: " + grade;
     }
 
     // This method ensures that two randomly selected pokemon choices are not the same.
     public void noDuplicate(String choice1, String choice2) {
         while(true) {
             if (choice1.equals(choice2)) {
-                choice2 = getRandomPokemon();
+                choice2 = selectRandomPokemon();
             }
             else {
                 break;
