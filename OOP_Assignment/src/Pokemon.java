@@ -123,9 +123,15 @@ public class Pokemon {
 
 	@Override
 	public String toString() {
-		return String.format(
-				"Pokemon [collectionNumber=%s, name=%s, type=%s, moveName=%s, grade=%s, pokeEne=%s, hp=%s, attack=%s, defense=%s, speed=%s, probability=%f]",
-				collectionNumber, name, type, moveName, grade, pokeEne, hp, attack, defense, speed, probability);
+		return String.format("%s %s \n"
+				+ "Type: %s \n"
+				+ "HP: %s \n"
+				+ "Attack: %s \n"
+				+ "Defense: %s \n", name, grade, type, hp, attack, defense);
+		
+//		return String.format(
+//				"Pokemon [collectionNumber=%s, name=%s, type=%s, moveName=%s, grade=%s, pokeEne=%s, hp=%s, attack=%s, defense=%s, speed=%s, probability=%f]",
+//				collectionNumber, name, type, moveName, grade, pokeEne, hp, attack, defense, speed, probability);
 	}
 	
 	public void useMove(Pokemon target) {
