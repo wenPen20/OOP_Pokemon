@@ -1,6 +1,8 @@
+package defa;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
+import java.util.Scanner;
 
 public class Battle {
     private Pokemon ally1, ally2, enemy1, enemy2;
@@ -39,6 +41,10 @@ public class Battle {
 	    boolean allyTeam = true;
 	    boolean enemyTeam = true;
 	    int i = 0;
+    	Scanner scanner = new Scanner(System.in);
+    	
+    	System.out.print("Type anything to start the round: ");
+    	String input = scanner.next();
 	    
 	    // Check which team starts first
 	    if (startTurn()) {
@@ -58,7 +64,10 @@ public class Battle {
 	    System.out.println("\n" + enemy1);
 	    System.out.println("\n" + enemy2);
 
-	    while (true) { 	
+	    while (true) {
+
+	    	System.out.print("Type anything to start the next round: ");
+	    	String input1 = scanner.next();
 	    	
 	        if (allyTeam) {
 	            System.out.println("Your team attacks now");
