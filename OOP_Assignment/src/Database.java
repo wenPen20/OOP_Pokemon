@@ -27,13 +27,26 @@ public class Database {
 
 					// Extract username
 					String username = extractData(parts, 0);
-
-					// Extract ownedDisks
+					
+					// Extract ownedDisks as collection number
 					String PokemonsString = extractData(parts, 1);
 					PokemonsString = PokemonsString.replaceAll("\\[|\\]", ""); // Remove square brackets
 					String[] PokemonsArray = PokemonsString.split(",\\s*"); // Split by commas
-					ArrayList<String> ownedPokemons = new ArrayList<>(Arrays.asList(PokemonsArray));
-
+					ArrayList<String> collectionNumberList = new ArrayList<>(Arrays.asList(PokemonsArray));
+					
+					
+					//Transfer array list string data into array list Pokemon data
+					ArrayList<Pokemon> ownedPokemons = new ArrayList<>();
+					for(String collectionNumber : collectionNumberList ) {
+						for(Pokemon pokemon: loadPokemons("Pokemons.txt")) {
+							if (collectionNumber.equals(pokemon.getCollectionNumber())) {
+								ownedPokemons.add(pokemon);
+								break;
+							}
+						}
+					}
+					
+					
 					// Extract tokens
 					int tokens = Integer.parseInt(extractData(parts, 2));
 

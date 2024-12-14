@@ -2,18 +2,18 @@ import java.util.ArrayList;
 
 public class Player {
 	private String username;
-	private ArrayList<String> ownedPokemons;
+	private ArrayList<Pokemon> ownedPokemons;
 	private int tokens;
 	
 	// creating new player
 	public Player(String username) {
 		this.username = username;
-		this.ownedPokemons = new ArrayList<String>();
+		this.ownedPokemons = new ArrayList<Pokemon>();
 		this.tokens = 0;
 	}
 
 	// retrieve player
-	public Player(String username, ArrayList<String> ownedDisks, int tokens) {
+	public Player(String username, ArrayList<Pokemon> ownedDisks, int tokens) {
 		this.username = username;
 		this.ownedPokemons = ownedDisks;
 		this.tokens = tokens;
@@ -28,11 +28,21 @@ public class Player {
 		this.username = username;
 	}
 
-	public ArrayList<String> getOwnedDisks() {
+	public ArrayList<Pokemon> getOwnedDisks() {
 		return ownedPokemons;
 	}
+	
+	//returns a STRING array of the player's disks
+	public ArrayList<String> getOwnedDiskNames() {
+		ArrayList<String> ownedPokemonNames = new ArrayList<>();
+		for(Pokemon pokemon: this.ownedPokemons) {
+			ownedPokemonNames.add(pokemon.getName());
+		}
+		return ownedPokemonNames;
+	}
 
-	public void setOwnedDisks(ArrayList<String> ownedDisks) {
+	//returns a POKEMON datatype array of the player's disks
+	public void setOwnedDisks(ArrayList<Pokemon> ownedDisks) {
 		this.ownedPokemons = ownedDisks;
 	}
 
@@ -48,7 +58,7 @@ public class Player {
 	public String toString() {
 		return String.format("Username: %s \n"
 				+ "Owned Disks: %s \n"
-				+ "Tokens: %s \n", username, ownedPokemons, tokens);
+				+ "Tokens: %s \n", username, getOwnedDiskNames(), tokens);
 	}
 	
 	// other methods
@@ -56,7 +66,7 @@ public class Player {
 		this.tokens -= cost;
 	}
 	
-	public void saveDisk(String pokemon) {
+	public void saveDisk(Pokemon pokemon) {
 		this.ownedPokemons.add(pokemon);
 	}
 	
