@@ -1,3 +1,5 @@
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
@@ -6,6 +8,7 @@ import java.util.Scanner;
 public class Battle {
     private Pokemon ally1, ally2, enemy1, enemy2;
     private Map<String, Double> typeEffectiveness;
+    private ArrayList<String> faintedMessages = new ArrayList<>();
 
 	public Battle(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2) {
 		this.ally1 = ally1;
@@ -13,6 +16,7 @@ public class Battle {
 		this.enemy1 = enemy1;
 		this.enemy2 = enemy2;
 		
+	    effectiveness();
 		startBattle();
 		teamTurns();
 		//Checks which team is faster then checks which pokemon is faster
@@ -39,10 +43,10 @@ public class Battle {
 	public void teamTurns() {
 	    boolean allyTeam = true;
 	    boolean enemyTeam = true;
-	    int i = 0;
     	Scanner scanner = new Scanner(System.in);
     	
-    	System.out.print("Type anything to start the round: \n");
+    	System.out.println("===========================================================");
+    	System.out.print("Type anything to start the round: ");
     	String input = scanner.next();
     	//initialize turn counter for each team
     	int turnCount1 = getStart(ally1, ally2);
@@ -51,72 +55,109 @@ public class Battle {
 	    // Check which team starts first
 	    if (startTurn()) {
 	        System.out.println("Your team starts FIRST!");
-	        attack(pokemonStart(ally1, ally2) ? ally1 : ally2, enemy1, enemy2); 
+	        attack(pokemonStart(ally1, ally2) ? ally1 : ally2, enemy1, enemy2);
 	        turnCount1 += 1;
+
 	        allyTeam = false;
 	        enemyTeam = true;
 	    } else {
 	        System.out.println("Enemy team starts FIRST!");
 	        attack(pokemonStart(enemy1, enemy2) ? enemy1 : enemy2, ally1, ally2);
 	        turnCount2 += 1;
+	        
 	        enemyTeam = false;
 	        allyTeam = true;
 	    }
-	    System.out.println("Ally:");
-	    System.out.println(ally1);
-	    System.out.println("\n" + ally2);
-	    System.out.println("\nEnemy:");
-	    System.out.println(enemy1);
-	    System.out.println("\n" + enemy2);
+        System.out.println(faintedMessages);
+	    printTeams();
 
-	    // Battle loop
 	    while (true) {
-
+	    	System.out.println("===========================================================");
 	    	System.out.print("Type anything to start the next round: ");
 	    	String input1 = scanner.next();
 	    	
-	        if (allyTeam) {
-	        	
-	            System.out.println("\nYour team attacks now");
-	            if (turnCount1 % 2 == 0) {
-	            	System.out.println(ally1.getName() + " attacks using " + ally1.getMoveName() + "!");
-	            	attack(ally1, enemy1, enemy2); 
-	        	} else {
-	        		System.out.println(ally2.getName() + " attacks using " + ally2.getMoveName() + "!");
-	        		attack(ally2, enemy1, enemy2);
-	        	}
-	            turnCount1 += 1;
-	            // mechanic to swap turns
-	            allyTeam = false;
-	            enemyTeam = true;
-	        }
+	    	while(true) {
+		        if (allyTeam) { // Ally's turn
+		            if (turnCount1 % 2 == 0) { // Ally1's turn
+		                if (ally1.getHp() > 0) {
+		                	System.out.println("\nYour team's turn!");
+		                    System.out.println(ally1.getName() + " attacks using " + ally1.getMoveName() + "!");
+		                    attack(ally1, enemy1, enemy2);
+		                } else {
+		                    turnCount1++; // Increment to switch to Ally2
+		                    continue;
+		                }
+		            } else { // Ally2's turn
+		                if (ally2.getHp() > 0) {
+		                	System.out.println("\nYour team's turn!");
+		                    System.out.println(ally2.getName() + " attacks using " + ally2.getMoveName() + "!");
+		                    attack(ally2, enemy1, enemy2);
+		                } else {
+		                    turnCount1++; // Increment to switch back to Ally1
+		                    continue;
+		                }
+		            }
+		            turnCount1++;
+		            allyTeam = false;
+		            enemyTeam = true;
+		            break;
+		        } 
+		        
+		        else if (enemyTeam){ // Enemy's turn
+		            if (turnCount2 % 2 == 0) { // Enemy1's turn
+		                if (enemy1.getHp() > 0) {
+		                	System.out.println("\nEnemy team's turn!");
+		                    System.out.println(enemy1.getName() + " attacks using " + enemy1.getMoveName() + "!");
+		                    attack(enemy1, ally1, ally2);
+		                } else {
+		                    turnCount2++; // Increment to switch to Enemy2
+		                    continue;
+		                }
+		            } else { // Enemy2's turn
+		                if (enemy2.getHp() > 0) {
+		                	System.out.println("\nEnemy team's turn!");
+		                    System.out.println(enemy2.getName() + " attacks using " + enemy2.getMoveName() + "!");
+		                    attack(enemy2, ally1, ally2);
+		                } else {
+		                	turnCount2++; // Increment to switch back to Enemy1
+		                    continue;
+		                }
+		            }
+		            turnCount2++;
+		            allyTeam = true; 
+		            enemyTeam = false;
+		            break;
+		        }
+	    	}
 
-	        else if (enemyTeam) {
-	        	
-	            System.out.println("\nEnemy team attacks now");
-	            if (turnCount2 % 2 == 0) {
-	            	System.out.println(enemy1.getName() + " attacks using " + enemy1.getMoveName() + "!");
-	            	attack(enemy1, ally1, ally2);  
-	            } else {
-	            	System.out.println(enemy2.getName() + " attacks using " + enemy2.getMoveName() + "!");
-	            	attack(enemy2, ally1, ally2);  
-	            }
-            	turnCount2 += 1;
-	            // mechanic to swap turns
-	            allyTeam = true;
-	            enemyTeam = false;
+
+	        System.out.println(faintedMessages);
+	        printTeams();
+
+	        if (ally1.getHp() < 0 && ally2.getHp() < 0) {
+	        	break;
 	        }
-	        System.out.println("Ally:");
+	        if (enemy1.getHp() < 0 && enemy2.getHp() < 0) {
+	        	break;
+	        }
+	    }
+	}
+	
+	private void printTeams() {
+	    System.out.println("\nAlly Team:");
+	    if (ally1.getHp() > 0) {
 	        System.out.println(ally1);
-	        System.out.println("\n" + ally2);
-	        System.out.println("\nEnemy:");
-	        System.out.println(enemy1);
-	        System.out.println("\n" + enemy2);
+	    }
+	    if (ally2.getHp() > 0) {
+	        System.out.println(ally2);
+	    }
 
-	        i++;
-	        if (i == 2) {
-	            break; 
-	        }
+	    System.out.println("\nEnemy Team:");
+	    if (enemy1.getHp() > 0) {
+	        System.out.println(enemy1);
+	    }
+	    if (enemy2.getHp() > 0) {
+	        System.out.println(enemy2);
 	    }
 	}
 	
@@ -163,7 +204,6 @@ public class Battle {
     }
 	
 	public void attack(Pokemon attacker, Pokemon enemy1, Pokemon enemy2) { // test in progress (DO NOT TOUCH)
-	    effectiveness(); 
 		
 		String attackerType = attacker.getType();
 	    String enemyType1 = enemy1.getType();
@@ -200,9 +240,13 @@ public class Battle {
 	    	totalDamage2 = baseDamage * effMult2 - enemyDef2;
 	    }
 	    
-	    System.out.println(String.format("\nIt's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus1, enemy1.getName(),  Math.ceil(totalDamage1)));
-	    System.out.println(String.format("It's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus2, enemy2.getName(),  Math.ceil(totalDamage2)));
-	    
+	    if (enemy1.getHp() > 0) {
+	    	System.out.println(String.format("\nIt's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus1, enemy1.getName(),  Math.ceil(totalDamage1)));
+	    }
+	    if (enemy2.getHp() > 0) {
+	    	System.out.println(String.format("It's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus2, enemy2.getName(),  Math.ceil(totalDamage2)));
+	    }
+  
 		newHp1 = (int) (maxHp1 - totalDamage1);
 		newHp2 = (int) (maxHp2 - totalDamage2);
 	    
@@ -215,9 +259,24 @@ public class Battle {
 	
 	// check if hp of pokemon < 0
 	public void hpCheck(Pokemon pokemon) {
-		if (pokemon.getHp() < 0) {
-			System.out.println(pokemon.getName() + " has fainted");
+	    if (pokemon.getHp() < 0) {
+	        String message = "Fainted: " + pokemon.getName();
+
+	        if (!faintedMessages.contains(message)) {
+	            faintedMessages.add(message);
+	        }
+	    }
+	}
+	
+	public int skipPokemon(Pokemon pok) {
+		int turnCount = 0;
+		if (pok.getHp() < 0) {
+			turnCount = 1;
 		}
+		else {
+			turnCount = 0;
+		}
+		return turnCount;
 	}
 	
 	// get starting pokemon thru getting their speeds first
