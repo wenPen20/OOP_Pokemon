@@ -42,48 +42,75 @@ public class Battle {
 	    int i = 0;
     	Scanner scanner = new Scanner(System.in);
     	
-    	System.out.print("Type anything to start the round: ");
+    	System.out.print("Type anything to start the round: \n");
     	String input = scanner.next();
+    	//initialize turn counter for each team
+    	int turnCount1 = getStart(ally1, ally2);
+    	int turnCount2 = getStart(enemy1, enemy2);
 	    
 	    // Check which team starts first
 	    if (startTurn()) {
 	        System.out.println("Your team starts FIRST!");
 	        attack(pokemonStart(ally1, ally2) ? ally1 : ally2, enemy1, enemy2); 
+	        turnCount1 += 1;
 	        allyTeam = false;
 	        enemyTeam = true;
 	    } else {
 	        System.out.println("Enemy team starts FIRST!");
 	        attack(pokemonStart(enemy1, enemy2) ? enemy1 : enemy2, ally1, ally2);
+	        turnCount2 += 1;
 	        enemyTeam = false;
 	        allyTeam = true;
 	    }
-
-	    System.out.println("\n" + ally1);
+	    System.out.println("Ally:");
+	    System.out.println(ally1);
 	    System.out.println("\n" + ally2);
-	    System.out.println("\n" + enemy1);
+	    System.out.println("\nEnemy:");
+	    System.out.println(enemy1);
 	    System.out.println("\n" + enemy2);
 
+	    // Battle loop
 	    while (true) {
 
 	    	System.out.print("Type anything to start the next round: ");
 	    	String input1 = scanner.next();
 	    	
 	        if (allyTeam) {
-	            System.out.println("Your team attacks now");
-	            attack(pokemonStart(ally1, ally2) ? ally1 : ally2, enemy1, enemy2); 
+	        	
+	            System.out.println("\nYour team attacks now");
+	            if (turnCount1 % 2 == 0) {
+	            	System.out.println(ally1.getName() + " attacks using " + ally1.getMoveName() + "!");
+	            	attack(ally1, enemy1, enemy2); 
+	        	} else {
+	        		System.out.println(ally2.getName() + " attacks using " + ally2.getMoveName() + "!");
+	        		attack(ally2, enemy1, enemy2);
+	        	}
+	            turnCount1 += 1;
+	            // mechanic to swap turns
 	            allyTeam = false;
 	            enemyTeam = true;
 	        }
 
 	        else if (enemyTeam) {
-	            System.out.println("Enemy team attacks now");
-	            attack(pokemonStart(enemy1, enemy2) ? enemy1 : enemy2, ally1, ally2);  
-	            enemyTeam = false;
+	        	
+	            System.out.println("\nEnemy team attacks now");
+	            if (turnCount2 % 2 == 0) {
+	            	System.out.println(enemy1.getName() + " attacks using " + enemy1.getMoveName() + "!");
+	            	attack(enemy1, ally1, ally2);  
+	            } else {
+	            	System.out.println(enemy2.getName() + " attacks using " + enemy2.getMoveName() + "!");
+	            	attack(enemy2, ally1, ally2);  
+	            }
+            	turnCount2 += 1;
+	            // mechanic to swap turns
 	            allyTeam = true;
+	            enemyTeam = false;
 	        }
-	        System.out.println("\n" + ally1);
+	        System.out.println("Ally:");
+	        System.out.println(ally1);
 	        System.out.println("\n" + ally2);
-	        System.out.println("\n" + enemy1);
+	        System.out.println("\nEnemy:");
+	        System.out.println(enemy1);
 	        System.out.println("\n" + enemy2);
 
 	        i++;
@@ -93,6 +120,7 @@ public class Battle {
 	    }
 	}
 	
+	//determine which pokemon has the higher speed to start first turn
 	public boolean pokemonStart(Pokemon pok1, Pokemon pok2) { // test in progress (DO NOT TOUCH)
 		boolean pokemonStart = true;
 		if (pok1.getSpeed() > pok2.getSpeed()) {
@@ -104,6 +132,7 @@ public class Battle {
 		}
 	}
 	
+	//save a hashmap of counter values, use them for comparison later
 	public void effectiveness() { // test in progress (DO NOT TOUCH)
         typeEffectiveness = new HashMap<>();
 
@@ -121,6 +150,7 @@ public class Battle {
         typeEffectiveness.put("Grass->Grass", 1.0);
     }
 	
+	//get effectiveness message
     private String getEffectivenessStatus(double effMult) {
         if (effMult == 1.5) {
             return "Super Effective";
@@ -149,6 +179,7 @@ public class Battle {
 	    int enemyDef2 = enemy2.getDefense();
 	    double totalDamage1 = 0, totalDamage2 = 0, baseDamage;
 	    
+	    // look for effectiveness in hashmap
         double effMult1 = typeEffectiveness.getOrDefault(key1, 1.0);
         double effMult2 = typeEffectiveness.getOrDefault(key2, 1.0);
 	    String effectStatus1 = getEffectivenessStatus(effMult1);
@@ -156,6 +187,7 @@ public class Battle {
 
 	    baseDamage = attacker.getAttack();
 	    
+	    //Damage calculations
 	    if ((baseDamage * effMult1) < enemyDef1*1.2) {
 	    	totalDamage1 = Math.ceil((baseDamage * effMult1)*0.2);
 	    } else {
@@ -176,7 +208,27 @@ public class Battle {
 	    
 	    enemy1.setHp(newHp1);
 	    enemy2.setHp(newHp2);
+	    hpCheck(enemy1);
+	    hpCheck(enemy2);
+	    
 	}
 	
+	// check if hp of pokemon < 0
+	public void hpCheck(Pokemon pokemon) {
+		if (pokemon.getHp() < 0) {
+			System.out.println(pokemon.getName() + " has fainted");
+		}
+	}
+	
+	// get starting pokemon thru getting their speeds first
+	public int getStart(Pokemon pok1, Pokemon pok2) {
+		if (pok1.getSpeed() > pok2.getSpeed()) {
+			return 0; //pokemon 1 can cycle at even indexes
+		}else {
+			return 1; //pokemon 2 can cycle at odd indexes
+		}
+	}
 	
 }
+
+

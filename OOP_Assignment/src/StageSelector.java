@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class StageSelector {
 	
 	private int stage;
@@ -35,8 +36,13 @@ public class StageSelector {
     	System.out.println("===========================================================");
     	
     	roaredPokemon = selectedPokemon.get(input - 1); 
-    	System.out.printf("%s is roaring! \n\n", roaredPokemon.getName());
-       
+    	System.out.printf("\n%s is roaring! \n\n", roaredPokemon.getName());
+    	
+    	try {
+    		Thread.sleep(1000);
+    	}
+    	catch(InterruptedException e){	
+    	}
     }
 	
 
@@ -115,5 +121,6 @@ public class StageSelector {
     public Pokemon getRoaredPokemon() {
     	return roaredPokemon;
     }
+    
 }
 
