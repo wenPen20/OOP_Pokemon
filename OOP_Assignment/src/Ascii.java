@@ -43,4 +43,13 @@ public class Ascii {
 		System.out.println("  |_|\\___/ \\__,_|    \\_/\\_/ \\___/|_| |_| (_)");
 
 	}
+	
+	public static void CapturePokemonMessage() {
+		System.out.println("  ____      _       _     ____       _     __                       ");
+        System.out.println(" / ___|__ _| |_ ___| |__ |  _ \\ ___ | | __/_/ _ __ ___   ___  _ __  ");
+        System.out.println("| |   / _ | __/ __| '_ \\| |_) / _ \\| |/ / _ \\ '_  _ \\ / _ \\| '_ \\ ");
+        System.out.println("| |__| (_| | || (__| | | |  __/ (_) |   <  __/ | | | | | (_) | | | |");
+        System.out.println(" \\____\\__,_|\\__\\___|_| |_|_|   \\___/|_|\\_\\___|_| |_| |_\\___/|_| |_/");
+
+	}
 }
