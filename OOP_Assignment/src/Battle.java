@@ -68,7 +68,9 @@ public class Battle {
 	        enemyTeam = false;
 	        allyTeam = true;
 	    }
-        System.out.println(faintedMessages);
+	    if (!faintedMessages.isEmpty()) {
+	        System.out.println(faintedMessages);
+	    }
 	    printTeams();
 
 	    while (true) {
@@ -131,7 +133,9 @@ public class Battle {
 	    	}
 
 
-	        System.out.println(faintedMessages);
+		    if (!faintedMessages.isEmpty()) {
+		        System.out.println(faintedMessages);
+		    }
 	        
 
 	        if (ally1.getHp() < 0 && ally2.getHp() < 0) {

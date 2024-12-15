@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 
@@ -15,11 +16,28 @@ public class StageSelector {
 	// Executes the entire roaring process: sets the stage, selects pokemon, and prompts the user to choose a roaring pokemon.
     public void selectStage() {
     	// prompts user to select a stage
-    	System.out.println("===========================================================");
-        System.out.print("[1] Fire, [2] Water, [3] Grass\nChoose a stage: ");
-        int input = scanner.nextInt();
-        System.out.println("===========================================================");
-		this.stage = input;
+    	int input = 0;
+    	boolean checkStage = true;
+    	
+    	while(input < 1 || input > 3) {
+	    	try {
+	        	if (!checkStage) {
+	        		System.out.println("Please choose a number from 1-3 to select the stage");
+	        	}
+	            System.out.println("===========================================================");
+	            System.out.print("[1] Fire, [2] Water, [3] Grass\nChoose a stage: ");
+	            input = scanner.nextInt();
+	            System.out.println("===========================================================");
+	            this.stage = input;
+	        	checkStage = false;
+	        }
+	    	catch (InputMismatchException e){
+	    		System.out.println("===========================================================");
+	    		System.out.println("Please choose a number from 1-3 to select the stage");
+	    		scanner.next();
+	    	}
+    	}
+
 		
 		System.out.println("Three wild Pokémons appeared!\n");
 		
