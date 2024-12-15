@@ -1,5 +1,6 @@
+
 public class Pokemon {
-	private String collectionNumber, grade, name, type, moveName;
+	private String collectionNumber, grade, name, type, moveName, team;
 	private int pokeEne, maxHp, hp, attack, defense, speed;
 	private double probability;
 	
@@ -15,6 +16,7 @@ public class Pokemon {
 		this.attack = 25;
 		this.defense = 25;
 		this.speed = 25;
+		this.team = "No team";
 		this.probability = 0.0;
 	}
 	
@@ -31,6 +33,7 @@ public class Pokemon {
 		this.attack = attack;
 		this.defense = defense;
 		this.speed = speed;
+		this.team = team;
 		this.probability = 0.0;
 	}
 
@@ -121,6 +124,14 @@ public class Pokemon {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
+	
+	public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
 	
 	public double getProbability() {
         return probability;

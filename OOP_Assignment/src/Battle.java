@@ -15,6 +15,10 @@ public class Battle {
 		this.ally2 = ally2;
 		this.enemy1 = enemy1;
 		this.enemy2 = enemy2;
+		ally1.setTeam("Ally");
+		ally2.setTeam("Ally");
+		enemy1.setTeam("Enemy");
+		enemy2.setTeam("Enemy");
 		
 	    effectiveness();
 		startBattle();
@@ -137,6 +141,7 @@ public class Battle {
 		        System.out.println(faintedMessages);
 		    }
 	        
+		    printTeams();
 
 	        if (ally1.getHp() < 0 && ally2.getHp() < 0) {
 	        	Ascii.GameOverMessage();
@@ -147,7 +152,6 @@ public class Battle {
 	        	break;
 	        }
 	        
-	        printTeams();
 	    }
 	}
 	
@@ -267,8 +271,18 @@ public class Battle {
 	
 	// check if hp of pokemon < 0
 	public void hpCheck(Pokemon pokemon) {
+		
+		String teamStatus = "";
 	    if (pokemon.getHp() < 0) {
-	        String message = "Fainted: " + pokemon.getName();
+	    	
+	    	if(pokemon.getTeam().equals("Ally")) {
+	    		teamStatus = "Ally";
+	    	}
+	    	else if (pokemon.getTeam().equals("Enemy")) {
+	    		teamStatus = "Enemy";
+	    	}
+	    	
+	        String message = "Fainted: " + pokemon.getName() + " (" + teamStatus + ")";
 
 	        if (!faintedMessages.contains(message)) {
 	            faintedMessages.add(message);
