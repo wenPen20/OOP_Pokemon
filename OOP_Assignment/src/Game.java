@@ -50,7 +50,7 @@ public class Game {
 		// generate two enemy pokemons
 		enemy1 = pb2.selectRandomPokemon();
 		enemy2 = pb2.selectRandomPokemon();
-		enemy2 = noDuplicate(enemy1, enemy2);
+		enemy2 = noDuplicate1(enemy1, enemy2);
 		
 		if (player.getOwnedDisks().size() > 0) {
 			System.out.println("Your current owned disks: " + player.getOwnedDisks());
@@ -75,13 +75,20 @@ public class Game {
 		
 
 	}
-
 	// make sure the two pokemons are different
 	public Pokemon noDuplicate(Pokemon p1, Pokemon p2) {
 		while (p1.getCollectionNumber().equals(p2.getCollectionNumber())) {
 			p2 = pb.selectRandomPokemon();
 		}
-		
 		return p2;
 	}
+	
+	// make sure the two pokemons are different
+	public Pokemon noDuplicate1(Pokemon p1, Pokemon p2) {
+		while (p1.getCollectionNumber().equals(p2.getCollectionNumber())) {
+			p2 = pb2.selectRandomPokemon(); //different database prevents the self-damage issue
+		}
+		return p2;
+	}
+	
 }
