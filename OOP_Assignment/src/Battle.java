@@ -132,14 +132,18 @@ public class Battle {
 
 
 	        System.out.println(faintedMessages);
-	        printTeams();
+	        
 
 	        if (ally1.getHp() < 0 && ally2.getHp() < 0) {
+	        	Ascii.GameOverMessage();
 	        	break;
 	        }
 	        if (enemy1.getHp() < 0 && enemy2.getHp() < 0) {
+	        	Ascii.YouWonMessage();
 	        	break;
 	        }
+	        
+	        printTeams();
 	    }
 	}
 	
