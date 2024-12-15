@@ -4,6 +4,7 @@ public class Game {
 	Scanner input = new Scanner(System.in);
 	Database db = new Database();
 	Probability pb = new Probability();
+	Probability pb2 = new Probability();
 	StageSelector stage = new StageSelector();
 	Battle battle;
 	ArrayList<Player> loadedPlayers = db.loadPlayers("Players.txt");
@@ -43,12 +44,12 @@ public class Game {
 
 		// roared pokemon / first rental pokemon
 		rental1 = stage.getRoaredPokemon();
-		rental2 = pb.selectRandomPokemon();
+		rental2 = pb2.selectRandomPokemon();
 		rental2 = noDuplicate(rental1, rental2);
 
 		// generate two enemy pokemons
 		enemy1 = pb.selectRandomPokemon();
-		enemy2 = pb.selectRandomPokemon();
+		enemy2 = pb2.selectRandomPokemon();
 		enemy2 = noDuplicate(enemy1, enemy2);
 		
 		if (player.getOwnedDisks().size() > 0) {
