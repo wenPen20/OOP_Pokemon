@@ -9,6 +9,7 @@ public class Battle {
     private Pokemon ally1, ally2, enemy1, enemy2;
     private Map<String, Double> typeEffectiveness;
     private ArrayList<String> faintedMessages = new ArrayList<>();
+    private ArrayList<Pokemon> catchablePokemon = new ArrayList<>();
 
 	public Battle(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2) {
 		this.ally1 = ally1;
@@ -145,14 +146,26 @@ public class Battle {
 
 	        if (ally1.getHp() < 0 && ally2.getHp() < 0) {
 	        	Ascii.GameOverMessage();
+	        	if (enemy1.getHp() < 0) {
+	        		catchablePokemon.add(enemy1);
+	        	}
+	        	if(enemy2.getHp() < 0) {
+	        		catchablePokemon.add(enemy2);
+	        	}
 	        	break;
 	        }
 	        if (enemy1.getHp() < 0 && enemy2.getHp() < 0) {
 	        	Ascii.YouWonMessage();
+	        	catchablePokemon.add(enemy1);
+	        	catchablePokemon.add(enemy2);
 	        	break;
 	        }
 	        
 	    }
+	}
+	
+	public ArrayList<Pokemon> getCatchablePokemon(){
+		return catchablePokemon;
 	}
 	
 	private void printTeams() {
