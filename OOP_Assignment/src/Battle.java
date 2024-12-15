@@ -28,14 +28,14 @@ public class Battle {
 
 	}
 	
-	public void startBattle() { // test in progress (DO NOT TOUCH)
+	public void startBattle() { 
 		Ascii.BattleStartMessage();
 		System.out.println("\n\nTwo enemy Pokémons appeared! \n");
 		System.out.println("Enemy 1 \n" + enemy1);
 		System.out.println("Enemy 2 \n" + enemy2);
 	}
 	
-	public boolean startTurn() { // test in progress (DO NOT TOUCH)
+	public boolean startTurn() { 
 		boolean team1Start = true;
 		if ((ally1.getSpeed() + ally2.getSpeed()) > (enemy1.getSpeed() + enemy2.getSpeed())) {
 			return team1Start; //(T) team 1 is faster
@@ -45,9 +45,11 @@ public class Battle {
 		}	
 	}
 	
+	// main function of game system
 	public void teamTurns() {
 	    boolean allyTeam = true;
 	    boolean enemyTeam = true;
+	    boolean endLoop = false;
     	Scanner scanner = new Scanner(System.in);
     	
     	System.out.println("===========================================================");
@@ -77,8 +79,12 @@ public class Battle {
 	        System.out.println(faintedMessages);
 	    }
 	    printTeams();
+	    // check if game ended by comparing teams
+	    if (finishGame(ally1, ally2, enemy1, enemy2)) {
+	    	endLoop = true;
+	    }  
 
-	    while (true) {
+	    while (true && !endLoop) {
 	    	System.out.println("===========================================================");
 	    	System.out.print("Type anything to start the next round: ");
 	    	String input1 = scanner.next();
@@ -143,51 +149,65 @@ public class Battle {
 		    }
 	        
 		    printTeams();
-
-	        if (ally1.getHp() < 0 && ally2.getHp() < 0) {
-	        	Ascii.GameOverMessage();
-	        	if (enemy1.getHp() < 0) {
-	        		catchablePokemon.add(enemy1);
-	        	}
-	        	if(enemy2.getHp() < 0) {
-	        		catchablePokemon.add(enemy2);
-	        	}
-	        	break;
-	        }
-	        if (enemy1.getHp() < 0 && enemy2.getHp() < 0) {
-	        	Ascii.YouWonMessage();
-	        	catchablePokemon.add(enemy1);
-	        	catchablePokemon.add(enemy2);
-	        	break;
-	        }
-	        
+		    
+		    // check if game ended by comparing teams
+		    if (finishGame(ally1, ally2, enemy1, enemy2)) {
+		    	break;
+		    }        
 	    }
+	}
+	
+	// print ASCII message of game finish, set all enemy pokemon that fainted into catchable array, returns true to break loop
+	public boolean finishGame(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2) {
+		boolean isEnd = false;
+		if (ally1.getHp() < 0 && ally2.getHp() < 0) {
+			isEnd = true;
+			Ascii.GameOverMessage();
+        	if (enemy1.getHp() < 0) {
+        		catchablePokemon.add(enemy1);
+        	}
+        	if(enemy2.getHp() < 0) {
+        		catchablePokemon.add(enemy2);
+        	}
+        }
+        if (enemy1.getHp() < 0 && enemy2.getHp() < 0) {
+        	isEnd = true;
+        	Ascii.YouWonMessage();
+        	catchablePokemon.add(enemy1);
+        	catchablePokemon.add(enemy2);
+        }
+        return isEnd;
 	}
 	
 	public ArrayList<Pokemon> getCatchablePokemon(){
 		return catchablePokemon;
 	}
 	
+	// print each pokemon team member if hp>0
 	private void printTeams() {
-	    System.out.println("\nAlly Team:");
-	    if (ally1.getHp() > 0) {
-	        System.out.println(ally1);
-	    }
-	    if (ally2.getHp() > 0) {
-	        System.out.println(ally2);
-	    }
-
-	    System.out.println("\nEnemy Team:");
-	    if (enemy1.getHp() > 0) {
-	        System.out.println(enemy1);
-	    }
-	    if (enemy2.getHp() > 0) {
-	        System.out.println(enemy2);
-	    }
+		if (ally1.getHp() > 0 || ally2.getHp() > 0) {
+			System.out.println("\nAlly Team:");
+		    if (ally1.getHp() > 0) {
+		        System.out.println(ally1);
+		    }
+		    if (ally2.getHp() > 0) {
+		        System.out.println(ally2);
+		    }
+		}
+	    
+		if (enemy1.getHp() > 0 || enemy2.getHp() > 0) {
+		    System.out.println("\nEnemy Team:");
+		    if (enemy1.getHp() > 0) {
+		        System.out.println(enemy1);
+		    }
+		    if (enemy2.getHp() > 0) {
+		        System.out.println(enemy2);
+		    }
+		}
 	}
 	
 	//determine which pokemon has the higher speed to start first turn
-	public boolean pokemonStart(Pokemon pok1, Pokemon pok2) { // test in progress (DO NOT TOUCH)
+	public boolean pokemonStart(Pokemon pok1, Pokemon pok2) { 
 		boolean pokemonStart = true;
 		if (pok1.getSpeed() > pok2.getSpeed()) {
 			System.out.println(pok1.getName() + " attacks first using " + pok1.getMoveName() + "!");
@@ -199,7 +219,7 @@ public class Battle {
 	}
 	
 	//save a hashmap of counter values, use them for comparison later
-	public void effectiveness() { // test in progress (DO NOT TOUCH)
+	public void effectiveness() { 
         typeEffectiveness = new HashMap<>();
 
         // Populate the effectiveness values
@@ -228,7 +248,7 @@ public class Battle {
         return "";
     }
 	
-	public void attack(Pokemon attacker, Pokemon enemy1, Pokemon enemy2) { // test in progress (DO NOT TOUCH)
+	public void attack(Pokemon attacker, Pokemon enemy1, Pokemon enemy2) { 
 		
 		String attackerType = attacker.getType();
 	    String enemyType1 = enemy1.getType();
@@ -282,7 +302,7 @@ public class Battle {
 	    
 	}
 	
-	// check if hp of pokemon < 0
+	// print message if hp of pokemon < 0
 	public void hpCheck(Pokemon pokemon) {
 		
 		String teamStatus = "";
@@ -303,6 +323,7 @@ public class Battle {
 	    }
 	}
 	
+	// pokemon skipped if hp<0
 	public int skipPokemon(Pokemon pok) {
 		int turnCount = 0;
 		if (pok.getHp() < 0) {
