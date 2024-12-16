@@ -10,12 +10,14 @@ public class Battle {
     private Map<String, Double> typeEffectiveness;
     private ArrayList<String> faintedMessages = new ArrayList<>();
     private ArrayList<Pokemon> catchablePokemon = new ArrayList<>();
+    private Score score;
 
 	public Battle(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2) {
 		this.ally1 = ally1;
 		this.ally2 = ally2;
 		this.enemy1 = enemy1;
 		this.enemy2 = enemy2;
+		this.score = new Score();
 		ally1.setTeam("Ally");
 		ally2.setTeam("Ally");
 		enemy1.setTeam("Enemy");
@@ -57,6 +59,7 @@ public class Battle {
     	//initialize turn counter for each team
     	int turnCount1 = getStart(ally1, ally2);
     	int turnCount2 = getStart(enemy1, enemy2);
+    	int totalTurns = 1;
 	    
 	    // Check which team starts first
 	    if (startTurn()) {
@@ -80,6 +83,8 @@ public class Battle {
 	    printTeams();
 	    // check if game ended by comparing teams
 	    if (finishGame(ally1, ally2, enemy1, enemy2)) {
+	    	score.turnScore(totalTurns);
+	    	System.out.println(score);
 	    	endLoop = true;
 	    }  
 
@@ -142,7 +147,7 @@ public class Battle {
 		        }
 	    	}
 
-
+	    	totalTurns++;
 		    if (!faintedMessages.isEmpty()) {
 		        System.out.println(faintedMessages);
 		    }
@@ -151,12 +156,14 @@ public class Battle {
 		    
 		    // check if game ended by comparing teams
 		    if (finishGame(ally1, ally2, enemy1, enemy2)) {
+		    	score.turnScore(totalTurns);
+		    	System.out.println(score);
 		    	break;
 		    }        
 	    }
 	}
 	
-	// print ASCII message of game finish, set all enemy pokemon that fainted into catchable array, returns true to break loop
+	// print ASCII message of game finish, set all enemy pokemon that fainted into catchable array, returns true to break loop, update score as well
 	public boolean finishGame(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2) {
 		boolean isEnd = false;
 		if (ally1.getHp() < 0 && ally2.getHp() < 0) {
@@ -164,19 +171,36 @@ public class Battle {
 			Ascii.GameOverMessage();
         	if (enemy1.getHp() < 0) {
         		catchablePokemon.add(enemy1);
+        		score.enemyDefeated();
         	}
         	if(enemy2.getHp() < 0) {
         		catchablePokemon.add(enemy2);
+        		score.enemyDefeated();
         	}
         }
         if (enemy1.getHp() < 0 && enemy2.getHp() < 0) {
         	isEnd = true;
+        	int remainingHp = 0;
         	Ascii.YouWonMessage();
         	catchablePokemon.add(enemy1);
         	catchablePokemon.add(enemy2);
+        	score.enemyDefeated();
+        	score.enemyDefeated();
+        	if (ally1.getHp() > 0) {
+        		score.allyAlive();
+        		remainingHp = ally1.getHp();
+        		score.remainingHpBonus(remainingHp);
+        	}
+        	if (ally2.getHp() > 0) {
+        		score.allyAlive();
+        		remainingHp = ally2.getHp();
+        		score.remainingHpBonus(remainingHp);
+        	}
+        	score.winBonus();
         }
         return isEnd;
 	}
+	
 	
 	public ArrayList<Pokemon> getCatchablePokemon(){
 		return catchablePokemon;
@@ -248,6 +272,7 @@ public class Battle {
 		
 	    String enemyType1 = enemy1.getType();
 	    String enemyType2 = enemy2.getType();
+	    int intValue;
 
 	    // get attacker's damage type effectiveness
 	    double effMult1 = (getPokEffectiveness(attacker)).getOrDefault(enemyType1, 1.0);
@@ -284,9 +309,19 @@ public class Battle {
 	    
 	    if (enemy1.getHp() > 0) {
 	    	System.out.println(String.format("\nIt's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus1, enemy1.getName(),  Math.ceil(totalDamage1)));
+	    	if (attacker.equals(ally1) || attacker.equals(ally2)) {
+	    		intValue = (int) totalDamage1;
+	    		score.damageBonus(intValue);
+	    		score.effectiveAttackBonus(effectStatus1);
+	    	}
 	    }
 	    if (enemy2.getHp() > 0) {
 	    	System.out.println(String.format("It's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus2, enemy2.getName(),  Math.ceil(totalDamage2)));
+	    	if (attacker.equals(ally1) || attacker.equals(ally2)) {
+	    		intValue = (int) totalDamage2;
+	    		score.damageBonus(intValue);
+	    		score.effectiveAttackBonus(effectStatus2);
+	    	}
 	    }
   
 		newHp1 = (int) (maxHp1 - totalDamage1);

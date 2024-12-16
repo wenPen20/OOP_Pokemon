@@ -16,8 +16,9 @@ public class StageSelector {
 	// Executes the entire roaring process: sets the stage, selects pokemon, and prompts the user to choose a roaring pokemon.
     public void selectStage() {
     	// prompts user to select a stage
-    	int input = 0;
+    	int input = 0, input1 = 0;
     	boolean checkStage = true;
+    	boolean checkRoar = true;
     	
     	while(input < 1 || input > 3) {
 	    	try {
@@ -46,14 +47,31 @@ public class StageSelector {
     		Stage();
     	}
     	
-    	// prompts user to select one of three pokemons
-    	System.out.println("===========================================================");
-    	System.out.printf("[1] %s \n[2] %s \n[3] %s \n", selectedPokemon.get(0).getName(), selectedPokemon.get(1).getName(), selectedPokemon.get(2).getName());
-    	System.out.print("Choose a Pokémon to roar: ");
-    	input = scanner.nextInt();
-    	System.out.println("===========================================================");
+    	String roarPok1 = selectedPokemon.get(0).getName(), roarPok2 = selectedPokemon.get(1).getName(), roarPok3 = selectedPokemon.get(2).getName();
     	
-    	roaredPokemon = selectedPokemon.get(input - 1); 
+    	while(input1 < 1 || input1 > 3) {
+	    	try {
+	        	if (!checkRoar) {
+	        		System.out.println("Please choose a number from 1-3 to select a pokemon to roar");
+	        	}
+	        	// prompts user to select one of three pokemons
+	        	System.out.println("===========================================================");
+	        	System.out.printf("[1] %s \n[2] %s \n[3] %s \n", roarPok1, roarPok2, roarPok3);
+	        	System.out.print("Choose a Pokémon to roar: ");
+	        	input1 = scanner.nextInt();
+	        	System.out.println("===========================================================");
+	        	checkRoar = false;
+	    	}
+	    	catch(InputMismatchException e) {
+	    		System.out.println("===========================================================");
+	    		System.out.println("Please choose a number from 1-3 to select a pokemon to roar");
+	    		scanner.next();
+	    		}
+	    	}
+    	
+
+    	
+    	roaredPokemon = selectedPokemon.get(input1 - 1); 
     	System.out.printf("\n%s is roaring! \n\n", roaredPokemon.getName());
     	
     	try {

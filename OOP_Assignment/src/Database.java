@@ -1,3 +1,4 @@
+
 import java.util.*;
 import java.io.*;
 
@@ -150,10 +151,10 @@ public class Database {
 
 					// Extract data
 					String username = extractData(parts, 0);
-					int score = Integer.parseInt(extractData(parts, 1));
+//					int score = Integer.parseInt(extractData(parts, 1));
 
-					Score scores = new Score(username, score);
-					topScores.add(scores);
+//					Score scores = new Score(username, score);
+//					topScores.add(scores);
 				}
 			}
 
