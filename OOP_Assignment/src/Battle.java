@@ -169,6 +169,8 @@ public class Battle {
 		if (ally1.getHp() < 0 && ally2.getHp() < 0) {
 			isEnd = true;
 			Ascii.GameOverMessage();
+			System.out.println("\n===========================================================");
+			Ascii.YourScoreMessage();
         	if (enemy1.getHp() < 0) {
         		catchablePokemon.add(enemy1);
         		score.enemyDefeated();
@@ -182,6 +184,8 @@ public class Battle {
         	isEnd = true;
         	int remainingHp = 0;
         	Ascii.YouWonMessage();
+        	System.out.println("\n===========================================================");
+        	Ascii.YourScoreMessage();
         	catchablePokemon.add(enemy1);
         	catchablePokemon.add(enemy2);
         	score.enemyDefeated();
