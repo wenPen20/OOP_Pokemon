@@ -191,21 +191,21 @@ public class Battle {
 	// print ASCII message of game finish, set all enemy pokemon that fainted into catchable array, returns true to break loop, update score as well
 	public boolean finishGame(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2) {
 		boolean isEnd = false;
-		if (ally1.getHp() < 0 && ally2.getHp() < 0) {
+		if (ally1.getHp() <= 0 && ally2.getHp() <= 0) {
 			isEnd = true;
 			System.out.println("===========================================================");
 			Ascii.GameOverMessage();
 			System.out.println("\n===========================================================");
-        	if (enemy1.getHp() < 0) {
+        	if (enemy1.getHp() <= 0) {
         		catchablePokemon.add(enemy1);
         		score.enemyDefeated();
         	}
-        	if(enemy2.getHp() < 0) {
+        	if(enemy2.getHp() <= 0) {
         		catchablePokemon.add(enemy2);
         		score.enemyDefeated();
         	}
         }
-        if (enemy1.getHp() < 0 && enemy2.getHp() < 0) {
+        if (enemy1.getHp() <= 0 && enemy2.getHp() <= 0) {
         	isEnd = true;
         	int remainingHp = 0;
         	System.out.println("===========================================================");
@@ -367,7 +367,7 @@ public class Battle {
 	public void hpCheck(Pokemon pokemon) {
 		
 		String teamStatus = "";
-	    if (pokemon.getHp() < 0) {
+	    if (pokemon.getHp() <= 0) {
 	    	
 	    	if(pokemon.getTeam().equals("Ally")) {
 	    		teamStatus = "Ally";
@@ -384,10 +384,10 @@ public class Battle {
 	    }
 	}
 	
-	// pokemon skipped if hp<0 during battle
+	// pokemon skipped if hp<=0 during battle
 	public int skipPokemon(Pokemon pok) {
 		int turnCount = 0;
-		if (pok.getHp() < 0) {
+		if (pok.getHp() <= 0) {
 			turnCount = 1;
 		}
 		else {
