@@ -25,10 +25,15 @@ public class Battle {
 		
 		startBattle();
 		teamTurns();
-		//Checks which team is faster then checks which pokemon is faster
 
 	}
 	
+	// catchablePokemon getter method
+	public ArrayList<Pokemon> getCatchablePokemon(){
+		return catchablePokemon;
+	}
+	
+	// battle start messages
 	public void startBattle() { 
 		System.out.println("===========================================================");
 		Ascii.BattleStartMessage();
@@ -83,7 +88,7 @@ public class Battle {
 	        allyTeam = true;
 	    }
 	    if (!faintedMessages.isEmpty()) {
-	        System.out.println(faintedMessages);
+	        System.out.println("\n" + faintedMessages);
 	    }
 	    printTeams();
 	    // check if game ended by comparing teams
@@ -157,7 +162,7 @@ public class Battle {
 
 	    	totalTurns++;
 		    if (!faintedMessages.isEmpty()) {
-		        System.out.println(faintedMessages);
+		        System.out.println("\n" + faintedMessages);
 		    }
 	        
 		    printTeams();
@@ -215,11 +220,6 @@ public class Battle {
         return isEnd;
 	}
 	
-	
-	public ArrayList<Pokemon> getCatchablePokemon(){
-		return catchablePokemon;
-	}
-	
 	// print each pokemon team member if hp>0
 	private void printTeams() {
 		if (ally1.getHp() > 0 || ally2.getHp() > 0) {
@@ -243,7 +243,7 @@ public class Battle {
 		}
 	}
 	
-	//determine which pokemon has the higher speed to start first turn
+	// determine which pokemon has the higher speed to start first turn
 	public boolean pokemonStart(Pokemon pok1, Pokemon pok2) { 
 		boolean pokemonStart = true;
 		if (pok1.getSpeed() > pok2.getSpeed()) {
@@ -258,7 +258,7 @@ public class Battle {
 	// get their effectiveness from their subclasses
 	public Map<String,Double> getPokEffectiveness(Pokemon pok) { 
 		if (pok instanceof NormalType) {
-	        typeEffectiveness = ((NormalType) pok).getEffectiveness();
+	        typeEffectiveness.put(null, null);
 	    } else if (pok instanceof FireType) {
 	        typeEffectiveness = ((FireType) pok).getEffectiveness();
 	    } else if (pok instanceof WaterType) {
@@ -308,7 +308,7 @@ public class Battle {
 
 	    baseDamage = attacker.getAttack();
 	    
-	    //Damage calculations
+	    // Damage calculations
 	    if ((baseDamage * effMult1) < enemyDef1*1.2) {
 	    	totalDamage1 = Math.ceil((baseDamage * effMult1)*0.2);
 	    } else {
@@ -321,6 +321,7 @@ public class Battle {
 	    	totalDamage2 = baseDamage * effMult2 - enemyDef2;
 	    }
 	    
+	    // only deal damage when opponent's hp is > 0
 	    if (enemy1.getHp() > 0) {
 	    	System.out.println(String.format("\nIt's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus1, enemy1.getName(),  Math.ceil(totalDamage1)));
 	    	if (attacker.equals(ally1) || attacker.equals(ally2)) {
@@ -337,7 +338,8 @@ public class Battle {
 	    		score.effectiveAttackBonus(effectStatus2);
 	    	}
 	    }
-  
+	    
+	    // hp manipulation and checks
 		newHp1 = (int) (maxHp1 - totalDamage1);
 		newHp2 = (int) (maxHp2 - totalDamage2);
 	    
@@ -348,7 +350,7 @@ public class Battle {
 	    
 	}
 	
-	// print message if hp of pokemon < 0
+	// print message if hp of pokemon < 0 during battle
 	public void hpCheck(Pokemon pokemon) {
 		
 		String teamStatus = "";
@@ -369,7 +371,7 @@ public class Battle {
 	    }
 	}
 	
-	// pokemon skipped if hp<0
+	// pokemon skipped if hp<0 during battle
 	public int skipPokemon(Pokemon pok) {
 		int turnCount = 0;
 		if (pok.getHp() < 0) {

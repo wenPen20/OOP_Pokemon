@@ -88,7 +88,7 @@ public class Database {
 					
 					if (type.equals("Normal")) {
 						NormalType normalPokemon = new NormalType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
-								defense, speed, effectiveness);
+								defense, speed);
 						pokemons.add(normalPokemon);	//add normal
 					} else if (type.equals("Fire")) {
 						FireType firePokemon = new FireType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
