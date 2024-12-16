@@ -45,7 +45,7 @@ public class Score {
     }
     
     public void damageBonus(int damage) {
-    	int damageScore = damage * 10;
+    	int damageScore = damage * 15;
     	score += damageScore;
     	damageBonus += damageScore;
     }
@@ -99,7 +99,7 @@ public class Score {
 
     @Override
     public String toString() {
-        return "\033[1mAlive Ally Bonus:\033[0m " + allyAlive + "\n"
+        return "\n\033[1mAlive Ally Bonus:\033[0m " + allyAlive + "\n"
              + "\033[1mDefeated Enemy Bonus:\033[0m " + enemyDefeated + "\n"
              + "\033[1mDamage Bonus:\033[0m " + damageBonus + "\n"
              + "\033[1mEffective Attack Bonus:\033[0m " + effectiveAttackBonus + "\n"
