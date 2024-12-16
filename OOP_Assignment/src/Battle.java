@@ -165,7 +165,7 @@ public class Battle {
 		    // check if game ended by comparing teams
 		    if (finishGame(ally1, ally2, enemy1, enemy2)) {
 		    	Ascii.YourScoreMessage();
-		    	System.out.println("===========================================================");
+		    	System.out.println("\n===========================================================");
 		    	score.turnScore(totalTurns);
 		    	System.out.println(score);
 		    	break;
@@ -330,7 +330,7 @@ public class Battle {
 	    	}
 	    }
 	    if (enemy2.getHp() > 0) {
-	    	System.out.println(String.format("It's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus2, enemy2.getName(),  Math.ceil(totalDamage2)));
+	    	System.out.println(String.format("\nIt's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus2, enemy2.getName(),  Math.ceil(totalDamage2)));
 	    	if (attacker.equals(ally1) || attacker.equals(ally2)) {
 	    		intValue = (int) totalDamage2;
 	    		score.damageBonus(intValue);
