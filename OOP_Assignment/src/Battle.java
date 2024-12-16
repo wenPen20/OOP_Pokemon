@@ -30,12 +30,15 @@ public class Battle {
 	}
 	
 	public void startBattle() { 
+		System.out.println("===========================================================");
 		Ascii.BattleStartMessage();
+		System.out.println("\n===========================================================");
 		System.out.println("\n\nTwo enemy Pokémons appeared! \n");
 		System.out.println("Enemy 1 \n" + enemy1);
 		System.out.println("Enemy 2 \n" + enemy2);
 	}
 	
+	// decide which team starts first
 	public boolean startTurn() { 
 		boolean team1Start = true;
 		if ((ally1.getSpeed() + ally2.getSpeed()) > (enemy1.getSpeed() + enemy2.getSpeed())) {
@@ -56,12 +59,14 @@ public class Battle {
     	System.out.println("===========================================================");
     	System.out.print("Type anything to start the round: ");
     	String input = scanner.next();
-    	//initialize turn counter for each team
+    	System.out.println("===========================================================");
+    	// initialize turn counter for each team
     	int turnCount1 = getStart(ally1, ally2);
     	int turnCount2 = getStart(enemy1, enemy2);
     	int totalTurns = 1;
 	    
 	    // Check which team starts first
+    	System.out.println("\n			TURN	" + totalTurns + "\n");
 	    if (startTurn()) {
 	        System.out.println("Your team starts FIRST!");
 	        attack(pokemonStart(ally1, ally2) ? ally1 : ally2, enemy1, enemy2);
@@ -86,12 +91,15 @@ public class Battle {
 	    	score.turnScore(totalTurns);
 	    	System.out.println(score);
 	    	endLoop = true;
-	    }  
-
+	    } else {
+	    	totalTurns++;
+	    }
 	    while (true && !endLoop) {
 	    	System.out.println("===========================================================");
 	    	System.out.print("Type anything to start the next round: ");
 	    	String input1 = scanner.next();
+	    	System.out.println("===========================================================");
+	    	System.out.println("\n			TURN	" + totalTurns);
 	    	
 	    	while(true) {
 		        if (allyTeam) { // Ally's turn
@@ -156,6 +164,8 @@ public class Battle {
 		    
 		    // check if game ended by comparing teams
 		    if (finishGame(ally1, ally2, enemy1, enemy2)) {
+		    	Ascii.YourScoreMessage();
+		    	System.out.println("===========================================================");
 		    	score.turnScore(totalTurns);
 		    	System.out.println(score);
 		    	break;
@@ -168,7 +178,9 @@ public class Battle {
 		boolean isEnd = false;
 		if (ally1.getHp() < 0 && ally2.getHp() < 0) {
 			isEnd = true;
+			System.out.println("===========================================================");
 			Ascii.GameOverMessage();
+			System.out.println("\n===========================================================");
         	if (enemy1.getHp() < 0) {
         		catchablePokemon.add(enemy1);
         		score.enemyDefeated();
@@ -181,7 +193,9 @@ public class Battle {
         if (enemy1.getHp() < 0 && enemy2.getHp() < 0) {
         	isEnd = true;
         	int remainingHp = 0;
+        	System.out.println("===========================================================");
         	Ascii.YouWonMessage();
+        	System.out.println("\n===========================================================");
         	catchablePokemon.add(enemy1);
         	catchablePokemon.add(enemy2);
         	score.enemyDefeated();
