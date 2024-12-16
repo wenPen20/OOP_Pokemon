@@ -21,7 +21,6 @@ public class Battle {
 		enemy1.setTeam("Enemy");
 		enemy2.setTeam("Enemy");
 		
-	    effectiveness();
 		startBattle();
 		teamTurns();
 		//Checks which team is faster then checks which pokemon is faster
@@ -218,23 +217,19 @@ public class Battle {
 		}
 	}
 	
-	//save a hashmap of counter values, use them for comparison later
-	public void effectiveness() { 
-        typeEffectiveness = new HashMap<>();
-
-        // Populate the effectiveness values
-        typeEffectiveness.put("Water->Fire", 1.5);
-        typeEffectiveness.put("Water->Grass", 0.5);
-        typeEffectiveness.put("Water->Water", 1.0);
-
-        typeEffectiveness.put("Fire->Grass", 1.5);
-        typeEffectiveness.put("Fire->Water", 0.5);
-        typeEffectiveness.put("Fire->Fire", 1.0);
-
-        typeEffectiveness.put("Grass->Water", 1.5);
-        typeEffectiveness.put("Grass->Fire", 0.5);
-        typeEffectiveness.put("Grass->Grass", 1.0);
-    }
+	// get their effectiveness from their subclasses
+	public Map<String,Double> getPokEffectiveness(Pokemon pok) { 
+		if (pok instanceof NormalType) {
+	        typeEffectiveness = ((NormalType) pok).getEffectiveness();
+	    } else if (pok instanceof FireType) {
+	        typeEffectiveness = ((FireType) pok).getEffectiveness();
+	    } else if (pok instanceof WaterType) {
+	        typeEffectiveness = ((WaterType) pok).getEffectiveness();
+	    } else if (pok instanceof GrassType) {
+	        typeEffectiveness = ((GrassType) pok).getEffectiveness();
+	    }
+		return typeEffectiveness;
+	}
 	
 	//get effectiveness message
     private String getEffectivenessStatus(double effMult) {
@@ -248,25 +243,27 @@ public class Battle {
         return "";
     }
 	
+    // deals with attack damage and effectiveness handling
 	public void attack(Pokemon attacker, Pokemon enemy1, Pokemon enemy2) { 
 		
-		String attackerType = attacker.getType();
 	    String enemyType1 = enemy1.getType();
 	    String enemyType2 = enemy2.getType();
-	    String key1 = attackerType + "->" + enemyType1;
-	    String key2 = attackerType + "->" + enemyType2;
+
+	    // get attacker's damage type effectiveness
+	    double effMult1 = (getPokEffectiveness(attacker)).getOrDefault(enemyType1, 1.0);
+	    double effMult2 = (getPokEffectiveness(attacker)).getOrDefault(enemyType2, 1.0);
 	    
+	    // initialize hp values
 	    double maxHp1 = enemy1.getHp();
 	    double maxHp2 = enemy2.getHp();
 	    int newHp1 = 0, newHp2 = 0;
 	    
+	    // initialize def values
 	    int enemyDef1 = enemy1.getDefense();
 	    int enemyDef2 = enemy2.getDefense();
 	    double totalDamage1 = 0, totalDamage2 = 0, baseDamage;
 	    
-	    // look for effectiveness in hashmap
-        double effMult1 = typeEffectiveness.getOrDefault(key1, 1.0);
-        double effMult2 = typeEffectiveness.getOrDefault(key2, 1.0);
+	    // get effective status message
 	    String effectStatus1 = getEffectivenessStatus(effMult1);
 	    String effectStatus2 = getEffectivenessStatus(effMult2);
 

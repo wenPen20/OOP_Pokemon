@@ -82,10 +82,30 @@ public class Database {
 					int attack = Integer.parseInt(extractData(parts, 7));
 					int defense = Integer.parseInt(extractData(parts, 8));
 					int speed = Integer.parseInt(extractData(parts, 9));
-
-					Pokemon pokemon = new Pokemon(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
-							defense, speed);
-					pokemons.add(pokemon);
+					
+					HashMap<String, Double> effectiveness = new HashMap<>();
+					
+					if (type.equals("Normal")) {
+						NormalType normalPokemon = new NormalType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+								defense, speed, effectiveness);
+						pokemons.add(normalPokemon);	//add normal
+					} else if (type.equals("Fire")) {
+						FireType firePokemon = new FireType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+								defense, speed, effectiveness);
+						pokemons.add(firePokemon);		//add fire
+					} else if (type.equals("Grass")) {
+						GrassType grassPokemon = new GrassType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+								defense, speed, effectiveness);
+						pokemons.add(grassPokemon);		//add grass
+					} else if (type.equals("Water")) {
+						WaterType waterPokemon = new WaterType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+								defense, speed, effectiveness);
+						pokemons.add(waterPokemon);		//add water
+					} else {
+						Pokemon pokemon = new Pokemon(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+								defense, speed);
+						pokemons.add(pokemon);	//add Pokemon
+					}
 				}
 			}
 
