@@ -180,9 +180,9 @@ public class Battle {
 		    // check if game ended by comparing teams
 		    if (finishGame(ally1, ally2, enemy1, enemy2)) {
 		    	Ascii.YourScoreMessage();
-		    	System.out.println("\n===========================================================");
 		    	score.turnScore(totalTurns);
-		    	System.out.println(score);
+		    	System.out.println("\n" + score);
+		    	System.out.println("===========================================================");
 		    	break;
 		    }        
 	    }
