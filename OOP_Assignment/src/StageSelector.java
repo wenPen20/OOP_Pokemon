@@ -73,7 +73,7 @@ public class StageSelector {
     	
     	roaredPokemon = selectedPokemon.get(input1 - 1); 
     	System.out.printf("\n%s is roaring! \n\n", roaredPokemon.getName());
-    	
+    	// Purposefully have delay for pokemon roaring 
     	try {
     		Thread.sleep(1000);
     	}

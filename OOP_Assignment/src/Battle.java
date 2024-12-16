@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 import java.lang.Math;
 import java.util.Scanner;
 
@@ -12,6 +12,8 @@ public class Battle {
     private ArrayList<Pokemon> catchablePokemon = new ArrayList<>();
     private Score score;
 
+    Scanner scanner = new Scanner(System.in);
+    
 	public Battle(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2) {
 		this.ally1 = ally1;
 		this.ally2 = ally2;
@@ -25,7 +27,6 @@ public class Battle {
 		
 		startBattle();
 		teamTurns();
-
 	}
 	
 	// catchablePokemon getter method
@@ -35,6 +36,16 @@ public class Battle {
 	
 	// battle start messages
 	public void startBattle() { 
+		// Delay the start
+		System.out.println("Battle is starting...");
+		try {
+    		Thread.sleep(2000);
+    	}
+    	catch(InterruptedException e){	
+    	}
+		System.out.print("Enter any key to continue! ");
+		String input = scanner.next();
+		// Start messages
 		System.out.println("===========================================================");
 		Ascii.BattleStartMessage();
 		System.out.println("\n===========================================================");
@@ -59,7 +70,6 @@ public class Battle {
 	    boolean allyTeam = true;
 	    boolean enemyTeam = true;
 	    boolean endLoop = false;
-    	Scanner scanner = new Scanner(System.in);
     	
     	System.out.println("===========================================================");
     	System.out.print("Type anything to start the round: ");
@@ -257,8 +267,11 @@ public class Battle {
 	
 	// get their effectiveness from their subclasses
 	public Map<String,Double> getPokEffectiveness(Pokemon pok) { 
+		// Initialize the map to avoid NullPointerException
+	    Map<String, Double> typeEffectiveness = new HashMap<>();
+	    
 		if (pok instanceof NormalType) {
-	        typeEffectiveness.put(null, null);
+	        typeEffectiveness.put(null, null); // normal has no effectiveness
 	    } else if (pok instanceof FireType) {
 	        typeEffectiveness = ((FireType) pok).getEffectiveness();
 	    } else if (pok instanceof WaterType) {

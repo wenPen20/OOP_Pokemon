@@ -103,6 +103,7 @@ public class Database {
 								defense, speed, effectiveness);
 						pokemons.add(waterPokemon);		//add water
 					} else {
+						// Default pokemon
 						Pokemon pokemon = new Pokemon(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
 								defense, speed);
 						pokemons.add(pokemon);	//add Pokemon
