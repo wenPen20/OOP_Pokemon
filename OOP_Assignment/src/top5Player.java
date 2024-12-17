@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
-public class top5Player extends Player {
+public class Top5Player extends Player {
 	
 	private int rank;
 
-	public top5Player(String username, ArrayList<Pokemon> ownedDisks, int tokens, int rank) {
-		super(username, ownedDisks, tokens);
+	public Top5Player(String username, Score playerScore, int rank) {
+		super(username, playerScore);
 		this.rank = rank;
 	}
 

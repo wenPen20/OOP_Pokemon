@@ -1,5 +1,5 @@
-username=abc, score=10000
-username=12aewr3, score=9000
-username=aswerd, score=7000
-username=78wer9, score=5000
-username=adsdfgs, score=1000
+username=bob, highscore=3000, rank=1
+username=joe, highscore=2000, rank=2
+username=bro, highscore=1000, rank=3
+username=win, highscore=900, rank=4
+username=ski, highscore=800, rank=5
