@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 
-public class Top5Player extends Player {
+public class Top5Player {
 	
 	private int rank;
-
-	public Top5Player(String username, Score playerScore, int rank) {
-		super(username, playerScore);
+	private String username;
+	
+	public Top5Player(int rank, String username) {
 		this.rank = rank;
+		this.username = username;
 	}
 
 	public int getRank() {
