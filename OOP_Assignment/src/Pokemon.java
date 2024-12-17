@@ -149,14 +149,11 @@ public class Pokemon {
                 + "Attack: %s \n"
                 + "Defense: %s \n"
                 + "Speed: %s \n", name, grade, type, hp, maxHp, attack, defense, speed);
-<<<<<<< HEAD
     
 		
 //		return String.format(
 //				"Pokemon [collectionNumber=%s, name=%s, type=%s, moveName=%s, grade=%s, pokeEne=%s, hp=%s, attack=%s, defense=%s, speed=%s, probability=%f]",
 //				collectionNumber, name, type, moveName, grade, pokeEne, hp, attack, defense, speed, probability);
-=======
->>>>>>> 704e428260e76dae8645ccd7ca2e888749b958cb
 	}
 	
 	public void useMove(Pokemon target) {
