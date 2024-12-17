@@ -1,7 +1,7 @@
 
 public class Pokemon {
-	private String collectionNumber, grade, name, type, moveName;
-	private int pokeEne, hp, attack, defense, speed;
+	private String collectionNumber, grade, name, type, moveName, team;
+	private int pokeEne, maxHp, hp, attack, defense, speed;
 	private double probability;
 	
 	public Pokemon() {
@@ -12,9 +12,11 @@ public class Pokemon {
 		this.grade = "★";
 		this.pokeEne = 1000;
 		this.hp = 25;
+		this.maxHp = 25;
 		this.attack = 25;
 		this.defense = 25;
 		this.speed = 25;
+		this.team = "No team";
 		this.probability = 0.0;
 	}
 	
@@ -27,9 +29,11 @@ public class Pokemon {
 		this.grade = grade;
 		this.pokeEne = pokeEne;
 		this.hp = hp;
+		this.maxHp = hp;
 		this.attack = attack;
 		this.defense = defense;
 		this.speed = speed;
+		this.team = team;
 		this.probability = 0.0;
 	}
 
@@ -80,6 +84,14 @@ public class Pokemon {
 	public void setPokeEne(int pokeEne) {
 		this.pokeEne = pokeEne;
 	}
+	
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+    }
 
 	public int getHp() {
 		return hp;
@@ -113,6 +125,14 @@ public class Pokemon {
 		this.speed = speed;
 	}
 	
+	public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+	
 	public double getProbability() {
         return probability;
     }
@@ -122,16 +142,13 @@ public class Pokemon {
     }
 
 	@Override
-	public String toString() {
-		return String.format("%s %s \n"
-				+ "Type: %s \n"
-				+ "HP: %s \n"
-				+ "Attack: %s \n"
-				+ "Defense: %s \n", name, grade, type, hp, attack, defense);
-		
-//		return String.format(
-//				"Pokemon [collectionNumber=%s, name=%s, type=%s, moveName=%s, grade=%s, pokeEne=%s, hp=%s, attack=%s, defense=%s, speed=%s, probability=%f]",
-//				collectionNumber, name, type, moveName, grade, pokeEne, hp, attack, defense, speed, probability);
+    public String toString() {
+        return String.format("%s %s \n"
+                + "Type: %s \n"
+                + "HP: %d/%d \n" // Show HP in currentHp/maxHp format
+                + "Attack: %s \n"
+                + "Defense: %s \n"
+                + "Speed: %s \n", name, grade, type, hp, maxHp, attack, defense, speed);
 	}
 	
 	public void useMove(Pokemon target) {
