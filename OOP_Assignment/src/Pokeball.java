@@ -1,38 +1,28 @@
-
 public class Pokeball {
-	private String ballName;
-	private double catchRate;
-	
-	public Pokeball() {
-		this.ballName = "Unknown Ball";
-		this.catchRate = 0.0;
-	}
-	
-	public Pokeball(String ballName, double catchRate) {
-		this.ballName = ballName;
-		this.catchRate = catchRate;
-	}
+    private String ballName;
+    private double catchRate;
 
-	public String getBallName() {
-		return ballName;
-	}
+    public Pokeball(String ballName, double catchRate) {
+        this.ballName = ballName;
+        this.catchRate = catchRate;
+    }
 
-	public void setBallName(String ballName) {
-		this.ballName = ballName;
-	}
+    public String getBallName() {
+        return ballName;
+    }
 
-	public double getCatchRate() {
-		return catchRate;
-	}
+    public double getCatchRate() {
+        return catchRate;
+    }
+    
+    public boolean tryToCatch(Pokemon pokemon) {
+        double randomValue = Math.random();
+        return randomValue <= this.catchRate;
+    }
+    
+    @Override
+    public String toString() {
+        return ballName;
+    }
 
-	public void setCatchRate(double catchRate) {
-		this.catchRate = catchRate;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Pokeball [ballName=%s, catchRate=%s]", ballName, catchRate);
-	}
-	
-	
 }

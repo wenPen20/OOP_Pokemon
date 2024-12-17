@@ -165,7 +165,61 @@ public class Database {
 		return topScores;
 	}
 	
-	
+	// catch a Pokémon and update the player's data
+	public void catchPokemon(String username) {
+	    Player player = getPlayerByUsername(username);
+	    if (player != null) {
+	        // Randomly select a Pokémon from the list
+	        Random rand = new Random();
+	        int randomIndex = rand.nextInt(pokemons.size()); // generate random index for Pokémon
+	        Pokemon pokemonToCatch = pokemons.get(randomIndex); 
+
+	        // Randomly select a Pokéball from the list
+	        int randomPokeballIndex = rand.nextInt(pokeballs.size()); // generate random index for Pokéball
+	        Pokeball selectedPokeball = pokeballs.get(randomPokeballIndex); 
+
+	        // Try to catch the Pokémon with the selected Pokéball
+	        if (selectedPokeball.tryToCatch(pokemonToCatch)) {
+	            player.getOwnedDisks().add(pokemonToCatch);
+	            System.out.println("Successfully caught " + pokemonToCatch.getName() + " using a " + selectedPokeball.getBallName() + "!");
+	            updatePlayerFile(player);
+	        } else {
+	            System.out.println("Failed to catch " + pokemonToCatch.getName() + " using a " + selectedPokeball.getBallName());
+	        }
+	    } else {
+	        System.out.println("Player not found.");
+	    }
+	}
+    // get Player by Username
+    private Player getPlayerByUsername(String username) {
+        for (Player player : players) {
+            if (player.getUsername().equals(username)) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    // update the Player's data in the file after catching a Pokémon
+    private void updatePlayerFile(Player player) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Players.txt"))) {
+            for (Player p : players) {
+                String ownedPokemons = "[" + String.join(", ", getPokemonCollectionNumbers(p)) + "]";
+                writer.write("username=" + p.getUsername() + ", ownedPokemons=" + ownedPokemons + ", tokens=" + p.getTokens() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
+    // helper method to get collection numbers of owned Pokémon
+    private List<String> getPokemonCollectionNumbers(Player player) {
+        List<String> collectionNumbers = new ArrayList<>();
+        for (Pokemon pokemon : player.getOwnedDisks()) {
+            collectionNumbers.add(pokemon.getCollectionNumber());
+        }
+        return collectionNumbers;
+    }
 
 	// helper function to extract data
 	public String extractData(String[] parts, int index) {
