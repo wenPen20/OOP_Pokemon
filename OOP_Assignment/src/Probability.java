@@ -19,15 +19,15 @@ public class Probability {
 		String grade = "";
 
 		// Determine the grade based on random value
-		if (randomValue >= 0.00 && randomValue < 0.40) {
+		if (randomValue >= 0.00 && randomValue < 0.40) {			//40%
 			grade = "★";
-		} else if (randomValue >= 0.40 && randomValue < 0.70) {
+		} else if (randomValue >= 0.40 && randomValue < 0.70) {		//30%
 			grade = "★★";
-		} else if (randomValue >= 0.70 && randomValue < 0.85) {
+		} else if (randomValue >= 0.70 && randomValue < 0.85) {		//15%
 			grade = "★★★";
-		} else if (randomValue >= 0.85 && randomValue < 0.95) {
+		} else if (randomValue >= 0.85 && randomValue < 0.95) {		//10%
 			grade = "★★★★";
-		} else if (randomValue >= 0.95 && randomValue <= 1.0) {
+		} else if (randomValue >= 0.95 && randomValue <= 1.0) {		//5%
 			grade = "★★★★★";
 		}
 		

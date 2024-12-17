@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class Battle {
     private Pokemon ally1, ally2, enemy1, enemy2;
-    private Map<String, Double> typeEffectiveness;
     private ArrayList<String> faintedMessages = new ArrayList<>();
     private ArrayList<Pokemon> catchablePokemon = new ArrayList<>();
     private Score score;

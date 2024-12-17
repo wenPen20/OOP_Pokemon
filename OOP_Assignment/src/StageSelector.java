@@ -118,7 +118,7 @@ public class StageSelector {
         
         
         // if chosen the rate up pokemon, get its name and grade (maybe even print out the entire pokemon details)
-        if (randomValue >= 0.00 && randomValue < 0.60) {
+        if (randomValue >= 0.00 && randomValue < 0.60) { // 60% for type rateup
         	boolean pExist = false;
         	
         	// loop through the list to check if duplicate pokemon exist
