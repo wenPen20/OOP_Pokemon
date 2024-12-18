@@ -76,35 +76,34 @@ public class Database {
 					String collectionNumber = extractData(parts, 0);
 					String grade = extractData(parts, 1);
 					String name = extractData(parts, 2);
-					int pokeEne = Integer.parseInt(extractData(parts, 3));
-					String type = extractData(parts, 4);
-					String moveName = extractData(parts, 5);
-					int hp = Integer.parseInt(extractData(parts, 6));
-					int attack = Integer.parseInt(extractData(parts, 7));
-					int defense = Integer.parseInt(extractData(parts, 8));
-					int speed = Integer.parseInt(extractData(parts, 9));
+					String type = extractData(parts, 3);
+					String moveName = extractData(parts, 4);
+					int hp = Integer.parseInt(extractData(parts, 5));
+					int attack = Integer.parseInt(extractData(parts, 6));
+					int defense = Integer.parseInt(extractData(parts, 7));
+					int speed = Integer.parseInt(extractData(parts, 8));
 					
 					HashMap<String, Double> effectiveness = new HashMap<>();
 					
 					if (type.equals("Normal")) {
-						NormalType normalPokemon = new NormalType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+						NormalType normalPokemon = new NormalType(collectionNumber, name, type, moveName, grade, hp, attack,
 								defense, speed);
 						pokemons.add(normalPokemon);	//add normal
 					} else if (type.equals("Fire")) {
-						FireType firePokemon = new FireType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+						FireType firePokemon = new FireType(collectionNumber, name, type, moveName, grade, hp, attack,
 								defense, speed, effectiveness);
 						pokemons.add(firePokemon);		//add fire
 					} else if (type.equals("Grass")) {
-						GrassType grassPokemon = new GrassType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+						GrassType grassPokemon = new GrassType(collectionNumber, name, type, moveName, grade, hp, attack,
 								defense, speed, effectiveness);
 						pokemons.add(grassPokemon);		//add grass
 					} else if (type.equals("Water")) {
-						WaterType waterPokemon = new WaterType(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+						WaterType waterPokemon = new WaterType(collectionNumber, name, type, moveName, grade, hp, attack,
 								defense, speed, effectiveness);
 						pokemons.add(waterPokemon);		//add water
 					} else {
 						// Default pokemon
-						Pokemon pokemon = new Pokemon(collectionNumber, name, type, moveName, grade, pokeEne, hp, attack,
+						Pokemon pokemon = new Pokemon(collectionNumber, name, type, moveName, grade, hp, attack,
 								defense, speed);
 						pokemons.add(pokemon);	//add Pokemon
 					}
