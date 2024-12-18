@@ -54,10 +54,10 @@ public class Ascii {
 	}
 	
 	public static void YourScoreMessage() {
-		System.out.println("__   __               ____                     _ ");
-        System.out.println("\\ \\ / /__  _   _ _ __/ ___|  ___ ___  _ __ ___| |");
-        System.out.println(" \\ V / _ \\| | | | '__\\___ \\ / __/ _ \\| '__/ _ \\ |");
-        System.out.println("  | | (_) | |_| | |   ___) | (_| (_) | | |  __/_|");
-        System.out.println("  |_|\\___/ \\__,_|_|  |____/ \\___\\___/|_|  \\___(_)");
+		System.out.println("__   __                 ____                      ");
+        System.out.println("\\ \\ / /__  _   _ _ __  / ___|  ___ ___  _ __ ___  ");
+        System.out.println(" \\ V / _ \\| | | | '__| \\___ \\ / __/ _ \\| '__/ _ \\ ");
+        System.out.println("  | | (_) | |_| | |     ___) | (_| (_) | | |  __/ ");
+        System.out.println("  |_|\\___/ \\__,_|_|    |____/ \\___\\___/|_|  \\___| ");
 	}
 }

@@ -43,6 +43,7 @@ public class Probability {
 	
 	// select a random pokemon, accounting for grade but ignoring type
     public Pokemon selectRandomPokemon() {
+    	pokemons.clear();
         ArrayList<Pokemon> randP = getSameGradePokemons();
         Random random = new Random();
         

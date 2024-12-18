@@ -2,17 +2,17 @@ import java.util.*;
 
 public class Game {
 	Scanner input = new Scanner(System.in);
-	Database db = new Database();
-	Probability pb = new Probability();
-	Probability pb2 = new Probability();
-	StageSelector stage = new StageSelector();
-	Battle battle;
-	ArrayList<Player> loadedPlayers = db.loadPlayers("Players.txt");
-	ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
-	ArrayList<Pokeball> loadedPokeballs = db.loadPokeballs("Pokeballs.txt");
-	ArrayList<Score> loadedScores = db.loadTopScores("top5Scores.txt");
-	Pokemon rental1, rental2, enemy1, enemy2;
-	Player player;
+	private Database db = new Database();
+	private Probability pb = new Probability();
+	private Probability pb2 = new Probability();
+	private StageSelector stage = new StageSelector();
+	private Battle battle;
+	private ArrayList<Player> loadedPlayers = db.loadPlayers("Players.txt");
+	private ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
+	private ArrayList<Pokeball> loadedPokeballs = db.loadPokeballs("Pokeballs.txt");
+	private ArrayList<Score> loadedScores = db.loadTopScores("top5Scores.txt");
+	private Pokemon rental1, rental2, enemy1, enemy2;
+	private Player player;
 
 	public void start() {
 		Ascii.WelcomeMessage();
