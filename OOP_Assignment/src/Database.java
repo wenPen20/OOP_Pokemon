@@ -7,12 +7,14 @@ public class Database {
 	private ArrayList<Pokemon> pokemons;
 	private ArrayList<Pokeball> pokeballs;
 	private ArrayList<Score> topScores;
+	private ArrayList<Top5Player> top5Array;
 
 	public Database() {
 		this.players = new ArrayList<>();
 		this.pokemons = new ArrayList<>();
 		this.pokeballs = new ArrayList<>();
 		this.topScores = new ArrayList<>();
+		this.top5Array = new ArrayList<>();
 	}
 
 	public ArrayList<Player> loadPlayers(String filePath) {
@@ -162,6 +164,42 @@ public class Database {
 			System.out.println("Error: " + e.getMessage());
 		}
 		return topScores;
+	}
+	
+	public ArrayList<Top5Player> loadTopPlayer(String filePath){
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			String line;
+			// clearing persistent data in a "shared class" or "singleton"
+			top5Array.clear();
+			
+			// while there are still lines to read
+			while ((line = reader.readLine()) != null) {
+				line = line.trim();
+				if (!line.isEmpty()) {
+					// Split with spaces, except inside brackets
+					String[] parts = line.split(",\\s*");
+	
+					// Extract username
+					String username = extractData(parts, 0);
+					
+					// Extract score
+					int fileScore = Integer.parseInt(extractData(parts, 1));
+					
+					// Extract rank
+					int fileRank = Integer.parseInt(extractData(parts, 2));
+	
+					// Create Player object and add it to the list
+					Top5Player topPlayer = new Top5Player(username, fileScore);
+					topPlayer.setRank(fileRank);
+					// Add to the top5Array list
+	                top5Array.add(topPlayer);
+				}
+			}
+	
+		} catch (IOException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return top5Array;
 	}
 	
     // get Player by Username

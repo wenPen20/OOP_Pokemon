@@ -35,6 +35,11 @@ public class Battle {
 		return catchablePokemon;
 	}
 	
+	// return score method
+	public int getScore() {
+		return this.score.getScore();
+	}
+	
 	// battle start messages
 	public void startBattle() { 
 		// Delay the start

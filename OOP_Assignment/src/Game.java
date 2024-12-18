@@ -11,6 +11,7 @@ public class Game {
 	private ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
 	private ArrayList<Pokeball> loadedPokeballs = db.loadPokeballs("Pokeballs.txt");
 	private ArrayList<Score> loadedScores = db.loadTopScores("top5Scores.txt");
+	private ArrayList<Top5Player> top5Player = db.loadTopPlayer("top5Scores.txt");
 	private Pokemon rental1, rental2, enemy1, enemy2;
 	private Player player;
 
@@ -19,11 +20,13 @@ public class Game {
 
 		System.out.printf("\nEnter your username: ");
 		String username = input.nextLine();
-
+		String pName = "";
+		
 		boolean playerExist = false;
 		for (Player player : loadedPlayers) {
 			if (player.getUsername().equals(username)) {
 				this.player = new Player(username, player.getOwnedDisks(), player.getTokens());
+				pName = username;
 				
 				System.out.println("\nLoaded Saved Player Data:");
 				System.out.println(this.player);
@@ -34,6 +37,7 @@ public class Game {
 
 		if (playerExist == false) {
 			player = new Player(username);
+			pName = username;
 			
 			System.out.println("\nHello New User! This is Your Player Data.");
 			System.out.println(this.player);			
@@ -65,6 +69,17 @@ public class Game {
 			System.out.println(rental2);
 			
 			battle = new Battle(rental1, rental2, enemy1, enemy2, db);
+			
+			// prints old and new top scores
+			Top5Player newPlayer = new Top5Player(pName, battle.getScore());
+			// prints score, update score textfile
+			newPlayer.updateScoreAndWriteToFile(newPlayer, db);
+			
+			// STICKY NOTE: NOT YET IMPLEMENTED a function to update players.txt,
+			// though top5Scores.txt now supports auto updating
+			
+			// STICKY NOTE2: NOT YET IMPLEMENTED score board display could look nicer
+			
 			
 		} else {
 			// implement case for user to choose between rental and their own pokemons. 

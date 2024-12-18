@@ -4,14 +4,12 @@ public class Player {
 	private String username;
 	private ArrayList<Pokemon> ownedPokemons;
 	private int tokens;
-	private Score playerScore;
 	
 	// creating new player
 	public Player(String username) {
 		this.username = username;
 		this.ownedPokemons = new ArrayList<Pokemon>();
 		this.tokens = 0;
-		this.playerScore = new Score();
 	}
 
 	// retrieve player
