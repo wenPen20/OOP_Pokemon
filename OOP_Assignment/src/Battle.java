@@ -109,6 +109,7 @@ public class Battle {
 	    printTeams();
 	    // check if game ended by comparing teams
 	    if (finishGame(ally1, ally2, enemy1, enemy2)) {
+	    	Ascii.YourScoreMessage();
 	    	score.turnScore(totalTurns);
 	    	System.out.println(score);
 	    	endLoop = true;
