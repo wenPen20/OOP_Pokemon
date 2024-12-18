@@ -1,3 +1,4 @@
+package defa;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -41,15 +42,18 @@ public class Top5Player {
 	
 	@Override
 	public String toString() {
-		return String.format("Username: %s \n"
-				+ "Rank: %d \n"
-				+ "Score: %d \n", username, rank, score);
+		return String.format("\033[1mRank: %d\033[0m"
+				+ "\nUsername: %s"
+				+ "\nScore: %d", rank, username , score);
 	}
 	
 	// update top 5
 	public ArrayList<Top5Player> updateScore(Top5Player player, Database db) {
 		ArrayList<Top5Player> loadedTop5 = db.loadTopPlayer("top5Scores.txt");
-		System.out.println(loadedTop5); // print old top 5
+		System.out.println("\033[1mOld Top 5\033[0m");
+		for (int i = 0; i < loadedTop5.size(); i++) {
+			System.out.println(loadedTop5.get(i));
+		}
 		
 		// Check if the player's score is greater than any of the current scores
 	    boolean scoreAdded = false;
@@ -80,7 +84,10 @@ public class Top5Player {
 	    }
 
 	    // Return the updated list of top 5 players
-	    System.out.println("new\n" + loadedTop5); //print new top 5
+	    System.out.println("\n\033[1mNew Top 5\033[0m");
+		for (int i = 0; i < loadedTop5.size(); i++) { //print new top 5
+			System.out.println(loadedTop5.get(i));
+		} 
 	    return loadedTop5;
 	    
 	}
