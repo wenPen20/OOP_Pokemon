@@ -64,7 +64,7 @@ public class Game {
 			System.out.println(rental1);
 			System.out.println(rental2);
 			
-			battle = new Battle(rental1, rental2, enemy1, enemy2);
+			battle = new Battle(rental1, rental2, enemy1, enemy2, db);
 			
 		} else {
 			// implement case for user to choose between rental and their own pokemons. 

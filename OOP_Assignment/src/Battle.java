@@ -6,6 +6,7 @@ import java.lang.Math;
 import java.util.Scanner;
 
 public class Battle {
+	private Database database;
     private Pokemon ally1, ally2, enemy1, enemy2;
     private ArrayList<String> faintedMessages = new ArrayList<>();
     private ArrayList<Pokemon> catchablePokemon = new ArrayList<>();
@@ -13,7 +14,7 @@ public class Battle {
 
     Scanner scanner = new Scanner(System.in);
     
-	public Battle(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2) {
+	public Battle(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2, Database db) {
 		this.ally1 = ally1;
 		this.ally2 = ally2;
 		this.enemy1 = enemy1;
@@ -23,6 +24,7 @@ public class Battle {
 		ally2.setTeam("Ally");
 		enemy1.setTeam("Enemy");
 		enemy2.setTeam("Enemy");
+		this.database = db;
 		
 		startBattle();
 		teamTurns();
@@ -404,6 +406,38 @@ public class Battle {
 		}
 	}
 	
+	// catch fainted pokemon at the end of the battle
+    public void endBattleCatch(String username, ArrayList<Pokemon> catchablePokemon) {
+        Player player = database.getPlayerByUsername(username);  
+        if (player != null) {
+            // check if there are fainted pokemon in the catchablePokemon list
+            if (!catchablePokemon.isEmpty()) {
+                for (Pokemon faintedPokemon : catchablePokemon) {
+                    // ensure the pokemon is fainted (hp == 0)
+                    if (faintedPokemon.getHp() == 0) {
+                        // generate pokeball to catch
+                        Pokeball randomPokeball = Pokeball.getRandomPokeball();
+                        System.out.println("A Random Pokéball has been generated! : " + randomPokeball);
+                        
+                        // Try to catch the fainted pokemon with the random pokeball
+                        if (randomPokeball.tryToCatch(faintedPokemon)) {
+                            player.getOwnedDisks().add(faintedPokemon); // add to player's collection
+                            System.out.println("Successfully caught " + faintedPokemon.getName() + " using a " + randomPokeball.getBallName() + "!");
+                            database.updatePlayerFile(player); // Call updatePlayerFile from Database
+                        } else {
+                            System.out.println("Failed to catch " + faintedPokemon.getName() + " using a " + randomPokeball.getBallName());
+                        }
+                    } else {
+                        System.out.println(faintedPokemon.getName() + " is not fainted and cannot be caught.");
+                    }
+                }
+            } else {
+                System.out.println("No fainted Pokémon available to catch.");
+            }
+        } else {
+            System.out.println("Player not found.");
+        }
+    }
 }
 
 
