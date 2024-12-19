@@ -60,7 +60,7 @@ public class Battle {
     	catch(InterruptedException e){	
     	}
 		System.out.print("Enter any key to continue! ");
-		String input = scanner.next();
+		String input = scanner.nextLine();
 		// Start messages
 		System.out.println("===========================================================");
 		Ascii.BattleStartMessage();
@@ -89,7 +89,7 @@ public class Battle {
     	
     	System.out.println("===========================================================");
     	System.out.print("Type anything to start the round: ");
-    	String input = scanner.next();
+    	String input = scanner.nextLine();
     	System.out.println("===========================================================");
     	// initialize turn counter for each team
     	int turnCount1 = getStart(ally1, ally2);
@@ -106,7 +106,7 @@ public class Battle {
 	        allyTeam = false;
 	        enemyTeam = true;
 	    } else {
-	        System.out.println(red + "Enemy team starts FIRST!]" + reset);
+	        System.out.println(red + "Enemy team starts FIRST!" + reset);
 	        attack(pokemonStart(enemy1, enemy2) ? enemy1 : enemy2, ally1, ally2);
 	        turnCount2 += 1;
 	        
@@ -129,7 +129,7 @@ public class Battle {
 	    while (true && !endLoop) {
 	    	System.out.println("===========================================================");
 	    	System.out.print("Type anything to start the next round: ");
-	    	String input1 = scanner.next();
+	    	String input1 = scanner.nextLine();
 	    	System.out.println("===========================================================");
 	    	System.out.println("\n			TURN	" + totalTurns);
 	    	
@@ -138,7 +138,7 @@ public class Battle {
 		            if (turnCount1 % 2 == 0) { // Ally1's turn
 		                if (ally1.getHp() > 0) {
 		                	System.out.println("\n" + green + "Your team's turn!" + reset);
-		                    System.out.println(ally1.getName() + " attacks using " + ally1.getMoveName() + "!");
+		                    System.out.println(ally1.getName() + " attacks using " + yellow + ally1.getMoveName() + reset + "!");
 		                    attack(ally1, enemy1, enemy2);
 		                } else {
 		                    turnCount1++; // Increment to switch to Ally2
@@ -147,7 +147,7 @@ public class Battle {
 		            } else { // Ally2's turn
 		                if (ally2.getHp() > 0) {
 		                	System.out.println("\n" + green + "Your team's turn!" + reset);
-		                    System.out.println(ally2.getName() + " attacks using " + ally2.getMoveName() + "!");
+		                    System.out.println(ally2.getName() + " attacks using " + yellow + ally2.getMoveName() + reset + "!");
 		                    attack(ally2, enemy1, enemy2);
 		                } else {
 		                    turnCount1++; // Increment to switch back to Ally1
@@ -164,7 +164,7 @@ public class Battle {
 		            if (turnCount2 % 2 == 0) { // Enemy1's turn
 		                if (enemy1.getHp() > 0) {
 		                	System.out.println("\n" + red + "Enemy team's turn!" + reset);
-		                    System.out.println(enemy1.getName() + " attacks using " + enemy1.getMoveName() + "!");
+		                    System.out.println(enemy1.getName() + " attacks using " + yellow + enemy1.getMoveName() + reset + "!");
 		                    attack(enemy1, ally1, ally2);
 		                } else {
 		                    turnCount2++; // Increment to switch to Enemy2
@@ -173,7 +173,7 @@ public class Battle {
 		            } else { // Enemy2's turn
 		                if (enemy2.getHp() > 0) {
 		                	System.out.println("\n" + red + "Enemy team's turn!" + reset);
-		                    System.out.println(enemy2.getName() + " attacks using " + enemy2.getMoveName() + "!");
+		                    System.out.println(enemy2.getName() + " attacks using " + yellow + enemy2.getMoveName() + reset + "!");
 		                    attack(enemy2, ally1, ally2);
 		                } else {
 		                	turnCount2++; // Increment to switch back to Enemy1
