@@ -96,6 +96,10 @@ public class Score {
     	score += 5000;
     	winBonus += 5000;
     }
+    
+    public int generateToken() {
+        return score / 4000;
+    }
 
     @Override
     public String toString() {

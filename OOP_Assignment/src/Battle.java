@@ -123,6 +123,8 @@ public class Battle {
 	    	Ascii.YourScoreMessage();
 	    	score.turnScore(totalTurns);
 	    	System.out.println("\n" + score);
+	    	int token = score.generateToken();
+	    	System.out.println("Tokens earned: " + token);
 	    	System.out.println("===========================================================");
 	    	endBattleCatch(this.username, catchablePokemon);
 	    	endLoop = true;
@@ -202,6 +204,8 @@ public class Battle {
 		    	Ascii.YourScoreMessage();
 		    	score.turnScore(totalTurns);
 		    	System.out.println("\n" + score);
+		    	int token = score.generateToken();
+		    	System.out.println("Tokens earned: " + token);
 		    	System.out.println("===========================================================");
 		    	
 		    	endBattleCatch(this.username, catchablePokemon);
