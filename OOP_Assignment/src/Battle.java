@@ -13,6 +13,13 @@ public class Battle {
     private ArrayList<Pokemon> catchablePokemon = new ArrayList<>();
     private Score score;
 
+    // color codes
+    String red = "\033[31m";  // Red
+    String green = "\033[32m";  // Green
+    String yellow = "\033[33m";	// Yellow
+    String gray = "\033[90m";	// Gray
+    String reset = "\033[0m";  // Reset to default color
+    
     Scanner scanner = new Scanner(System.in);
     
 	public Battle(String username, Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2, Database db) {
@@ -92,14 +99,14 @@ public class Battle {
 	    // Check which team starts first
     	System.out.println("\n			TURN	" + totalTurns + "\n");
 	    if (startTurn()) {
-	        System.out.println("Your team starts FIRST!");
+	        System.out.println(green + "Your team starts FIRST!" + reset);
 	        attack(pokemonStart(ally1, ally2) ? ally1 : ally2, enemy1, enemy2);
 	        turnCount1 += 1;
 
 	        allyTeam = false;
 	        enemyTeam = true;
 	    } else {
-	        System.out.println("Enemy team starts FIRST!");
+	        System.out.println(red + "Enemy team starts FIRST!]" + reset);
 	        attack(pokemonStart(enemy1, enemy2) ? enemy1 : enemy2, ally1, ally2);
 	        turnCount2 += 1;
 	        
@@ -130,7 +137,7 @@ public class Battle {
 		        if (allyTeam) { // Ally's turn
 		            if (turnCount1 % 2 == 0) { // Ally1's turn
 		                if (ally1.getHp() > 0) {
-		                	System.out.println("\nYour team's turn!");
+		                	System.out.println("\n" + green + "Your team's turn!" + reset);
 		                    System.out.println(ally1.getName() + " attacks using " + ally1.getMoveName() + "!");
 		                    attack(ally1, enemy1, enemy2);
 		                } else {
@@ -139,7 +146,7 @@ public class Battle {
 		                }
 		            } else { // Ally2's turn
 		                if (ally2.getHp() > 0) {
-		                	System.out.println("\nYour team's turn!");
+		                	System.out.println("\n" + green + "Your team's turn!" + reset);
 		                    System.out.println(ally2.getName() + " attacks using " + ally2.getMoveName() + "!");
 		                    attack(ally2, enemy1, enemy2);
 		                } else {
@@ -156,7 +163,7 @@ public class Battle {
 		        else if (enemyTeam){ // Enemy's turn
 		            if (turnCount2 % 2 == 0) { // Enemy1's turn
 		                if (enemy1.getHp() > 0) {
-		                	System.out.println("\nEnemy team's turn!");
+		                	System.out.println("\n" + red + "Enemy team's turn!" + reset);
 		                    System.out.println(enemy1.getName() + " attacks using " + enemy1.getMoveName() + "!");
 		                    attack(enemy1, ally1, ally2);
 		                } else {
@@ -165,7 +172,7 @@ public class Battle {
 		                }
 		            } else { // Enemy2's turn
 		                if (enemy2.getHp() > 0) {
-		                	System.out.println("\nEnemy team's turn!");
+		                	System.out.println("\n" + red + "Enemy team's turn!" + reset);
 		                    System.out.println(enemy2.getName() + " attacks using " + enemy2.getMoveName() + "!");
 		                    attack(enemy2, ally1, ally2);
 		                } else {
@@ -246,7 +253,7 @@ public class Battle {
 	// print each pokemon team member if hp>0
 	private void printTeams() {
 		if (ally1.getHp() > 0 || ally2.getHp() > 0) {
-			System.out.println("\nAlly Team:");
+			System.out.println(green + "\nAlly Team:" + reset);
 		    if (ally1.getHp() > 0) {
 		        System.out.println(ally1);
 		    }
@@ -256,7 +263,7 @@ public class Battle {
 		}
 	    
 		if (enemy1.getHp() > 0 || enemy2.getHp() > 0) {
-		    System.out.println("\nEnemy Team:");
+		    System.out.println(red + "\nEnemy Team:" + reset);
 		    if (enemy1.getHp() > 0) {
 		        System.out.println(enemy1);
 		    }
@@ -270,10 +277,10 @@ public class Battle {
 	public boolean pokemonStart(Pokemon pok1, Pokemon pok2) { 
 		boolean pokemonStart = true;
 		if (pok1.getSpeed() > pok2.getSpeed()) {
-			System.out.println(pok1.getName() + " attacks first using " + pok1.getMoveName() + "!");
+			System.out.println(pok1.getName() + " attacks first using " + yellow + pok1.getMoveName() + reset + "!");
 			return pokemonStart; //(T) pokemon 1 is faster
 		} else {
-			System.out.println(pok2.getName() + " attacks first using " + pok2.getMoveName() + "!");
+			System.out.println(pok2.getName() + " attacks first using " + yellow + pok2.getMoveName() + reset + "!");
 			return !pokemonStart; //(F) pokemon 2 is faster
 		}
 	}
@@ -349,7 +356,7 @@ public class Battle {
 	    
 	    // only deal damage when opponent's hp is > 0
 	    if (enemy1.getHp() > 0) {
-	    	System.out.println(String.format("\nIt's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus1, enemy1.getName(),  Math.ceil(totalDamage1)));
+	    	System.out.println(String.format("\nIt's %s against %s dealing %s\u001B[1m%.2f\u001B[0m%s damage!", effectStatus1, enemy1.getName(), yellow, Math.ceil(totalDamage1), reset));
 	    	if (attacker.equals(ally1) || attacker.equals(ally2)) {
 	    		intValue = (int) totalDamage1;
 	    		score.damageBonus(intValue);
@@ -357,7 +364,7 @@ public class Battle {
 	    	}
 	    }
 	    if (enemy2.getHp() > 0) {
-	    	System.out.println(String.format("\nIt's %s against %s dealing \u001B[1m%.2f\u001B[0m damage!", effectStatus2, enemy2.getName(),  Math.ceil(totalDamage2)));
+	    	System.out.println(String.format("\nIt's %s against %s dealing %s\u001B[1m%.2f\u001B[0m%s damage!", effectStatus2, enemy2.getName(), yellow, Math.ceil(totalDamage2), reset));
 	    	if (attacker.equals(ally1) || attacker.equals(ally2)) {
 	    		intValue = (int) totalDamage2;
 	    		score.damageBonus(intValue);
@@ -389,7 +396,7 @@ public class Battle {
 	    		teamStatus = "Enemy";
 	    	}
 	    	
-	        String message = "Fainted: " + pokemon.getName() + " (" + teamStatus + ")";
+	        String message = gray + "Fainted: " + pokemon.getName() + " (" + teamStatus + ")" + reset;
 
 	        if (!faintedMessages.contains(message)) {
 	            faintedMessages.add(message);

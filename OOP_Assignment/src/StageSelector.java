@@ -26,7 +26,7 @@ public class StageSelector {
 	        		System.out.println("Please choose a number from 1-3 to select the stage");
 	        	}
 	            System.out.println("===========================================================");
-	            System.out.print("[1] Fire, [2] Water, [3] Grass\nChoose a stage: ");
+	            System.out.print("[1] \033[31mFire\033[0m, [2] \033[36mWater\033[0m, [3] \033[32mGrass\033[0m\nChoose a stage: ");
 	            input = scanner.nextInt();
 	            System.out.println("===========================================================");
 	            this.stage = input;

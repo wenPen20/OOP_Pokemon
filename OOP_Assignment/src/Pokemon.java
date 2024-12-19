@@ -80,14 +80,53 @@ public class Pokemon {
         this.team = team;
     }
 
-	@Override
+    @Override
     public String toString() {
+        // Calculate the percentage of HP
+        double hpPercentage = (double) hp / maxHp * 100;
+        
+        // Determine the color based on HP percentage
+        String hpColor;
+        if (hpPercentage > 70) {
+            hpColor = "\u001B[32m"; // Green
+        } else if (hpPercentage > 30) {
+            hpColor = "\u001B[33m"; // Yellow
+        } else {
+            hpColor = "\u001B[31m"; // Red
+        }
+        
+        // Determine the color based on the Pokémon's type
+        String typeColor;
+        switch (type.toLowerCase()) {
+            case "grass":
+                typeColor = "\u001B[32m"; // Green for Grass type
+                break;
+            case "fire":
+                typeColor = "\u001B[31m"; // Yellow for Fire type
+                break;
+            case "water":
+                typeColor = "\u001B[36m"; // Blue for Water type
+                break;
+            case "normal":
+                typeColor = "\u001B[37m"; // Dark Gray for Normal type
+                break;
+            default:
+                typeColor = "\u001B[0m"; // Default color if no match (reset)
+                break;
+        }
+        
+        // Reset color to default
+        String resetColor = "\u001B[0m";
+        String maxHpColor = "\033[94m";  //Light blue
+        
+        // Return the formatted string with colored HP
         return String.format("%s %s \n"
-                + "Type: %s \n"
-                + "HP: %d/%d \n" // Show HP in currentHp/maxHp format
-                + "Attack: %s \n"
-                + "Defense: %s \n"
-                + "Speed: %s \n", name, grade, type, hp, maxHp, attack, defense, speed);
-	}
+                    + "Type: %s%s%s \n"
+                    + "HP: %s%d%s/%s%d%s \n"  // Show HP in currentHp/maxHp format
+                    + "Attack: %s \n"
+                    + "Defense: %s \n"
+                    + "Speed: %s \n", 
+                    name, grade, typeColor, type, resetColor, hpColor, hp, resetColor, maxHpColor, maxHp, resetColor, attack, defense, speed);
+    }
 	
 }
