@@ -52,6 +52,7 @@ public class Top5Player {
 	public ArrayList<Top5Player> updateScore(Top5Player player, Database db) {
 		
 		ArrayList<Top5Player> loadedTop5 = db.loadTopPlayer("top5Scores.txt");
+		ArrayList<Top5Player> tempList = new ArrayList<>(loadedTop5);
 		
 		// Check if the player has a valid username
 	    if (player.getUsername() == null || player.getUsername().isEmpty()) {
@@ -64,9 +65,9 @@ public class Top5Player {
 	    }
 		
 	    boolean changesMade = false;  // Track whether any changes were made
+	   
 	    
 
-		
 	    boolean scoreAdded = false;
 	    
 	 // Check if player already exists in the list and if their score is higher
@@ -153,20 +154,19 @@ public class Top5Player {
 
 	    // Return the updated list of top 5 players if changes were made
 	    if (changesMade) {
-			System.out.println("\033[1mOld Top 5\033[0m");
-			for (int i = 0; i < loadedTop5.size(); i++) {
-				System.out.println(loadedTop5.get(i));
-			}
+	        System.out.println("\n\033[1mOld Top 5\033[0m");
+	        for (int i = 0; i < tempList.size(); i++) {
+	            System.out.println(tempList.get(i));
+	        }
 	        System.out.println("\n\033[1mNew Top 5\033[0m");
-	        for (int i = 0; i < loadedTop5.size(); i++) { // Print new top 5
+	        for (int i = 0; i < loadedTop5.size(); i++) {
 	            System.out.println(loadedTop5.get(i));
 	        }
-	    }
-	    else if (!changesMade) {
-			System.out.println("\033[1mTop 5\033[0m");
-			for (int i = 0; i < loadedTop5.size(); i++) {
-				System.out.println(loadedTop5.get(i));
-			}
+	    } else {
+	        System.out.println("\033[1mTop 5\033[0m");
+	        for (int i = 0; i < tempList.size(); i++) {
+	            System.out.println(tempList.get(i));
+	        }
 	    }
 	    
 	    return loadedTop5; 
