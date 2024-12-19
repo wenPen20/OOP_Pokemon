@@ -6,6 +6,7 @@ import java.lang.Math;
 import java.util.Scanner;
 
 public class Battle {
+	private String username;
 	private Database database;
     private Pokemon ally1, ally2, enemy1, enemy2;
     private ArrayList<String> faintedMessages = new ArrayList<>();
@@ -14,7 +15,7 @@ public class Battle {
 
     Scanner scanner = new Scanner(System.in);
     
-	public Battle(Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2, Database db) {
+	public Battle(String username, Pokemon ally1, Pokemon ally2, Pokemon enemy1, Pokemon enemy2, Database db) {
 		this.ally1 = ally1;
 		this.ally2 = ally2;
 		this.enemy1 = enemy1;
@@ -25,6 +26,8 @@ public class Battle {
 		enemy1.setTeam("Enemy");
 		enemy2.setTeam("Enemy");
 		this.database = db;
+		this.username = username;
+		this.catchablePokemon = new ArrayList<>();
 		
 		startBattle();
 		teamTurns();
@@ -190,6 +193,9 @@ public class Battle {
 		    	score.turnScore(totalTurns);
 		    	System.out.println("\n" + score);
 		    	System.out.println("===========================================================");
+		    	
+		    	//endBattleCatch(this.username, catchablePokemon);
+		    	
 		    	break;
 		    }        
 	    }

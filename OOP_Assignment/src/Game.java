@@ -68,7 +68,7 @@ public class Game {
 			System.out.println(rental1);
 			System.out.println(rental2);
 			
-			battle = new Battle(rental1, rental2, enemy1, enemy2, db);
+			battle = new Battle(username, rental1, rental2, enemy1, enemy2, db);
 			
 			// prints old and new top scores
 			Top5Player newPlayer = new Top5Player(pName, battle.getScore());

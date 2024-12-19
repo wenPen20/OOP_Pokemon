@@ -1,48 +1,51 @@
-import java.util.Random;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Random;	
 
 public class Pokeball {
     private String ballName;
-    private double catchRate;
+    private HashMap<String, Double> gradeCatchRates;
 
-    public Pokeball(String ballName, double catchRate) {
+    public Pokeball(String ballName) {
         this.ballName = ballName;
-        this.catchRate = catchRate;
+        this.gradeCatchRates = new HashMap<>();
     }
 
     public String getBallName() {
         return ballName;
     }
 
-    public double getCatchRate() {
-        return catchRate;
+    public void setCatchRates(HashMap<String, Double> rates) {
+        this.gradeCatchRates = rates;
     }
-    
-    public boolean tryToCatch(Pokemon pokemon) {
-        double randomValue = Math.random();
-        return randomValue <= this.catchRate;
-    }
-    
-    // random pokeball generator 
-    public static Pokeball getRandomPokeball() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(4); // generate a number between 0 and 3
 
-        switch (randomNumber) {
-            case 0:
-                return new NormalBall();
-            case 1:
-                return new GreatBall();
-            case 2:
-                return new UltraBall();
-            case 3:
-                return new MasterBall();
-            default:
-                return new NormalBall(); // 
-        }
+    public double getCatchRate(String grade) {
+        return gradeCatchRates.getOrDefault(grade, 0.0);
     }
+
+    public boolean tryToCatch(Pokemon pokemon) {
+        String grade = pokemon.getGrade();
+        double catchRate = getCatchRate(grade);
+        double randomValue = Math.random();
+        return randomValue <= catchRate;
+    }
+
+    public static Pokeball getRandomPokeball() {
+        ArrayList<Pokeball> availablePokeballs = new ArrayList<>();
+
+        // Add specific pokeball types to the list
+        availablePokeballs.add(new NormalBall());
+        availablePokeballs.add(new GreatBall());
+        availablePokeballs.add(new UltraBall());
+
+        // random pick a pokeball
+        Random rand = new Random();
+        int index = rand.nextInt(availablePokeballs.size());
+        return availablePokeballs.get(index);
+    }
+    
     @Override
     public String toString() {
         return ballName;
     }
-
 }

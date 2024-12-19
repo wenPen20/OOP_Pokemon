@@ -131,7 +131,13 @@ public class Database {
 					String name = extractData(parts, 0);
 					double catchRate = Double.parseDouble(extractData(parts, 1));
 
-					Pokeball pokeball = new Pokeball(name, catchRate);
+					Pokeball pokeball = new Pokeball(name);
+					
+					// Create a hashmap for setting pokeball catchrate
+	                HashMap<String, Double> catchRates = new HashMap<>();
+	                catchRates.put("Default", catchRate);  
+	                pokeball.setCatchRates(catchRates);
+	                
 					pokeballs.add(pokeball);
 				}
 			}
