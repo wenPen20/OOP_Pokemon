@@ -1,6 +1,6 @@
 username=bob, ownedPokemons=[01-025, 05-012], tokens=100
 username=joe, ownedPokemons=[01-013, UL5-027, D2-067], tokens=10
-username=bro, ownedPokemons=[], tokens=10
+username=bro, ownedPokemons=[01-013], tokens=10
 username=win, ownedPokemons=[], tokens=10
 username=ski, ownedPokemons=[], tokens=10
 username=bidi, ownedPokemons=[], tokens=10

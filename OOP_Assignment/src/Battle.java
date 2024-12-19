@@ -122,7 +122,9 @@ public class Battle {
 	    if (finishGame(ally1, ally2, enemy1, enemy2)) {
 	    	Ascii.YourScoreMessage();
 	    	score.turnScore(totalTurns);
-	    	System.out.println(score);
+	    	System.out.println("\n" + score);
+	    	System.out.println("===========================================================");
+	    	endBattleCatch(this.username, catchablePokemon);
 	    	endLoop = true;
 	    } else {
 	    	totalTurns++;
