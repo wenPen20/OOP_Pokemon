@@ -459,7 +459,9 @@ public class Battle {
         } else {
             System.out.println("Player not found.\n");
         }
-    }
+		System.out.println("===========================================================");
+		System.out.println("");
+		}
 }
 
 
