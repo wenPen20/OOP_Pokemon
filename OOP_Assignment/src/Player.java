@@ -4,7 +4,9 @@ public class Player {
 	private String username;
 	private ArrayList<Pokemon> ownedPokemons;
 	private int tokens;
+	private Score highScore;
 	
+
 	// creating new player
 	public Player(String username) {
 		this.username = username;
@@ -54,12 +56,14 @@ public class Player {
 		this.tokens = tokens;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("Username: %s \n"
-				+ "Owned Disks: %s \n"
-				+ "Tokens: %s \n", username, getOwnedDiskNames(), tokens);
+	public Score getHighScore() {
+		return highScore;
 	}
+	
+	public void setHighScore(Score highScore) {
+		this.highScore = highScore;
+	}
+
 	
 	// other methods
 	public void useToken(int cost) {
@@ -70,4 +74,10 @@ public class Player {
 		this.ownedPokemons.add(pokemon);
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("Username: %s \n"
+				+ "Owned Disks: %s \n"
+				+ "Tokens: %s \n", username, getOwnedDiskNames(), tokens);
+	}
 }

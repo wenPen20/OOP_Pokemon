@@ -57,8 +57,9 @@ public class Game {
 		enemy2 = noDuplicate1(enemy1, enemy2);
 		
 		if (player.getOwnedDisks().size() > 0) {
-			System.out.println("Your current owned disks: " + player.getOwnedDisks());
-		} else {
+			System.out.printf("Your current owned disks: %d\n", player.getOwnedDisks().size());
+		}
+		else {
 			System.out.println("Your current owned disks: -");
 		}
 		
@@ -80,7 +81,65 @@ public class Game {
 			
 			
 		} else {
-			// implement case for user to choose between rental and their own pokemons. 
+			//case for user to choose between rental and their own pokemons.
+			Pokemon allypoke1, allypoke2;
+			
+			Scanner input = new Scanner(System.in);
+			System.out.printf("Saved pokemon available to use!\n"
+					+ "[1] Load saved pokemon or [2] use rentals?\n");
+			if(input.nextInt()==1) {
+				int count = 0;
+				System.out.println();
+				for(Pokemon pokemon: player.getOwnedDisks()) {
+					System.out.printf("[%d] ", count);
+					System.out.println(pokemon);
+					count++;
+				}
+				
+				while(true) {
+					System.out.println("Choose the first pokemon on your team!");
+					int pokeselect1 = input.nextInt();
+					if(pokeselect1 >= 0 && pokeselect1 < player.getOwnedDisks().size()) {
+						allypoke1 = player.getOwnedDisks().get(pokeselect1);
+					}
+					else {
+						System.out.println("Enter a valid selection!");
+						continue;
+					}
+					
+					System.out.println("Choose the second pokemon on your team!\n");
+					int pokeselect2 = input.nextInt();
+					if(pokeselect2 >= 0 && pokeselect2 < player.getOwnedDisks().size() && pokeselect1 != pokeselect2) {
+						allypoke2 = player.getOwnedDisks().get(pokeselect2);
+						break;
+					}
+					else {
+						System.out.println("Enter a valid selection! (no duplicate selections)");
+						continue;
+					}
+					
+				}
+				System.out.printf("Pokemon chosen: \n%s\n%s\n", allypoke1, allypoke2);
+				
+				battle = new Battle(username, allypoke1, allypoke2, enemy1, enemy2, db);
+
+				// prints old and new top scores
+				Top5Player newPlayer = new Top5Player(pName, battle.getScore());
+				// prints score, update score textfile
+				newPlayer.updateScoreAndWriteToFile(newPlayer, db);
+			}
+			else {
+				System.out.println("Loading rentals...");
+				System.out.println(rental1);
+				System.out.println(rental2);
+				
+				battle = new Battle(username, rental1, rental2, enemy1, enemy2, db);
+				
+				// prints old and new top scores
+				Top5Player newPlayer = new Top5Player(pName, battle.getScore());
+				// prints score, update score textfile
+				newPlayer.updateScoreAndWriteToFile(newPlayer, db);
+			}
 		}
 		
 		
