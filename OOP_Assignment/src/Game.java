@@ -107,7 +107,7 @@ public class Game {
 						continue;
 					}
 					
-					System.out.println("Choose the second pokemon on your team!\n");
+					System.out.println("Choose the second pokemon on your team!");
 					int pokeselect2 = input.nextInt();
 					if(pokeselect2 >= 0 && pokeselect2 < player.getOwnedDisks().size() && pokeselect1 != pokeselect2) {
 						allypoke2 = player.getOwnedDisks().get(pokeselect2);

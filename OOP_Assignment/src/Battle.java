@@ -202,7 +202,7 @@ public class Battle {
 		    	System.out.println("\n" + score);
 		    	System.out.println("===========================================================");
 		    	
-		    	//endBattleCatch(this.username, catchablePokemon);
+		    	endBattleCatch(this.username, catchablePokemon);
 		    	
 		    	break;
 		    }        
@@ -434,7 +434,7 @@ public class Battle {
             if (!catchablePokemon.isEmpty()) {
                 for (Pokemon faintedPokemon : catchablePokemon) {
                     // ensure the pokemon is fainted (hp == 0)
-                    if (faintedPokemon.getHp() == 0) {
+                    if (faintedPokemon.getHp() <= 0) {
                         // generate pokeball to catch
                         Pokeball randomPokeball = Pokeball.getRandomPokeball();
                         System.out.println("A Random Pokéball has been generated! : " + randomPokeball);
@@ -442,20 +442,20 @@ public class Battle {
                         // Try to catch the fainted pokemon with the random pokeball
                         if (randomPokeball.tryToCatch(faintedPokemon)) {
                             player.getOwnedDisks().add(faintedPokemon); // add to player's collection
-                            System.out.println("Successfully caught " + faintedPokemon.getName() + " using a " + randomPokeball.getBallName() + "!");
+                            System.out.println("Successfully caught " + faintedPokemon.getName() + " using a " + randomPokeball.getBallName() + "!\n");
                             database.updatePlayerFile(player); // Call updatePlayerFile from Database
                         } else {
-                            System.out.println("Failed to catch " + faintedPokemon.getName() + " using a " + randomPokeball.getBallName());
+                            System.out.println("Failed to catch " + faintedPokemon.getName() + " using a " + randomPokeball.getBallName() + "\n");
                         }
                     } else {
-                        System.out.println(faintedPokemon.getName() + " is not fainted and cannot be caught.");
+                        System.out.println(faintedPokemon.getName() + " is not fainted and cannot be caught.\n");
                     }
                 }
             } else {
-                System.out.println("No fainted Pokémon available to catch.");
+                System.out.println("No fainted Pokémon available to catch.\n");
             }
         } else {
-            System.out.println("Player not found.");
+            System.out.println("Player not found.\n");
         }
     }
 }
