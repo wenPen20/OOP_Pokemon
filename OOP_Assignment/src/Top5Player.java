@@ -65,10 +65,7 @@ public class Top5Player {
 		
 	    boolean changesMade = false;  // Track whether any changes were made
 	    
-		System.out.println("\033[1mOld Top 5\033[0m");
-		for (int i = 0; i < loadedTop5.size(); i++) {
-			System.out.println(loadedTop5.get(i));
-		}
+
 		
 	    boolean scoreAdded = false;
 	    
@@ -156,10 +153,20 @@ public class Top5Player {
 
 	    // Return the updated list of top 5 players if changes were made
 	    if (changesMade) {
+			System.out.println("\033[1mOld Top 5\033[0m");
+			for (int i = 0; i < loadedTop5.size(); i++) {
+				System.out.println(loadedTop5.get(i));
+			}
 	        System.out.println("\n\033[1mNew Top 5\033[0m");
 	        for (int i = 0; i < loadedTop5.size(); i++) { // Print new top 5
 	            System.out.println(loadedTop5.get(i));
 	        }
+	    }
+	    else if (!changesMade) {
+			System.out.println("\033[1mTop 5\033[0m");
+			for (int i = 0; i < loadedTop5.size(); i++) {
+				System.out.println(loadedTop5.get(i));
+			}
 	    }
 	    
 	    return loadedTop5; 
