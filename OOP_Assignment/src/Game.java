@@ -78,8 +78,6 @@ public class Game {
 			// STICKY NOTE: NOT YET IMPLEMENTED a function to update players.txt,
 			// though top5Scores.txt now supports auto updating
 			
-			// STICKY NOTE2: NOT YET IMPLEMENTED score board display could look nicer
-			
 			
 		} else {
 			// implement case for user to choose between rental and their own pokemons. 

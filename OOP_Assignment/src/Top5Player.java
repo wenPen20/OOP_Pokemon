@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 
 public class Top5Player {
 	
@@ -49,46 +50,119 @@ public class Top5Player {
 	
 	// update top 5
 	public ArrayList<Top5Player> updateScore(Top5Player player, Database db) {
+		
 		ArrayList<Top5Player> loadedTop5 = db.loadTopPlayer("top5Scores.txt");
+		
+		// Check if the player has a valid username
+	    if (player.getUsername() == null || player.getUsername().isEmpty()) {
+	        System.out.println("Player has no valid username. No score update will be made.\n");
+	        System.out.println("\033[1mTop 5\033[0m");
+			for (int i = 0; i < loadedTop5.size(); i++) {
+				System.out.println(loadedTop5.get(i));
+			}
+	        return db.loadTopPlayer("top5Scores.txt");  // Return the current top 5 without making changes
+	    }
+		
+	    boolean changesMade = false;  // Track whether any changes were made
+	    
 		System.out.println("\033[1mOld Top 5\033[0m");
 		for (int i = 0; i < loadedTop5.size(); i++) {
 			System.out.println(loadedTop5.get(i));
 		}
 		
-		// Check if the player's score is greater than any of the current scores
 	    boolean scoreAdded = false;
+	    
+	 // Check if player already exists in the list and if their score is higher
 	    for (int i = 0; i < loadedTop5.size(); i++) {
 	        Top5Player currentPlayer = loadedTop5.get(i);
 
-
-	        if (player.getScore() > currentPlayer.getScore()) {
-	            // Add player in the appropriate position (higher score) and shift the others down
-	            loadedTop5.add(i, player);
-	            // Update the ranks
-	            updateRanks(loadedTop5);
-
-	            scoreAdded = true;
-	            break; // Exit the loop as the player is added
+	        // If the player is found, check if their score has improved
+	        if (currentPlayer.getUsername().equals(player.getUsername())) {
+	            if (player.getScore() > currentPlayer.getScore()) {
+	                // Update the score if it's improved
+	                currentPlayer.setScore(player.getScore());
+	                updateRanks(loadedTop5);
+	                changesMade = true; // Mark that a change was made
+	            }
+	            scoreAdded = true;  // Mark that the score was updated (not added)
+	            break;
 	        }
+	    }
+	    
+	    // Check if player already exists in the list and if their score is higher
+	    if (!scoreAdded) {
+		    for (int i = 0; i < loadedTop5.size(); i++) {
+		        Top5Player currentPlayer = loadedTop5.get(i);
+	
+	
+		        if (player.getScore() > currentPlayer.getScore()) {
+		            // Add player in the appropriate position (higher score) and shift the others down
+		            loadedTop5.add(i, player);
+		            // Update the ranks
+		            updateRanks(loadedTop5);
+	
+		            scoreAdded = true;
+	                changesMade = true; // Mark that a change was made
+
+		            break; // Exit the loop as the player is added
+		        }
+		    }
 	    }
 	    
 	 // If the player's score wasn't greater than any of the top 5, we check if they should be added to the last position
 	    if (!scoreAdded && loadedTop5.size() < 5) {
 	        loadedTop5.add(player);
 	        updateRanks(loadedTop5);
+            changesMade = true; // Mark that a change was made
+
 	    }
 
+	 // Ensure there are no duplicate players (by name), and remove the one with the lower score if duplicates exist
+	    HashSet<String> playerNames = new HashSet<>();
+	    for (int i = 0; i < loadedTop5.size(); i++) {
+	        Top5Player currentPlayer = loadedTop5.get(i);
+	        if (playerNames.contains(currentPlayer.getUsername())) {
+	            // Find the duplicate and remove the one with the lower score
+	            int duplicateIndex = -1;
+	            for (int j = i + 1; j < loadedTop5.size(); j++) {
+	                if (loadedTop5.get(j).getUsername().equals(currentPlayer.getUsername())) {
+	                    if (loadedTop5.get(j).getScore() < currentPlayer.getScore()) {
+	                        duplicateIndex = j;
+	                    } else {
+	                        duplicateIndex = i;
+	                    }
+	                    break;
+	                }
+	            }
+
+	            if (duplicateIndex != -1) {
+	                loadedTop5.remove(duplicateIndex);
+	                changesMade = true; // Mark that a change was made
+	                i--; // Adjust the index to account for removal
+	            }
+	        } else {
+	            playerNames.add(currentPlayer.getUsername());
+	        }
+	    }
+	    
+	    // Sort the list based on score in descending order
+	    loadedTop5.sort((p1, p2) -> Integer.compare(p2.getScore(), p1.getScore()));
+	    
 	    // If the list is now larger than 5 players, remove the lowest-ranked player
 	    if (loadedTop5.size() > 5) {
 	        loadedTop5.remove(loadedTop5.size() - 1); // Remove the player with the lowest score (last in the list)
+            changesMade = true; // Mark that a change was made
 	    }
 
-	    // Return the updated list of top 5 players
-	    System.out.println("\n\033[1mNew Top 5\033[0m");
-		for (int i = 0; i < loadedTop5.size(); i++) { //print new top 5
-			System.out.println(loadedTop5.get(i));
-		} 
-	    return loadedTop5;
+	    // Return the updated list of top 5 players if changes were made
+	    if (changesMade) {
+	        System.out.println("\n\033[1mNew Top 5\033[0m");
+	        for (int i = 0; i < loadedTop5.size(); i++) { // Print new top 5
+	            System.out.println(loadedTop5.get(i));
+	        }
+	    }
+	    
+	    return loadedTop5; 
 	    
 	}
 	
