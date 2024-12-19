@@ -14,8 +14,9 @@ public class Battle {
     private Score score;
 
     // color codes
+    
     String red = "\033[31m";  // Red
-    String green = "\033[32m";  // Green
+    String blue = "\033[36m";	// Blue
     String yellow = "\033[33m";	// Yellow
     String gray = "\033[90m";	// Gray
     String reset = "\033[0m";  // Reset to default color
@@ -99,7 +100,7 @@ public class Battle {
 	    // Check which team starts first
     	System.out.println("\n			TURN	" + totalTurns + "\n");
 	    if (startTurn()) {
-	        System.out.println(green + "Your team starts FIRST!" + reset);
+	        System.out.println(blue + "Your team starts FIRST!" + reset);
 	        attack(pokemonStart(ally1, ally2) ? ally1 : ally2, enemy1, enemy2);
 	        turnCount1 += 1;
 
@@ -137,7 +138,7 @@ public class Battle {
 		        if (allyTeam) { // Ally's turn
 		            if (turnCount1 % 2 == 0) { // Ally1's turn
 		                if (ally1.getHp() > 0) {
-		                	System.out.println("\n" + green + "Your team's turn!" + reset);
+		                	System.out.println("\n" + blue + "Your team's turn!" + reset);
 		                    System.out.println(ally1.getName() + " attacks using " + yellow + ally1.getMoveName() + reset + "!");
 		                    attack(ally1, enemy1, enemy2);
 		                } else {
@@ -146,7 +147,7 @@ public class Battle {
 		                }
 		            } else { // Ally2's turn
 		                if (ally2.getHp() > 0) {
-		                	System.out.println("\n" + green + "Your team's turn!" + reset);
+		                	System.out.println("\n" + blue + "Your team's turn!" + reset);
 		                    System.out.println(ally2.getName() + " attacks using " + yellow + ally2.getMoveName() + reset + "!");
 		                    attack(ally2, enemy1, enemy2);
 		                } else {
@@ -253,7 +254,7 @@ public class Battle {
 	// print each pokemon team member if hp>0
 	private void printTeams() {
 		if (ally1.getHp() > 0 || ally2.getHp() > 0) {
-			System.out.println(green + "\nAlly Team:" + reset);
+			System.out.println(blue + "\nAlly Team:" + reset);
 		    if (ally1.getHp() > 0) {
 		        System.out.println(ally1);
 		    }

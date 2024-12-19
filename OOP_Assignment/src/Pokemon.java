@@ -117,16 +117,15 @@ public class Pokemon {
         
         // Reset color to default
         String resetColor = "\u001B[0m";
-        String maxHpColor = "\033[94m";  //Light blue
         
         // Return the formatted string with colored HP
         return String.format("%s %s \n"
                     + "Type: %s%s%s \n"
-                    + "HP: %s%d%s/%s%d%s \n"  // Show HP in currentHp/maxHp format
+                    + "HP: %s%d%s/%d \n"  // Show HP in currentHp/maxHp format
                     + "Attack: %s \n"
                     + "Defense: %s \n"
                     + "Speed: %s \n", 
-                    name, grade, typeColor, type, resetColor, hpColor, hp, resetColor, maxHpColor, maxHp, resetColor, attack, defense, speed);
+                    name, grade, typeColor, type, resetColor, hpColor, hp, resetColor, maxHp, attack, defense, speed);
     }
 	
 }
