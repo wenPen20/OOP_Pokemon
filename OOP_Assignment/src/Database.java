@@ -147,30 +147,6 @@ public class Database {
 		}
 		return pokeballs;
 	}
-
-	public ArrayList<Score> loadTopScores(String filePath) {
-		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-			String line;
-
-			while ((line = reader.readLine()) != null) {
-				line = line.trim();
-				if (!line.isEmpty()) {
-					String[] parts = line.split(",\\s*");
-
-					// Extract data
-					String username = extractData(parts, 0);
-//					int score = Integer.parseInt(extractData(parts, 1));
-
-//					Score scores = new Score(username, score);
-//					topScores.add(scores);
-				}
-			}
-
-		} catch (IOException e) {
-			System.out.println("Error: " + e.getMessage());
-		}
-		return topScores;
-	}
 	
 	public ArrayList<Top5Player> loadTopPlayer(String filePath){
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -217,18 +193,6 @@ public class Database {
         }
         return null;
     }
-
-//    // update the Player's data in the file after catching a Pokémon
-//    public void updatePlayerFile(Player player) {
-//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Players.txt"))) {
-//            for (Player p : players) {
-//                String ownedPokemons = "[" + String.join(", ", getPokemonCollectionNumbers(p)) + "]";
-//                writer.write("username=" + p.getUsername() + ", ownedPokemons=" + ownedPokemons + ", tokens=" + p.getTokens() + "\n");
-//            }
-//        } catch (IOException e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//    }
     
     public void updatePlayerFile(Player player) {
         try {

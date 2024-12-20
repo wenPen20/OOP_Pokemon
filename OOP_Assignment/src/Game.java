@@ -10,7 +10,6 @@ public class Game {
 	private ArrayList<Player> loadedPlayers = db.loadPlayers("Players.txt");
 	private ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
 	private ArrayList<Pokeball> loadedPokeballs = db.loadPokeballs("Pokeballs.txt");
-	private ArrayList<Score> loadedScores = db.loadTopScores("top5Scores.txt");
 	private ArrayList<Top5Player> top5Player = db.loadTopPlayer("top5Scores.txt");
 	private Pokemon rental1, rental2, enemy1, enemy2;
 	private Player player;
