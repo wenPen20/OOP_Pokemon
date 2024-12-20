@@ -107,8 +107,8 @@ public class Player {
 					System.out.println("Choose pokemon to save [or 0 to return]");
 					int pokeselect = input.nextInt();
 					if(pokeselect >= 1 && pokeselect <= pokemon.size()) {
-						useToken(pokemon.get(pokeselect-1).getCost());
 						addToOwnedDisks(pokemon.get(pokeselect-1));
+						useToken(pokemon.get(pokeselect-1).getCost());
 						System.out.printf("%s- %d tokens!\n", blue, pokemon.get(pokeselect-1).getCost());
 						System.out.printf("%s+ %s!%s\n\n", green, pokemon.get(pokeselect-1).getName(), reset);
 						pokemon.remove(pokeselect-1);
