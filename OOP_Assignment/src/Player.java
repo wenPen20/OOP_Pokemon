@@ -99,7 +99,7 @@ public class Player {
 				if(input.nextLine().toLowerCase().matches("y")) {
 					int count = 1;
 					for(Pokemon savablePokemon: pokemon) {
-						System.out.printf("\n[%d]: %d token(s)\n", count, savablePokemon.getCost()); 
+						System.out.printf("\n%s[%d]: %s%d token(s)%s\n", blue, count, yellow, savablePokemon.getCost(), reset); 
 						System.out.println(savablePokemon);
 						count++;
 					}
