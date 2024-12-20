@@ -54,12 +54,12 @@ public class Player {
 	}
 	
 	public void addToOwnedDisks(Pokemon pokemon) {
-		if(!this.ownedPokemons.contains(pokemon)) {
-			this.ownedPokemons.add(pokemon);			
+		for(Pokemon ownedpokemon: this.ownedPokemons) {
+			if(pokemon.getName().equals(ownedpokemon.getName())) {
+				throw new IllegalArgumentException("Duplicate");
+			}
 		}
-		else {
-			throw new IllegalArgumentException("Duplicate");
-		}
+		this.ownedPokemons.add(pokemon);			
 	}
 
 	public int getTokens() {
@@ -88,14 +88,14 @@ public class Player {
 		while(!pokemon.isEmpty()) {
 			try {
 				Scanner input = new Scanner(System.in);
-				System.out.printf("Your total tokens: %d\n", this.tokens);
-				System.out.print("Pokémons caught: ");
+				System.out.printf("Your total tokens: %s%d\n%s", yellow, this.tokens, reset);
+				System.out.print("Pokémons caught: " + blue);
 				ArrayList<String> pokemonNames = new ArrayList<>();
 				for(Pokemon pokemonString: pokemon) {
 					pokemonNames.add(pokemonString.getName());
 				}
-				System.out.println(pokemonNames + "\n"
-						+ "Spend tokens to save pokémon as disks? [Y/N]");
+				System.out.println(pokemonNames + reset + "\n"
+						+ "Spend tokens to save pokémon as disks? [" + green + "Y" + reset + "/" + red + "N" + reset + "]");
 				if(input.nextLine().toLowerCase().matches("y")) {
 					int count = 1;
 					for(Pokemon savablePokemon: pokemon) {
@@ -124,11 +124,11 @@ public class Player {
 			}
 			catch(IllegalArgumentException e) {
 				if(e.getMessage().equals("Insufficient")) {
-					System.out.println("Insufficient funds!");
+					System.out.println(red + "Insufficient funds!\n" + reset);
 					continue;
 				}
 				else if(e.getMessage().equals("Duplicate")) {
-					System.out.println("You already have that Pokémon!");
+					System.out.println(red+ "You already have that Pokémon!\n" + reset);
 					continue;
 				}
 			}
