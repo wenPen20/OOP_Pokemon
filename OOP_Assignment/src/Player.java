@@ -100,6 +100,7 @@ public class Player {
 					int count = 1;
 					for(Pokemon savablePokemon: pokemon) {
 						System.out.printf("\n%s[%d]: %s%d token(s)%s\n", blue, count, yellow, savablePokemon.getCost(), reset); 
+						savablePokemon.setHp(savablePokemon.getMaxHp());
 						System.out.println(savablePokemon);
 						count++;
 					}

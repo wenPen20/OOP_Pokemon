@@ -52,6 +52,10 @@ public class Pokemon {
 		return grade;
 	}
 
+	public int getMaxHp() {
+		return maxHp;
+	}
+	
 	public int getHp() {
 		return hp;
 	}
