@@ -80,6 +80,28 @@ public class Pokemon {
         this.team = team;
     }
 
+    public int getCost() { // return the cost to save a particular pokemon
+    	int tokenCost = 0;
+    	switch(this.grade) {
+    		case "★":
+    			tokenCost = 1;
+    			break;
+    		case "★★":
+    			tokenCost = 4;
+    			break;
+    		case "★★★":
+    			tokenCost = 9;
+    			break;
+    		case "★★★★":
+    			tokenCost = 16;
+    			break;
+    		case "★★★★★":
+    			tokenCost = 25;	
+    			break;
+    	}
+    	return tokenCost;
+    }
+    
     @Override
     public String toString() {
         // Calculate the percentage of HP

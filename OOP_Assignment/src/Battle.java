@@ -435,6 +435,7 @@ public class Battle {
         if (player != null) {
             // check if there are fainted pokemon in the catchablePokemon list
             if (!catchablePokemon.isEmpty()) {
+            	ArrayList<Pokemon> savablePokemon = new ArrayList<>();
                 for (Pokemon faintedPokemon : catchablePokemon) {
                     // ensure the pokemon is fainted (hp == 0)
                     if (faintedPokemon.getHp() <= 0) {
@@ -444,19 +445,21 @@ public class Battle {
                         
                         // Try to catch the fainted pokemon with the random pokeball
                         if (randomPokeball.tryToCatch(faintedPokemon)) {
-                            player.getOwnedDisks().add(faintedPokemon); // add to player's collection
+                        	savablePokemon.add(faintedPokemon);// to be saved using tokens by the player
                             System.out.println(green + "Successfully caught " + blue + faintedPokemon.getName() + reset + " using a " + yellow + randomPokeball.getBallName() + reset + "!");
                         } 
                         else {
                             System.out.println(red + "Failed to catch " + blue + faintedPokemon.getName() + reset + " using a " + yellow + randomPokeball.getBallName() + reset);
                         }
-                        awardTokens(faintedPokemon, player); //Award the player with the appropriate tokens
+                        player.awardTokens(faintedPokemon);//Award the player with the appropriate tokens
                         database.updatePlayerFile(player); // Call updatePlayerFile from Database
 
                     } else {
                         System.out.println(faintedPokemon.getName() + " is not fainted and cannot be caught.\n");
                     }
                 }
+                player.saveDisk(savablePokemon); //Proceed to prompt player to save pokemons by spending tokens
+                database.updatePlayerFile(player); // Call updatePlayerFile from Database
             } else {
                 System.out.println("No fainted Pokémon available to catch.\n");
             }
@@ -466,28 +469,7 @@ public class Battle {
 		System.out.println("===========================================================");
 		System.out.println("");
 	}
-    public void awardTokens(Pokemon faintedPokemon, Player player) { //Determine the grade of fainted pokemon to award player with the appropriate tokens
-    	int tokensEarned = 0;
-    	switch(faintedPokemon.getGrade()) {
-    		case "★":
-    			tokensEarned = 1;
-    			break;
-    		case "★★":
-    			tokensEarned = 2;
-    			break;
-    		case "★★★":
-    			tokensEarned = 3;
-    			break;
-    		case "★★★★":
-    			tokensEarned = 4;
-    			break;
-    		case "★★★★★":
-    			tokensEarned = 5;	
-    			break;
-    	}
-    	System.out.printf(yellow + "+ %d tokens!\n\n" + reset, tokensEarned);
-    	player.earnTokens(tokensEarned);
-    }
+    
 }
 
 
