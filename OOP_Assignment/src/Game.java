@@ -39,6 +39,13 @@ public class Game {
 			player = new Player(username);
 			pName = username;
 			
+			// add this new user to file.txt if player is not null
+			if (!username.contentEquals("")){
+				Player newPlayerAdd = new Player(username);
+				db.updatePlayerFile(newPlayerAdd);
+				this.loadedPlayers = db.loadPlayers("Players.txt");
+			}
+			
 			System.out.println("\nHello New User! This is Your Player Data.");
 			System.out.println(this.player);			
 		}
@@ -75,10 +82,6 @@ public class Game {
 			Top5Player newPlayer = new Top5Player(pName, battle.getScore());
 			// prints score, update score textfile
 			newPlayer.updateScoreAndWriteToFile(newPlayer, db);
-			
-			// STICKY NOTE: NOT YET IMPLEMENTED a function to update players.txt,
-			// though top5Scores.txt now supports auto updating
-			
 			
 		} else {
 			//case for user to choose between rental and their own pokemons.
@@ -119,7 +122,7 @@ public class Game {
 					}
 					
 				}
-				System.out.printf("Pokemon chosen: \n%s\n%s\n", allypoke1, allypoke2);
+				System.out.printf("\nPokemon chosen: \n%s\n%s\n", allypoke1, allypoke2);
 				
 				battle = new Battle(username, allypoke1, allypoke2, enemy1, enemy2, db);
 

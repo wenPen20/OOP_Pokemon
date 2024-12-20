@@ -11,7 +11,7 @@ public class Player {
 	public Player(String username) {
 		this.username = username;
 		this.ownedPokemons = new ArrayList<Pokemon>();
-		this.tokens = 0;
+		this.tokens = 10;
 	}
 
 	// retrieve player

@@ -218,15 +218,59 @@ public class Database {
         return null;
     }
 
-    // update the Player's data in the file after catching a Pokémon
+//    // update the Player's data in the file after catching a Pokémon
+//    public void updatePlayerFile(Player player) {
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Players.txt"))) {
+//            for (Player p : players) {
+//                String ownedPokemons = "[" + String.join(", ", getPokemonCollectionNumbers(p)) + "]";
+//                writer.write("username=" + p.getUsername() + ", ownedPokemons=" + ownedPokemons + ", tokens=" + p.getTokens() + "\n");
+//            }
+//        } catch (IOException e) {
+//            System.out.println("Error: " + e.getMessage());
+//        }
+//    }
+    
     public void updatePlayerFile(Player player) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Players.txt"))) {
-            for (Player p : players) {
-                String ownedPokemons = "[" + String.join(", ", getPokemonCollectionNumbers(p)) + "]";
-                writer.write("username=" + p.getUsername() + ", ownedPokemons=" + ownedPokemons + ", tokens=" + p.getTokens() + "\n");
+        try {
+            // Read the current players data from the file
+            List<String> fileLines = new ArrayList<>();
+            try (BufferedReader reader = new BufferedReader(new FileReader("Players.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    fileLines.add(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Error reading file: " + e.getMessage());
             }
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+
+            // Check if the player already exists
+            boolean playerExists = false;
+            for (int i = 0; i < fileLines.size(); i++) {
+                if (fileLines.get(i).contains("username=" + player.getUsername())) {
+                    // Update the existing player's data
+                    String ownedPokemons = "[" + String.join(", ", getPokemonCollectionNumbers(player)) + "]";
+                    fileLines.set(i, "username=" + player.getUsername() + ", ownedPokemons=" + ownedPokemons + ", tokens=" + player.getTokens());
+                    playerExists = true;
+                    break;
+                }
+            }
+
+            // If the player doesn't exist, add them to the list
+            if (!playerExists) {
+                String ownedPokemons = "[" + String.join(", ", getPokemonCollectionNumbers(player)) + "]";
+                fileLines.add("username=" + player.getUsername() + ", ownedPokemons=" + ownedPokemons + ", tokens=" + player.getTokens());
+            }
+
+            // Write the updated player list back to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Players.txt"))) {
+                for (String line : fileLines) {
+                    writer.write(line + "\n");
+                }
+            } catch (IOException e) {
+                System.out.println("Error writing to file: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println("Unexpected error occured: " + e.getMessage());
         }
     }
     

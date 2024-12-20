@@ -43,9 +43,7 @@ public class Top5Player {
 	
 	@Override
 	public String toString() {
-		return String.format("\033[1mRank: %d\033[0m"
-				+ "\nUsername: %s"
-				+ "\nScore: %d", rank, username , score);
+		return String.format("\033[1m %d:\033[0m" + " %s" + " %d", rank, username , score);
 	}
 	
 	// update top 5
@@ -57,7 +55,7 @@ public class Top5Player {
 		// Check if the player has a valid username
 	    if (player.getUsername() == null || player.getUsername().isEmpty()) {
 	        System.out.println("Player has no valid username. No score update will be made.\n");
-	        System.out.println("\033[1mTop 5\033[0m");
+	        System.out.println("\033[1m			Leaderboard\033[0m");
 			for (int i = 0; i < loadedTop5.size(); i++) {
 				System.out.println(loadedTop5.get(i));
 			}
@@ -154,16 +152,18 @@ public class Top5Player {
 
 	    // Return the updated list of top 5 players if changes were made
 	    if (changesMade) {
-	        System.out.println("\n\033[1mOld Top 5\033[0m");
-	        for (int i = 0; i < tempList.size(); i++) {
-	            System.out.println(tempList.get(i));
-	        }
-	        System.out.println("\n\033[1mNew Top 5\033[0m");
+	    	// old Leaderboard for testing
+//	        System.out.println("\033[1mOld Top 5\033[0m");
+//	        for (int i = 0; i < tempList.size(); i++) {
+//	            System.out.println(tempList.get(i));
+//	        }
+	    	// new leaderboard
+	        System.out.println("\033[1m			Leaderboard\033[0m");
 	        for (int i = 0; i < loadedTop5.size(); i++) {
 	            System.out.println(loadedTop5.get(i));
 	        }
 	    } else {
-	        System.out.println("\033[1mTop 5\033[0m");
+	        System.out.println("\033[1m			Leaderboard\033[0m");
 	        for (int i = 0; i < tempList.size(); i++) {
 	            System.out.println(tempList.get(i));
 	        }
