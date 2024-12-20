@@ -6,14 +6,12 @@ public class Database {
 	private ArrayList<Player> players;
 	private ArrayList<Pokemon> pokemons;
 	private ArrayList<Pokeball> pokeballs;
-	private ArrayList<Score> topScores;
 	private ArrayList<Top5Player> top5Array;
 
 	public Database() {
 		this.players = new ArrayList<>();
 		this.pokemons = new ArrayList<>();
 		this.pokeballs = new ArrayList<>();
-		this.topScores = new ArrayList<>();
 		this.top5Array = new ArrayList<>();
 	}
 

@@ -29,7 +29,7 @@ public class Pokemon {
 		this.attack = attack;
 		this.defense = defense;
 		this.speed = speed;
-		this.team = team;
+		this.team = team;		// set later
 	}
 
 	public String getCollectionNumber() {
