@@ -52,8 +52,12 @@ public class Player {
 		return tokens;
 	}
 
-	public void setTokens(int tokens) {
-		this.tokens = tokens;
+	public void earnTokens(int tokens) {
+		this.tokens += tokens;
+	}
+
+	public void useToken(int cost) {
+		this.tokens -= cost;
 	}
 
 	public Score getHighScore() {
@@ -66,9 +70,6 @@ public class Player {
 
 	
 	// other methods
-	public void useToken(int cost) {
-		this.tokens -= cost;
-	}
 	
 	public void saveDisk(Pokemon pokemon) {
 		this.ownedPokemons.add(pokemon);
