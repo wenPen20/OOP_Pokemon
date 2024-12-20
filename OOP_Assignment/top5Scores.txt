@@ -2,4 +2,4 @@ username=Dave, highscore=19055, rank=1
 username=whale, highscore=17130, rank=2
 username=a, highscore=16725, rank=3
 username=number1victoryroyale, highscore=16585, rank=4
-username=chickendinner, highscore=16480, rank=5
+username=chickendinner, highscore=16580, rank=5

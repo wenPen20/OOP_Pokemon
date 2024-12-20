@@ -15,11 +15,12 @@ public class Battle {
 
     // color codes
     
-    String red = "\033[31m";  // Red
+    String red = "\033[31m";  	// Red
+    String green = "\u001B[32m";// Green
     String blue = "\033[36m";	// Blue
     String yellow = "\033[33m";	// Yellow
     String gray = "\033[90m";	// Gray
-    String reset = "\033[0m";  // Reset to default color
+    String reset = "\033[0m";  	// Reset to default color
     
     Scanner scanner = new Scanner(System.in);
     
@@ -443,15 +444,15 @@ public class Battle {
                     if (faintedPokemon.getHp() <= 0) {
                         // generate pokeball to catch
                         Pokeball randomPokeball = Pokeball.getRandomPokeball();
-                        System.out.println("A Random Pokéball has been generated! : " + randomPokeball);
+                        System.out.println("A Random Pokéball has been generated! : " + yellow + randomPokeball + reset);
                         
                         // Try to catch the fainted pokemon with the random pokeball
                         if (randomPokeball.tryToCatch(faintedPokemon)) {
                             player.getOwnedDisks().add(faintedPokemon); // add to player's collection
-                            System.out.println("Successfully caught " + faintedPokemon.getName() + " using a " + randomPokeball.getBallName() + "!\n");
+                            System.out.println(green + "Successfully caught " + blue + faintedPokemon.getName() + reset + " using a " + yellow + randomPokeball.getBallName() + reset + "!\n");
                             database.updatePlayerFile(player); // Call updatePlayerFile from Database
                         } else {
-                            System.out.println("Failed to catch " + faintedPokemon.getName() + " using a " + randomPokeball.getBallName() + "\n");
+                            System.out.println(red + "Failed to catch " + blue + faintedPokemon.getName() + reset + " using a " + yellow + randomPokeball.getBallName() + reset + "\n");
                         }
                     } else {
                         System.out.println(faintedPokemon.getName() + " is not fainted and cannot be caught.\n");

@@ -6,5 +6,6 @@ username=ski, ownedPokemons=[], tokens=10
 username=bidi, ownedPokemons=[], tokens=10
 username=jac, ownedPokemons=[], tokens=10
 username=nah, ownedPokemons=[], tokens=10
-username=whale, ownedPokemons=[D2-067, 04-037NM, D1-068, UL4-062, 01-017, 01-025, 01-013], tokens=9999
-username=chickendinner, ownedPokemons=[01-017, 01-006], tokens=10
+username=whale, ownedPokemons=[D2-067, 04-037NM, D1-068, UL4-062], tokens=9999
+username=chicken, ownedPokemons=[], tokens=10
+username=chickendinner, ownedPokemons=[05-012, 01-011, 03-031], tokens=10
