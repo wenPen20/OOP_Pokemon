@@ -106,6 +106,10 @@ public class Pokemon {
     	return tokenCost;
     }
     
+    public void reset() {
+        this.hp = this.maxHp;
+    }
+    
     @Override
     public String toString() {
         // Calculate the percentage of HP
@@ -140,6 +144,7 @@ public class Pokemon {
                 typeColor = "\u001B[0m"; // Default color if no match (reset)
                 break;
         }
+        
         
         // Reset color to default
         String resetColor = "\u001B[0m";
