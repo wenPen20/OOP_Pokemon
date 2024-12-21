@@ -121,6 +121,7 @@ public class Player {
 				else {
 					break;
 				}
+				input.close();
 			}
 			catch(IllegalArgumentException e) {
 				if(e.getMessage().equals("Insufficient")) {

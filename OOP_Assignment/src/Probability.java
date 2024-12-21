@@ -2,10 +2,9 @@ import java.util.*;
 
 public class Probability {
 	
-	String grade;
 	private ArrayList<Pokemon> pokemons;
-	Database db = new Database();
-	ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
+	private Database db = new Database();
+	private ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
 
 	public Probability() {
 		pokemons = new ArrayList<>();

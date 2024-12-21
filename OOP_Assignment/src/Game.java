@@ -8,9 +8,6 @@ public class Game {
 	private StageSelector stage = new StageSelector();
 	private Battle battle;
 	private ArrayList<Player> loadedPlayers = db.loadPlayers("Players.txt");
-	private ArrayList<Pokemon> loadedPokemons = db.loadPokemons("Pokemons.txt");
-	private ArrayList<Pokeball> loadedPokeballs = db.loadPokeballs("Pokeballs.txt");
-	private ArrayList<Top5Player> top5Player = db.loadTopPlayer("top5Scores.txt");
 	private Pokemon rental1, rental2, enemy1, enemy2;
 	private Player player;
 
@@ -142,13 +139,13 @@ public class Game {
 				// prints score, update score textfile
 				newPlayer.updateScoreAndWriteToFile(newPlayer, db);
 			}
-		}
-		
-		
-		
-		
+			
+			input.close();
+		}	
 
 	}
+	
+	
 	// make sure the two pokemons are different
 	public Pokemon noDuplicate(Pokemon p1, Pokemon p2) {
 		while (p1.getCollectionNumber().equals(p2.getCollectionNumber())) {

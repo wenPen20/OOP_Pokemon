@@ -62,7 +62,7 @@ public class Battle {
     	catch(InterruptedException e){	
     	}
 		System.out.print("Enter any key to continue! ");
-		String input = scanner.nextLine();
+		scanner.nextLine();
 		// Start messages
 		System.out.println("===========================================================");
 		Ascii.BattleStartMessage();
@@ -91,7 +91,7 @@ public class Battle {
     	
     	System.out.println("===========================================================");
     	System.out.print("Type anything to start the round: ");
-    	String input = scanner.nextLine();
+    	scanner.nextLine();
     	System.out.println("===========================================================");
     	// initialize turn counter for each team
     	int turnCount1 = getStart(ally1, ally2);
@@ -133,7 +133,7 @@ public class Battle {
 	    while (true && !endLoop) {
 	    	System.out.println("===========================================================");
 	    	System.out.print("Type anything to start the next round: ");
-	    	String input1 = scanner.nextLine();
+	    	scanner.nextLine();
 	    	System.out.println("===========================================================");
 	    	System.out.println("\n			TURN	" + totalTurns);
 	    	
