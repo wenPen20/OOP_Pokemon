@@ -95,7 +95,7 @@ public class Player {
 					pokemonNames.add(pokemonString.getName());
 				}
 				System.out.println(pokemonNames + reset + "\n"
-						+ "Spend tokens to save pokémon as disks? [" + green + "Y" + reset + "/" + red + "N" + reset + "]");
+						+ "Spend tokens to save pokémon as disks? [" + green + "Y" + reset + "/" + red + "N or any key" + reset + "]");
 				if(input.nextLine().toLowerCase().matches("y")) {
 					int count = 1;
 					for(Pokemon savablePokemon: pokemon) {
@@ -104,7 +104,7 @@ public class Player {
 						System.out.println(savablePokemon);
 						count++;
 					}
-					System.out.println("Choose pokemon to save [or 0 to return]");
+					System.out.println("Choose pokemon to save [" + red + "or 0 to return" + reset + "]");
 					int pokeselect = input.nextInt();
 					if(pokeselect >= 1 && pokeselect <= pokemon.size()) {
 						addToOwnedDisks(pokemon.get(pokeselect-1));
@@ -129,9 +129,13 @@ public class Player {
 					continue;
 				}
 				else if(e.getMessage().equals("Duplicate")) {
-					System.out.println(red+ "You already have that Pokémon!\n" + reset);
+					System.out.println(red + "You already have that Pokémon!\n" + reset);
 					continue;
 				}
+			}
+			catch(InputMismatchException e) {
+				System.out.println(red + "Error, try again! \n" + reset);
+				continue;
 			}
 		}
 	}
