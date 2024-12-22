@@ -146,14 +146,20 @@ public class Game {
 		}
 			int redoGame = 0;
 			while(true) {
-				System.out.print("\nType [1] to start another round or [2] to stop: ");
-				redoGame = input.nextInt();
-				
-				if (redoGame == 1 || redoGame == 2) {
-					break;
-				}
-				else {
-					System.out.println("Incorrect input");
+				try {
+					System.out.print("\nType [1] to start another round or [2] to stop: ");
+					redoGame = input.nextInt();
+					
+					if (redoGame == 1 || redoGame == 2) {
+						break;
+					}
+					else {
+						System.out.println("Incorrect input");
+					}
+				} catch (InputMismatchException e) {
+					System.out.println("Input Error ");
+					input.nextLine();
+					continue;
 				}
 			}
 			
