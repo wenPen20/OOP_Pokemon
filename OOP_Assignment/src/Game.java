@@ -11,6 +11,7 @@ public class Game {
 	private ArrayList<Player> loadedPlayers = db.loadPlayers("Players.txt");
 	private Pokemon rental1, rental2, enemy1, enemy2, allypoke1, allypoke2;
 	private Player player;
+	private boolean loadedRental = true;
 
 	public void start() {
 		Ascii.WelcomeMessage();
@@ -133,6 +134,7 @@ public class Game {
 					System.out.println("Loading rentals...");
 					System.out.println(rental1);
 					System.out.println(rental2);
+					loadedRental = false;
 					
 					battle = new Battle(username, rental1, rental2, enemy1, enemy2, db);
 					
@@ -156,7 +158,12 @@ public class Game {
 			}
 			
 			if (redoGame == 1) {
-				resetPokemons();
+				if (loadedRental) {
+                    resetPokemonsAlly();
+                }
+                else {
+                    resetPokemonRental();
+                }
 				continue;
 			}
 			else if (redoGame == 2) {
@@ -169,16 +176,21 @@ public class Game {
 
 	}
 	
-	public void resetPokemons() {
-		allypoke1.reset();
-		allypoke2.reset();
-		allypoke1 = null;
-		allypoke2 = null;
-		rental1.reset();
-		rental2.reset();
-		enemy1.reset();
-		enemy2.reset();
-	}
+	public void resetPokemonsAlly() {
+        allypoke1.reset();
+        allypoke2.reset();
+        allypoke1 = null;
+        allypoke2 = null;
+        enemy1.reset();
+        enemy2.reset();
+    }
+
+    public void resetPokemonRental() {
+        rental1.reset();
+        rental2.reset();
+        enemy1.reset();
+        enemy2.reset();
+    }
 	
 	
 	// make sure the two pokemons are different
