@@ -107,8 +107,12 @@ public class Player {
 					System.out.println("Choose pokemon to save [" + red + "or 0 to return" + reset + "]");
 					int pokeselect = input.nextInt();
 					if(pokeselect >= 1 && pokeselect <= pokemon.size()) {
+						
+						// add to pokemon array of player, and minus tokens spent
 						addToOwnedDisks(pokemon.get(pokeselect-1));
 						useToken(pokemon.get(pokeselect-1).getCost());
+						
+						// messages
 						System.out.printf("%s- %d tokens!\n", blue, pokemon.get(pokeselect-1).getCost());
 						System.out.printf("%s+ %s!%s\n\n", green, pokemon.get(pokeselect-1).getName(), reset);
 						pokemon.remove(pokeselect-1);
@@ -135,6 +139,10 @@ public class Player {
 			}
 			catch(InputMismatchException e) {
 				System.out.println(red + "Error, try again! \n" + reset);
+				continue;
+			}
+			catch(NoSuchElementException e) {
+				System.out.println(red + "Error, no such pokemon! Try again! \n" + reset);
 				continue;
 			}
 		}

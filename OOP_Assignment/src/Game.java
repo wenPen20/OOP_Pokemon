@@ -11,7 +11,6 @@ public class Game {
 	private ArrayList<Player> loadedPlayers = db.loadPlayers("Players.txt");
 	private Pokemon rental1, rental2, enemy1, enemy2, allypoke1, allypoke2;
 	private Player player;
-	private boolean loadedRental = true;
 
 	public void start() {
 		Ascii.WelcomeMessage();
@@ -20,6 +19,7 @@ public class Game {
 		String username = input.nextLine();
 		String pName = "";
 		
+		boolean loadedRental;
 		boolean playerExist = false;
 		for (Player player : loadedPlayers) {
 			if (player.getUsername().equals(username)) {
@@ -50,91 +50,33 @@ public class Game {
 		
 		// game loop
 		while (true) {
-			// select a stage and choose a pokemon to roar
-			stage.selectStage();
-
-			// roared pokemon / first rental pokemon
-			rental1 = stage.getRoaredPokemon();
-			rental2 = pb.selectRandomPokemon();
-			rental2 = noDuplicate(rental1, rental2);
-
-			// generate two enemy pokemons
-			enemy1 = pb2.selectRandomPokemon();
-			enemy2 = pb2.selectRandomPokemon();
-			enemy2 = noDuplicate1(enemy1, enemy2);
-			
-			if (player.getOwnedDisks().size() > 0) {
-				System.out.printf("Your current owned disks: %d\n", player.getOwnedDisks().size());
-			}
-			else {
-				System.out.println("Your current owned disks: -");
-			}
-			
-			// check if player has enough pokemons
-			if (player.getOwnedDisks().size() < 2) { // if players dont have enough pokemons, use rentals
-				System.out.println("You do not have enough disks to play, here's two rental Pokémons for you! \n");
-				System.out.println(rental1);
-				System.out.println(rental2);
+			try {
+				// select a stage and choose a pokemon to roar
+				stage.selectStage();
 				
-				battle = new Battle(username, rental1, rental2, enemy1, enemy2, db);
+				// roared pokemon / first rental pokemon
+				rental1 = stage.getRoaredPokemon();
+				rental2 = pb.selectRandomPokemon();
+				rental2 = noDuplicate(rental1, rental2);
+	
+				// generate two enemy pokemons
+				enemy1 = pb2.selectRandomPokemon();
+				enemy2 = pb2.selectRandomPokemon();
+				enemy2 = noDuplicate1(enemy1, enemy2);
 				
-				// prints old and new top scores
-				Top5Player newPlayer = new Top5Player(pName, battle.getScore());
-				// prints score, update score textfile
-				newPlayer.updateScoreAndWriteToFile(newPlayer, db);
-				
-			} else {
-				//case for user to choose between rental and their own pokemons.
-				
-				Scanner input = new Scanner(System.in);
-				System.out.printf("Saved pokemon available to use!\n"
-						+ "[1] Load saved pokemon or [2] use rentals?\n");
-				if(input.nextInt()==1) {
-					int count = 0;
-					System.out.println();
-					for(Pokemon pokemon: player.getOwnedDisks()) {
-						System.out.printf("[%d] ", count);
-						System.out.println(pokemon);
-						count++;
-					}
-					
-					while(true) {
-						System.out.println("Choose the first pokemon on your team!");
-						int pokeselect1 = input.nextInt();
-						if(pokeselect1 >= 0 && pokeselect1 < player.getOwnedDisks().size()) {
-							allypoke1 = player.getOwnedDisks().get(pokeselect1);
-						}
-						else {
-							System.out.println("Enter a valid selection!");
-							continue;
-						}
-						
-						System.out.println("Choose the second pokemon on your team!");
-						int pokeselect2 = input.nextInt();
-						if(pokeselect2 >= 0 && pokeselect2 < player.getOwnedDisks().size() && pokeselect1 != pokeselect2) {
-							allypoke2 = player.getOwnedDisks().get(pokeselect2);
-							break;
-						}
-						else {
-							System.out.println("Enter a valid selection! (no duplicate selections)");
-							continue;
-						}
-						
-					}
-					System.out.printf("\nPokemon chosen: \n%s\n%s\n", allypoke1, allypoke2);
-					
-					battle = new Battle(username, allypoke1, allypoke2, enemy1, enemy2, db);
-
-					// prints old and new top scores
-					Top5Player newPlayer = new Top5Player(pName, battle.getScore());
-					// prints score, update score textfile
-					newPlayer.updateScoreAndWriteToFile(newPlayer, db);
+				if (player.getOwnedDisks().size() > 0) {
+					System.out.printf("Your current owned disks: %d\n", player.getOwnedDisks().size());
 				}
 				else {
-					System.out.println("Loading rentals...");
+					System.out.println("Your current owned disks: -");
+				}
+				
+				// check if player has enough pokemons
+				if (player.getOwnedDisks().size() < 2) { // if players dont have enough pokemons, use rentals
+					loadedRental = true;
+					System.out.println("You do not have enough disks to play, here's two rental Pokémons for you! \n");
 					System.out.println(rental1);
 					System.out.println(rental2);
-					loadedRental = false;
 					
 					battle = new Battle(username, rental1, rental2, enemy1, enemy2, db);
 					
@@ -142,66 +84,129 @@ public class Game {
 					Top5Player newPlayer = new Top5Player(pName, battle.getScore());
 					// prints score, update score textfile
 					newPlayer.updateScoreAndWriteToFile(newPlayer, db);
-				}
-		}
-			int redoGame = 0;
-			while(true) {
-				try {
-					System.out.print("\nType [1] to start another round or [2] to stop: ");
-					redoGame = input.nextInt();
 					
-					if (redoGame == 1 || redoGame == 2) {
-						break;
+				} else {
+					//case for user to choose between rental and their own pokemons.
+					
+					Scanner input = new Scanner(System.in);
+					System.out.printf("Saved pokemon available to use!\n"
+							+ "[1] Load saved pokemon or [2] use rentals?\n");
+					if(input.nextInt()==1) {
+						int count = 0;
+						System.out.println();
+						for(Pokemon pokemon: player.getOwnedDisks()) {
+							System.out.printf("[%d] ", count);
+							System.out.println(pokemon);
+							count++;
+						}
+						
+						while(true) {
+							System.out.println("Choose the first pokemon on your team!");
+							loadedRental = false;
+							int pokeselect1 = input.nextInt();
+							if(pokeselect1 >= 0 && pokeselect1 < player.getOwnedDisks().size()) {
+								allypoke1 = player.getOwnedDisks().get(pokeselect1);
+							}
+							else {
+								System.out.println("Enter a valid selection!");
+								continue;
+							}
+							
+							System.out.println("Choose the second pokemon on your team!");
+							int pokeselect2 = input.nextInt();
+							if(pokeselect2 >= 0 && pokeselect2 < player.getOwnedDisks().size() && pokeselect1 != pokeselect2) {
+								allypoke2 = player.getOwnedDisks().get(pokeselect2);
+								break;
+							}
+							else {
+								System.out.println("Enter a valid selection! (no duplicate selections)");
+								continue;
+							}
+							
+						}
+						System.out.printf("\nPokemon chosen: \n%s\n%s\n", allypoke1, allypoke2);
+						
+						battle = new Battle(username, allypoke1, allypoke2, enemy1, enemy2, db);
+	
+						// prints old and new top scores
+						Top5Player newPlayer = new Top5Player(pName, battle.getScore());
+						// prints score, update score textfile
+						newPlayer.updateScoreAndWriteToFile(newPlayer, db);
 					}
 					else {
-						System.out.println("Incorrect input");
+						loadedRental = true;
+						System.out.println("Loading rentals...");
+						System.out.println(rental1);
+						System.out.println(rental2);
+						
+						battle = new Battle(username, rental1, rental2, enemy1, enemy2, db);
+						
+						// prints old and new top scores
+						Top5Player newPlayer = new Top5Player(pName, battle.getScore());
+						// prints score, update score textfile
+						newPlayer.updateScoreAndWriteToFile(newPlayer, db);
 					}
-				} catch (InputMismatchException e) {
-					System.out.println("Input Error ");
-					input.nextLine();
+				}
+				int redoGame = 0;
+				while(true) {
+					try {
+						System.out.print("\nType [1] to start another round or [2] to stop: ");
+						redoGame = input.nextInt();
+						
+						if (redoGame == 1 || redoGame == 2) {
+							break;
+						}
+						else {
+							System.out.println("Incorrect input");
+						}
+					} catch (InputMismatchException e) {
+						System.out.println("Input Error ");
+						input.nextLine();
+						continue;
+					}
+				}
+				
+				// refresh hp for next game
+				if (redoGame == 1) {
+					if (!loadedRental) {
+					    if (allypoke1 != null) {
+					        allypoke1.setHp(allypoke1.getMaxHp());
+					    }
+					    if (allypoke2 != null) {
+					        allypoke2.setHp(allypoke2.getMaxHp());
+					    }
+					    if (enemy1 != null) {
+					        enemy1.setHp(enemy1.getMaxHp());
+					    }
+					    if (enemy2 != null) {
+					        enemy2.setHp(enemy2.getMaxHp());
+					    }
+	                }
+	                else if (loadedRental){
+	            	    if (rental1 != null) {
+	            	        rental1.setHp(rental1.getMaxHp());
+	            	    }
+	            	    if (rental2 != null) {
+	            	        rental2.setHp(rental2.getMaxHp());
+	            	    }
+	            	    if (enemy1 != null) {
+	            	        enemy1.setHp(enemy1.getMaxHp());
+	            	    }
+	            	    if (enemy2 != null) {
+	            	        enemy2.setHp(enemy2.getMaxHp());
+	            	    }
+	                }
 					continue;
 				}
-			}
-			
-			if (redoGame == 1) {
-				if (loadedRental) {
-				    if (allypoke1 != null) {
-				        allypoke1.reset();
-				        allypoke1 = null;
-				    }
-				    if (allypoke2 != null) {
-				        allypoke2.reset();
-				        allypoke2 = null;
-				    }
-				    if (enemy1 != null) {
-				        enemy1.reset();
-				    }
-				    if (enemy2 != null) {
-				        enemy2.reset();
-				    }
-                }
-                else if (!loadedRental){
-            	    if (rental1 != null) {
-            	        rental1.reset();
-            	    }
-            	    if (rental2 != null) {
-            	        rental2.reset();
-            	    }
-            	    if (enemy1 != null) {
-            	        enemy1.reset();
-            	    }
-            	    if (enemy2 != null) {
-            	        enemy2.reset();
-            	    }
-                }
+				else if (redoGame == 2) {
+					Ascii.ThankYouMessage();
+					input.close();
+					break;
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Input Error");
 				continue;
 			}
-			else if (redoGame == 2) {
-				Ascii.ThankYouMessage();
-				input.close();
-				break;
-			}
-
 		}	
 
 	}

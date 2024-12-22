@@ -106,10 +106,6 @@ public class Pokemon {
     	return tokenCost;
     }
     
-    public void reset() {
-        this.hp = this.maxHp;
-    }
-    
     @Override
     public String toString() {
         // Calculate the percentage of HP
