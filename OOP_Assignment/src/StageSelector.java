@@ -19,6 +19,7 @@ public class StageSelector {
     	int input = 0, input1 = 0;
     	boolean checkStage = true;
     	boolean checkRoar = true;
+    	selectedPokemon.clear();
     	
     	while(input < 1 || input > 3) {
 	    	try {
