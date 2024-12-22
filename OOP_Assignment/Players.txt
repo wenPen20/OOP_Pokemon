@@ -12,3 +12,4 @@ username=chickendinner, ownedPokemons=[05-012, 01-011, 03-031], tokens=10
 username=jfkdf, ownedPokemons=[], tokens=10
 username=asdf, ownedPokemons=[01-013, 01-025, 04-003], tokens=19
 username=adsf, ownedPokemons=[], tokens=17
+

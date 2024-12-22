@@ -142,8 +142,8 @@ public class Player {
 				continue;
 			}
 			catch(NoSuchElementException e) {
-				System.out.println(red + "Error, no such pokemon! Try again! \n" + reset);
-				continue;
+				System.out.println(red + "Error, no such pokemon! \n" + reset);
+				break;
 			}
 		}
 	}

@@ -74,7 +74,8 @@ public class Game {
 				// check if player has enough pokemons
 				if (player.getOwnedDisks().size() < 2) { // if players dont have enough pokemons, use rentals
 					loadedRental = true;
-					System.out.println("You do not have enough disks to play, here's two rental Pokémons for you! \n");
+					System.out.println("You do not have enough disks to play, here's two rental Pokémons for you!");
+					System.out.println("If you are a new player, reload the game to use your saved pokemons! \n");
 					System.out.println(rental1);
 					System.out.println(rental2);
 					
