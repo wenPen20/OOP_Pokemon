@@ -46,7 +46,8 @@ public class Game {
 			System.out.println("\nHello New User! This is Your Player Data.");
 			System.out.println(this.player);			
 		}
-
+		
+		// game loop
 		while (true) {
 			// select a stage and choose a pokemon to roar
 			stage.selectStage();
@@ -159,7 +160,7 @@ public class Game {
 				continue;
 			}
 			else if (redoGame == 2) {
-				System.out.println("Thanks for playing!!!");
+				Ascii.ThankYouMessage();
 				input.close();
 				break;
 			}

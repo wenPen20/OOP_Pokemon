@@ -57,14 +57,13 @@ public class Ascii {
 		System.out.println("  |_|\\___/ \\__,_|    \\_/\\_/ \\___/|_| |_| (_)" + reset);
 
 	}
+	public static void ThankYouMessage() {
+		System.out.println(" _   _            _  _           _             _             _ _ ");
+		System.out.println("| |_| |__ __  __ | || |    _ __ | | __ _ _   _(_)_ __   __ _| | |");
+		System.out.println("| __| '_  \\ \\/ / | || |_  | '_ \\| |/ _` | | | | | '_ \\ / _` | | |");
+		System.out.println("| |_| | | |>  <  |__   _| | |_) | | (_| | |_| | | | | | (_| |_|_|");
+		System.out.println(" \\__|_| |_/_/\\_\\    |_|   | .__/|_|\\__,_|\\__, |_|_| |_|\\__, (_|_)\n                          |_|            |___/         |___/     ");
 	
-	public static void CapturePokemonMessage() {
-		System.out.println("  ____      _       _     ____       _     __                       ");
-        System.out.println(" / ___|__ _| |_ ___| |__ |  _ \\ ___ | | __/_/ _ __ ___   ___  _ __  ");
-        System.out.println("| |   / _ | __/ __| '_ \\| |_) / _ \\| |/ / _ \\ '_  _ \\ / _ \\| '_ \\ ");
-        System.out.println("| |__| (_| | || (__| | | |  __/ (_) |   <  __/ | | | | | (_) | | | |");
-        System.out.println(" \\____\\__,_|\\__\\___|_| |_|_|   \\___/|_|\\_\\___|_| |_| |_\\___/|_| |_/");
-
 	}
 	
 	public static void YourScoreMessage() {
