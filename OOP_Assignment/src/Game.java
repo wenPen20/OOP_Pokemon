@@ -161,7 +161,7 @@ public class Game {
 				if (loadedRental) {
                     resetPokemonsAlly();
                 }
-                else {
+                else if (!loadedRental){
                     resetPokemonRental();
                 }
 				continue;
@@ -177,20 +177,38 @@ public class Game {
 	}
 	
 	public void resetPokemonsAlly() {
-        allypoke1.reset();
-        allypoke2.reset();
-        allypoke1 = null;
-        allypoke2 = null;
-        enemy1.reset();
-        enemy2.reset();
-    }
+	    if (allypoke1 != null) {
+	        allypoke1.reset();
+	        allypoke1 = null;
+	    }
+	    if (allypoke2 != null) {
+	        allypoke2.reset();
+	        allypoke2 = null;
+	    }
+	    if (enemy1 != null) {
+	        enemy1.reset();
+	    }
+	    if (enemy2 != null) {
+	        enemy2.reset();
+	    }
+	}
 
-    public void resetPokemonRental() {
-        rental1.reset();
-        rental2.reset();
-        enemy1.reset();
-        enemy2.reset();
-    }
+
+	public void resetPokemonRental() {
+	    if (rental1 != null) {
+	        rental1.reset();
+	    }
+	    if (rental2 != null) {
+	        rental2.reset();
+	    }
+	    if (enemy1 != null) {
+	        enemy1.reset();
+	    }
+	    if (enemy2 != null) {
+	        enemy2.reset();
+	    }
+	}
+
 	
 	
 	// make sure the two pokemons are different
