@@ -5,13 +5,14 @@ import java.util.*;
 public class StageSelector {
 	
 	private int stage;
-	private Scanner scanner = new Scanner(System.in);
 	private ArrayList<Pokemon> selectedPokemon = new ArrayList<>();
 	private Pokemon roaredPokemon;
 	
 	public StageSelector() { 
 		
 	}
+	
+	private Scanner scanner = new Scanner(System.in);
 	
 	// Executes the entire roaring process: sets the stage, selects pokemon, and prompts the user to choose a roaring pokemon.
     public void selectStage() {

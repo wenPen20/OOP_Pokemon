@@ -255,7 +255,7 @@ public class Battle {
 	}
 	
 	// print each pokemon team member if hp>0
-	private void printTeams() {
+	public void printTeams() {
 		if (ally1.getHp() > 0 || ally2.getHp() > 0) {
 			System.out.println(blue + "\nAlly Team:" + reset);
 		    if (ally1.getHp() > 0) {
@@ -307,7 +307,7 @@ public class Battle {
 	}
 	
 	//get effectiveness message
-    private String getEffectivenessStatus(double effMult) {
+    public String getEffectivenessStatus(double effMult) {
         if (effMult == 1.5) {
             return "Super Effective";
         } else if (effMult == 1.0) {

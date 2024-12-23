@@ -82,6 +82,10 @@ public class Player {
 	// other methods
 	Scanner input = new Scanner(System.in);
 	public void saveDisk(ArrayList<Pokemon> pokemon) {
+		
+		System.out.println("Enter any key to continue: ");
+		input.nextLine();
+		
 		if(pokemon.isEmpty()) {
 			System.out.println("No Pokémon caught, unable to save disks...");
 		}
@@ -119,6 +123,7 @@ public class Player {
 						System.out.printf("%s- %d tokens!\n", blue, pokemon.get(pokeselect-1).getCost());
 						System.out.printf("%s+ %s!%s\n\n", green, pokemon.get(pokeselect-1).getName(), reset);
 						pokemon.remove(pokeselect-1);
+						input.nextLine();
 						continue;
 					}
 					else if (pokeselect == 0){
