@@ -144,6 +144,11 @@ public class Top5Player {
 	    // Sort the list based on score in descending order
 	    loadedTop5.sort((p1, p2) -> Integer.compare(p2.getScore(), p1.getScore()));
 	    
+	    // Reassign ranks based on the new order after sorting
+        for (int i = 0; i < loadedTop5.size(); i++) {
+            loadedTop5.get(i).setRank(i + 1); // Set rank to the position in the list (1-based index)
+        }
+	    
 	    // If the list is now larger than 5 players, remove the lowest-ranked player
 	    if (loadedTop5.size() > 5) {
 	        loadedTop5.remove(loadedTop5.size() - 1); // Remove the player with the lowest score (last in the list)

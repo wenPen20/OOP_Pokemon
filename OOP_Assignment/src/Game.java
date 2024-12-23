@@ -87,7 +87,7 @@ public class Game {
 					newPlayer.updateScoreAndWriteToFile(newPlayer, db);
 					
 				} else {
-					//case for user to choose between rental and their own pokemons.
+					//case for user to choose between rental or their own pokemons.
 					
 					Scanner input = new Scanner(System.in);
 					System.out.printf("Saved pokemon available to use!\n"
@@ -129,7 +129,7 @@ public class Game {
 						
 						battle = new Battle(username, allypoke1, allypoke2, enemy1, enemy2, db);
 	
-						// prints old and new top scores
+						// create a Top5Player object for file writing
 						Top5Player newPlayer = new Top5Player(pName, battle.getScore());
 						// prints score, update score textfile
 						newPlayer.updateScoreAndWriteToFile(newPlayer, db);
@@ -142,7 +142,7 @@ public class Game {
 						
 						battle = new Battle(username, rental1, rental2, enemy1, enemy2, db);
 						
-						// prints old and new top scores
+						// create a Top5Player object for file writing
 						Top5Player newPlayer = new Top5Player(pName, battle.getScore());
 						// prints score, update score textfile
 						newPlayer.updateScoreAndWriteToFile(newPlayer, db);

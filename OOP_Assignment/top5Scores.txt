@@ -1,5 +1,5 @@
-username=joe, highscore=19795, rank=1
-username=asdf, highscore=19200, rank=2
-username=Dave, highscore=19055, rank=3
-username=whale, highscore=18860, rank=4
-username=a, highscore=16725, rank=5
+username=player1, highscore=15000, rank=1
+username=player2, highscore=12500, rank=2
+username=player3, highscore=10000, rank=3
+username=player4, highscore=7500, rank=4
+username=player5, highscore=5000, rank=5
