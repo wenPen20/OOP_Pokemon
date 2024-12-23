@@ -80,14 +80,14 @@ public class Player {
 	}
 	
 	// other methods
-	
+	Scanner input = new Scanner(System.in);
 	public void saveDisk(ArrayList<Pokemon> pokemon) {
 		if(pokemon.isEmpty()) {
 			System.out.println("No Pokémon caught, unable to save disks...");
 		}
 		while(!pokemon.isEmpty()) {
 			try {
-				Scanner input = new Scanner(System.in);
+				
 				System.out.printf("Your total tokens: %s%d\n%s", yellow, this.tokens, reset);
 				System.out.print("Pokémons caught: " + blue);
 				ArrayList<String> pokemonNames = new ArrayList<>();
@@ -95,8 +95,11 @@ public class Player {
 					pokemonNames.add(pokemonString.getName());
 				}
 				System.out.println(pokemonNames + reset + "\n"
-						+ "Spend tokens to save pokémon as disks? [" + green + "Y" + reset + "/" + red + "N or any key" + reset + "]");
-				if(input.nextLine().toLowerCase().matches("y")) {
+						+ "Spend tokens to save pokémon as disks? [" + green + "Y" + reset + "/" + red + "N" + reset + "]");
+				
+				String confirm = input.nextLine();
+				
+				if(confirm.toLowerCase().matches("y")) {
 					int count = 1;
 					for(Pokemon savablePokemon: pokemon) {
 						System.out.printf("\n%s[%d]: %s%d token(s)%s\n", blue, count, yellow, savablePokemon.getCost(), reset); 
@@ -119,31 +122,43 @@ public class Player {
 						continue;
 					}
 					else if (pokeselect == 0){
+						input.nextLine();
+						continue;
+					} else {
+						System.out.println(red + "Please enter a valid selection!\n" + reset);
+						input.nextLine();
 						continue;
 					}
 				}
-				else {
+				else if(confirm.toLowerCase().matches("n")) {
 					break;
 				}
-				input.close();
+				else {
+					System.out.println("\nYou did not enter [" + green + "Y" + reset + "/" + red + "N" + reset + "], try again! \n");
+					continue;
+				}
 			}
 			catch(IllegalArgumentException e) {
 				if(e.getMessage().equals("Insufficient")) {
 					System.out.println(red + "Insufficient funds!\n" + reset);
+					input.nextLine();
 					continue;
 				}
 				else if(e.getMessage().equals("Duplicate")) {
 					System.out.println(red + "You already have that Pokémon!\n" + reset);
+					input.nextLine();
 					continue;
 				}
 			}
 			catch(InputMismatchException e) {
 				System.out.println(red + "Error, try again! \n" + reset);
+				input.nextLine();
 				continue;
 			}
 			catch(NoSuchElementException e) {
 				System.out.println(red + "Error, no such pokemon! \n" + reset);
-				break;
+				input.nextLine();
+				continue;
 			}
 		}
 	}
